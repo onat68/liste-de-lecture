@@ -3,19 +3,19 @@
     [
         {
             "name": "Rainman",
-            "release-date": "1988",
-            "real-name": "Barry Levinson",
+            "releaseDate": "1988",
+            "realName": "Barry Levinson",
             "img": "https://image.tmdb.org/t/p/original/jCvzsYOjeGj0cVqFIUoOrwyML3W.jpg",
             "note": "Avec Dustin Hoffman",
-            "add-date": "31-07-2023"
+            "date": "31-07-2023"
         },
         {
             "name": "La soupe aux choux",
-            "release-date": "1981",
-            "real-name": "Jean Girault",
+            "releaseDate": "1981",
+            "realName": "Jean Girault",
             "img": "https://i0.wp.com/www.regarder-films.net/wp-content/uploads/2020/04/la-soupe-aux-choux-scaled.jpg?fit=2000%2C3000&ssl=1",
             "note": "bloublouboublbubouboluou",
-            "add-date": "30-07-2023"
+            "date": "30-07-2023"
         }
     ]
 
