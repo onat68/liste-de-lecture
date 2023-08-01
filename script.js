@@ -1,6 +1,4 @@
-let databaseLouis = './users-profile/louis/films.json';
 
-let databaseOnat = './users-profile/onat/films.json';
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
@@ -12,9 +10,6 @@ const timelineDiv = document.querySelector('.timeline')
 // 'name' => 'title';
 class FilmCard {
     constructor(filmData) {
-
-
-
         this.nameElement = () => {
             let filmName = document.createElement('h3');
             filmName.classList.add('film-name-h3');
@@ -64,19 +59,11 @@ class FilmCard {
 
     appendElement() {
         timelineDiv.appendChild(this.filmCard);
-
     }
 }
 
 async function getData(loggedUser) {
-    let url = () => {
-        if (loggedUser == 'Louis') {
-            return databaseLouis;
-        } else if (loggedUser == 'Onat') {
-            return databaseOnat;
-        }
-    }
-    let films = fetch(url)
+    let films = fetch(`users-profile/${loggedUser}/films.json`)
         .then(response => response.json())
         .then(data => {
             return data
@@ -96,7 +83,7 @@ async function displayData(films) {
 }
 
 async function loadTimeline() {
-    let films = await getData('Louis');
+    let films = await getData('louis');
     console.log(films)
     displayData(films);
 }
