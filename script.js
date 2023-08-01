@@ -9,6 +9,7 @@ const searchResultsDiv = document.querySelector('.search-results')
 // 'name' => 'title';
 class FilmCard {
     constructor(filmData, target) {
+        // élément parent cible (on peut faire ça mieux ?)
         this.target = target;
 
         this.nameElement = document.createElement('h3');
@@ -40,7 +41,7 @@ class FilmCard {
         this.cardElement.classList.add('film-div')
         this.cardElement.id = filmData.name;
     }
-
+    // ajouter le composant complet dans le HTML
     appendElement() {
         this.cardElement.appendChild(this.nameElement);
         this.cardElement.appendChild(this.releaseDateElement);
@@ -55,6 +56,9 @@ class FilmCard {
 class SearchResultCard {
     constructor(filmData, target) {
         this.target = target;
+
+        this.textWrapper = document.createElement('div')
+        this.textWrapper.classList.add('text-wrapper');
 
         this.nameElement = document.createElement('h3');
         this.nameElement.classList.add('film-name-h3');
@@ -73,19 +77,28 @@ class SearchResultCard {
         this.imgElement.setAttribute('style', `background: url(${filmData['poster_path']})`)
 
         this.cardElement = document.createElement('div');
-        this.cardElement.classList.add('film-div')
-        this.cardElement.id = filmData.name;
+        this.cardElement.classList.add('result-card')
+        this.cardElement.id = filmData['original_title'];
+
+        this.selectButton = document.createElement('button')
+        this.selectButton.classList.add('select-button')
+        this.selectButton.innerText = 'OK'
     }
 
     appendElement() {
-        this.cardElement.appendChild(this.nameElement);
-        this.cardElement.appendChild(this.releaseDateElement);
+        this.textWrapper.appendChild(this.nameElement);
+        this.textWrapper.appendChild(this.releaseDateElement);
+        this.textWrapper.appendChild(this.overviewElement)
+        
         this.cardElement.appendChild(this.imgElement)
-        this.cardElement.appendChild(this.overviewElement)
+        this.cardElement.appendChild(this.textWrapper)
+        this.cardElement.appendChild(this.selectButton)
+
         this.target.appendChild(this.cardElement);
     }
 }
 
+// selon l'utilisateur connecté, faire une requête pour récuper la liste de lectuer depuis le local storage
 async function getData(loggedUser) {
     let films = fetch(`users-profile/${loggedUser}/films.json`)
         .then(response => response.json())
@@ -98,7 +111,7 @@ async function getData(loggedUser) {
     return films
 }
 
-// il faut s'assurer que les données du JSON sont triées par date ou qq chose, soit en amont soit ici idk
+// afficher la liste de lecture en ajoutant les encarts de chaque film
 async function displayData(films, target) {
     films.films.forEach(film => {
         let filmComponent = new FilmCard(film, target);
@@ -106,6 +119,7 @@ async function displayData(films, target) {
     });
 }
 
+// séquence de chargement en ouverture de la page (et peux être plus tard pour passer d'une page/vue à une autre ?)
 async function loadTimeline() {
     let films = await getData('onat');
     console.log(films)
@@ -116,7 +130,7 @@ loadTimeline();
 
 let submit = document.getElementById('add-button')
 submit.addEventListener('click', async () => {
-    console.log('click!')
+    console.log('click')
     async function searchFilm() {
 
         let toSearch = "entretien avec un vampire"
@@ -137,6 +151,7 @@ submit.addEventListener('click', async () => {
             .catch(err => console.error('error:' + err));
         return films;
     }
+    // fonction d'affichage des résultats de recherche
     async function displaySearchResults(films, target) {
         films.results.forEach(film => {
             let filmComponent = new SearchResultCard(film, target);
@@ -144,7 +159,9 @@ submit.addEventListener('click', async () => {
         });
     }
     let films = await searchFilm();
-    console.log(films)
+    console.log(searchFilm)
+    let wrapper = document.querySelector('.search-results-wrapper') 
+    wrapper.setAttribute('style', 'display: flex;animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;')
     displaySearchResults(films, searchResultsDiv);
 })
 
