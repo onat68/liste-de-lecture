@@ -10,18 +10,13 @@ const timelineDiv = document.querySelector('.timeline')
 class FilmCard {
     constructor(filmData) {
 
-        let filmName = document.createElement('h3');
-        filmName.classList.add('film-name-h3');
-        filmName.innerText = filmData.name;
-        this.nameElement = filmName;
+        this.nameElement = document.createElement('h3');
+        this.nameElement.classList.add('film-name-h3');
+        this.nameElement.innerText = filmData.name;
 
-
-        let filmReleaseDate = document.createElement('p');
-        filmReleaseDate.classList.add('release-date-p');
-        filmReleaseDate.innerText = filmData.releaseDate;
-
-        this.releaseDateElement = filmReleaseDate
-
+        this.releaseDateElement = document.createElement('p');
+        this.releaseDateElement.classList.add('release-date-p');
+        this.releaseDateElement.innerText = filmData.releaseDate;
 
         this.realNameElement = document.createElement('p');
         this.realNameElement.classList.add('real-name-p');
@@ -40,7 +35,7 @@ class FilmCard {
         this.dateElement.classList.add('film-date-p');
         this.dateElement.innerText = filmData.date
 
-        this.cardElement = document.createElement('CardfilmCardElement');
+        this.cardElement = document.createElement('div');
         this.cardElement.classList.add('film-div')
         this.cardElement.id = filmData.name;
     }
