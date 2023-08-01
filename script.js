@@ -70,7 +70,7 @@ class SearchResultCard {
 
         this.imgElement = document.createElement('div');
         this.imgElement.classList.add('film-poster-div');
-        this.imgElement.setAttribute('style', `background: url(${filmData['poster-path']})`)
+        this.imgElement.setAttribute('style', `background: url(${filmData['poster_path']})`)
 
         this.cardElement = document.createElement('div');
         this.cardElement.classList.add('film-div')
