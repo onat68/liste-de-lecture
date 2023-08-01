@@ -76,7 +76,7 @@ async function getData(loggedUser) {
 
 // il faut s'assurer que les données du JSON sont triées par date ou qq chose, soit en amont soit ici idk
 async function displayData(films) {
-    films.forEach(film => {
+    films.films.forEach(film => {
         let filmComponent = new FilmCard(film);
         filmComponent.appendElement();
     });
