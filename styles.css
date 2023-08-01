@@ -14,8 +14,8 @@ body {
 /* Frame 7 */
 .account-menu {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 8px;
+  right: 8px;
   box-sizing: border-box;
 
   /* Auto layout */
@@ -67,10 +67,13 @@ body {
   width: auto;
   height: auto;
   /* Inside auto layout */
-  flex: none;
+  display: flex;
+  flex-direction: column;
   order: 0;
   align-self: stretch;
   flex-grow: 1;
+  padding: 4px;
+  gap: 4px;
 }
 
 /* Frame 3 */
@@ -143,4 +146,9 @@ body {
   order: 1;
   align-self: stretch;
   flex-grow: 0;
+}
+
+.film-div {
+  border: 1px solid black;
+  padding: 2px;
 }
