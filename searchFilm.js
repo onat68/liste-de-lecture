@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 function searchFilm(toSearch){
 
-
+    let toSearch = "entretien avec un vampire"
     const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
     const options = {
     method: 'GET',
