@@ -3,6 +3,7 @@
   padding: 0;
 }
 
+
 body {
   display: flex;
   justify-content: center;
@@ -92,7 +93,7 @@ body {
 }
 
 /* Frame 4 */
-.add-wrapper {
+.add-form {
   box-sizing: border-box;
 
   /* Auto layout */
@@ -131,7 +132,7 @@ body {
 }
 
 /* Frame 6 */
-.search-button {
+.add-button {
   box-sizing: border-box;
 
   width: 80px;
@@ -151,4 +152,10 @@ body {
 .film-div {
   border: 1px solid black;
   padding: 2px;
+}
+
+.film-poster-div {
+  width: 40px;
+  height: 40px;
+  background-size: contain;;
 }

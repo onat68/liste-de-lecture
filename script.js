@@ -10,55 +10,44 @@ const timelineDiv = document.querySelector('.timeline')
 class FilmCard {
     constructor(filmData) {
 
-        let filmName = document.createElement('h3');
-        filmName.classList.add('film-name-h3');
-        filmName.innerText = filmData.name;
-        this.nameElement = filmName;
+        this.nameElement = document.createElement('h3');
+        this.nameElement.classList.add('film-name-h3');
+        this.nameElement.innerText = filmData.name;
+
+        this.releaseDateElement = document.createElement('p');
+        this.releaseDateElement.classList.add('release-date-p');
+        this.releaseDateElement.innerText = filmData.releaseDate;
+
+        this.realNameElement = document.createElement('p');
+        this.realNameElement.classList.add('real-name-p');
+        this.realNameElement.innerText = filmData.realName
+
+        this.imgElement = document.createElement('div');
+        this.imgElement.classList.add('film-poster-div');
+        this.imgElement.setAttribute('style', `background: url(${filmData.img})`)
+
+        this.noteElement = document.createElement('p');
+        this.noteElement.classList.add('film-note-p');
+        this.noteElement.innerText = filmData.note
 
 
-        let filmReleaseDate = document.createElement('p');
-        filmReleaseDate.classList.add('release-date-p');
-        filmReleaseDate.innerText = filmData.releaseDate;
+        this.dateElement = document.createElement('p');
+        this.dateElement.classList.add('film-date-p');
+        this.dateElement.innerText = filmData.date
 
-        this.releaseDateElement = filmReleaseDate
-
-
-        let filmRealName = document.createElement('p');
-        filmRealName.classList.add('real-name-p');
-        filmRealName.innerText = filmData.realName
-        this.realNameElement = filmRealName
-
-        let filmImg = document.createElement('div');
-        filmImg.classList.add('film-poster-div');
-        filmImg.setAttribute('style', `background: url(${filmData.img})`)
-
-        this.imgElement = filmImg
-
-        let filmNote = document.createElement('p');
-        filmNote.classList.add('film-note-p');
-        filmNote.innerText = filmData.note
-        this.noteElement = filmNote
-
-        let filmAddDate = document.createElement('p');
-        filmAddDate.classList.add('film-AddDate-p');
-        filmAddDate.innerText = filmData.date
-        this.addDateElement = filmAddDate;
-
-
-        let filmDiv = document.createElement('div');
-        filmDiv.id = filmData.name;
-        filmDiv.classList.add('film-div')
-        this.filmCardElement = filmDiv
+        this.cardElement = document.createElement('div');
+        this.cardElement.classList.add('film-div')
+        this.cardElement.id = filmData.name;
     }
 
     appendElement() {
-        this.filmCardElement.appendChild(this.nameElement);
-        this.filmCardElement.appendChild(this.releaseDateElement);
-        this.filmCardElement.appendChild(this.realNameElement)
-        this.filmCardElement.appendChild(this.imgElement)
-        this.filmCardElement.appendChild(this.noteElement)
-        this.filmCardElement.appendChild(this.addDateElement)
-        timelineDiv.appendChild(this.filmCardElement);
+        this.cardElement.appendChild(this.nameElement);
+        this.cardElement.appendChild(this.releaseDateElement);
+        this.cardElement.appendChild(this.realNameElement)
+        this.cardElement.appendChild(this.imgElement)
+        this.cardElement.appendChild(this.noteElement)
+        this.cardElement.appendChild(this.dateElement)
+        timelineDiv.appendChild(this.cardElement);
     }
 }
 
