@@ -83,7 +83,7 @@ async function displayData(films) {
 }
 
 async function loadTimeline() {
-    let films = await getData('louis');
+    let films = await getData('onat');
     console.log(films)
     displayData(films);
 }
