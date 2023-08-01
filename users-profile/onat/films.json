@@ -2,19 +2,19 @@
   "films": [
     {
       "name": "La cité de la peur",
-      "release-date": "1994",
-      "real-name": "Alain Berbérian",
+      "releaseDate": "1994",
+      "realName": "Alain Berbérian",
       "img": "https://fusion.molotov.tv/arts/i/446x588/Ch8SHQoU_9LPxssZY_JfaenNcbaW1SvEvlMSA2pwZxgB/jpg",
       "note": "ODIIILE !",
-      "add-date": "31-07-2023"
+      "date": "31-07-2023"
     },
     {
       "name": "The Shining",
-      "release-date": "1980",
-      "real-name": "Stanley Kubrick",
+      "releaseDate": "1980",
+      "realName": "Stanley Kubrick",
       "img": "https://image.tmdb.org/t/p/original/b6ko0IKC8MdYBBPkkA1aBPLe2yz.jpg",
       "note": "Le type est un peu fou",
-      "add-date": "30-07-2023"
+      "date": "30-07-2023"
     },
     {
       "name": "Entretien avec un vampire",
@@ -26,4 +26,3 @@
     }
   ]
 }
-  
