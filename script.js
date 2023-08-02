@@ -81,7 +81,6 @@ loadTimeline();
 
 submit = document.getElementById('add-button')
 submit.addEventListener('click', () => {
-    function searchFilm(){
 
         let toSearch = "entretien avec un vampire"
         const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
@@ -97,6 +96,4 @@ submit.addEventListener('click', () => {
         .then(res => res.json())
         .then(json => alert(JSON.stringify(json)))
         .catch(err => console.error('error:' + err));
-    }
-    searchFilm()
-})
+    })
