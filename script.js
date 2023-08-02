@@ -130,10 +130,10 @@ loadTimeline();
 
 let submit = document.getElementById('add-button')
 submit.addEventListener('click', async () => {
-    console.log('click')
     async function searchFilm() {
-
-        let toSearch = "entretien avec un vampire"
+        
+        let toSearch = document.getElementById('add-input-field').value
+        console.log("aaa",toSearch)
         const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
         const options = {
             method: 'GET',

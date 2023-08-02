@@ -23,6 +23,23 @@
       "note": "Lestat :(",
       "img": "https://media.senscritique.com/media/000014089088/source_big/Entretien_avec_un_vampire.jpg",
       "date": "2023-07-31T18:40:56.203Z"
-    }
+    },
+    {
+      "name": "Rainman",
+      "releaseDate": "1988",
+      "realName": "Barry Levinson",
+      "img": "https://image.tmdb.org/t/p/original/jCvzsYOjeGj0cVqFIUoOrwyML3W.jpg",
+      "note": "Avec Dustin Hoffman",
+      "date": "31-07-2023"
+  },
+  {
+      "name": "La soupe aux choux",
+      "releaseDate": "1981",
+      "realName": "Jean Girault",
+      "img": "https://i0.wp.com/www.regarder-films.net/wp-content/uploads/2020/04/la-soupe-aux-choux-scaled.jpg?fit=2000%2C3000&ssl=1",
+      "note": "bloublouboublbubouboluou",
+      "date": "30-07-2023"
+  }
+    
   ]
 }
