@@ -2,13 +2,15 @@
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
-
+const searchResultsDiv = document.querySelector('.search-results')
 
 // questions de nommage : 
 // 'real-name' trop ambigu => 'directorName';
 // 'name' => 'title';
 class FilmCard {
-    constructor(filmData) {
+    constructor(filmData, target) {
+        // élément parent cible (on peut faire ça mieux ?)
+        this.target = target;
 
         this.nameElement = document.createElement('h3');
         this.nameElement.classList.add('film-name-h3');
@@ -39,7 +41,7 @@ class FilmCard {
         this.cardElement.classList.add('film-div')
         this.cardElement.id = filmData.name;
     }
-
+    // ajouter le composant complet dans le HTML
     appendElement() {
         this.cardElement.appendChild(this.nameElement);
         this.cardElement.appendChild(this.releaseDateElement);
@@ -47,10 +49,56 @@ class FilmCard {
         this.cardElement.appendChild(this.imgElement)
         this.cardElement.appendChild(this.noteElement)
         this.cardElement.appendChild(this.dateElement)
-        timelineDiv.appendChild(this.cardElement);
+        this.target.appendChild(this.cardElement);
     }
 }
 
+class SearchResultCard {
+    constructor(filmData, target) {
+        this.target = target;
+
+        this.textWrapper = document.createElement('div')
+        this.textWrapper.classList.add('text-wrapper');
+
+        this.nameElement = document.createElement('h3');
+        this.nameElement.classList.add('film-name-h3');
+        this.nameElement.innerText = filmData['original_title'];
+
+        this.releaseDateElement = document.createElement('p');
+        this.releaseDateElement.classList.add('release-date-p');
+        this.releaseDateElement.innerText = filmData['release_date'];
+
+        this.overviewElement = document.createElement('p');
+        this.overviewElement.classList.add('overview-p');
+        this.overviewElement.innerText = filmData.overview
+
+        this.imgElement = document.createElement('div');
+        this.imgElement.classList.add('film-poster-div');
+        this.imgElement.setAttribute('style', `background: url(${filmData['poster_path']})`)
+
+        this.cardElement = document.createElement('div');
+        this.cardElement.classList.add('result-card')
+        this.cardElement.id = filmData['original_title'];
+
+        this.selectButton = document.createElement('button')
+        this.selectButton.classList.add('select-button')
+        this.selectButton.innerText = 'OK'
+    }
+
+    appendElement() {
+        this.textWrapper.appendChild(this.nameElement);
+        this.textWrapper.appendChild(this.releaseDateElement);
+        this.textWrapper.appendChild(this.overviewElement)
+        
+        this.cardElement.appendChild(this.imgElement)
+        this.cardElement.appendChild(this.textWrapper)
+        this.cardElement.appendChild(this.selectButton)
+
+        this.target.appendChild(this.cardElement);
+    }
+}
+
+// selon l'utilisateur connecté, faire une requête pour récuper la liste de lectuer depuis le local storage
 async function getData(loggedUser) {
     let films = fetch(`users-profile/${loggedUser}/films.json`)
         .then(response => response.json())
@@ -63,37 +111,57 @@ async function getData(loggedUser) {
     return films
 }
 
-// il faut s'assurer que les données du JSON sont triées par date ou qq chose, soit en amont soit ici idk
-async function displayData(films) {
+// afficher la liste de lecture en ajoutant les encarts de chaque film
+async function displayData(films, target) {
     films.films.forEach(film => {
-        let filmComponent = new FilmCard(film);
+        let filmComponent = new FilmCard(film, target);
         filmComponent.appendElement();
     });
 }
 
+// séquence de chargement en ouverture de la page (et peux être plus tard pour passer d'une page/vue à une autre ?)
 async function loadTimeline() {
     let films = await getData('onat');
     console.log(films)
-    displayData(films);
+    displayData(films, timelineDiv);
 }
 
 loadTimeline();
 
-submit = document.getElementById('add-button')
-submit.addEventListener('click', () => {
+let submit = document.getElementById('add-button')
+submit.addEventListener('click', async () => {
+    console.log('click')
+    async function searchFilm() {
 
         let toSearch = "entretien avec un vampire"
         const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
         const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
-        }
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
+            }
         };
-    
-        fetch(url, options)
-        .then(res => res.json())
-        .then(json => alert(JSON.stringify(json)))
-        .catch(err => console.error('error:' + err));
-    })
+
+        let films = fetch(url, options)
+            .then(res => res.json())
+            .then(data => {
+                return data
+            })
+            .catch(err => console.error('error:' + err));
+        return films;
+    }
+    // fonction d'affichage des résultats de recherche
+    async function displaySearchResults(films, target) {
+        films.results.forEach(film => {
+            let filmComponent = new SearchResultCard(film, target);
+            filmComponent.appendElement();
+        });
+    }
+    let films = await searchFilm();
+    console.log(searchFilm)
+    let wrapper = document.querySelector('.search-results-wrapper') 
+    wrapper.setAttribute('style', 'display: flex;animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;')
+    displaySearchResults(films, searchResultsDiv);
+})
+
