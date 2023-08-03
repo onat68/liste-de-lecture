@@ -104,7 +104,7 @@ body {
 }
 
 label {
-display: none;
+  display: none;
 }
 /* Champ de recherche */
 .input-field {
@@ -144,16 +144,30 @@ display: none;
   background-size: contain;
   height: 40px;
   width: 40px;
-  flex:none;
+  flex: none;
 }
 
 /* Vue alternative ou overlay a animer au moment d'une recherche */
 
 /* Frame 3 */
-.main-wrapper.search-results-wrapper {
+.main-wrapper.sr-wrapper {
   /* ne s'affiche pas et ne s'insère pas par défaut */
-  display: none;
   position: absolute;
+}
+.sr-active {
+  display: flex;
+  flex: none;
+}
+
+.sr-anim-in {
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.sr-inactive {
+  display: none;
+}
+
+.sr-anim-out {
+  animation: scale-out-center 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
 .search-results {
@@ -186,8 +200,6 @@ display: none;
   flex: none;
 }
 
-
-
 /* Bouton pour revenir à la vue principale */
 .cancel-button {
   all: unset;
@@ -210,10 +222,22 @@ display: none;
 @keyframes scale-in-center {
   0% {
     transform: scale(0);
-    opacity: 1;
+    opacity: 0;
   }
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* animation apparition */
+@keyframes scale-out-center {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }

@@ -1,8 +1,13 @@
+
+
 const loggedUser = "onat"
+
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
 const searchResultsDiv = document.querySelector('.search-results')
+
+const srWrapper = document.querySelector('.sr-wrapper')
 
 // questions de nommage : 
 // 'real-name' trop ambigu => 'directorName';
@@ -85,17 +90,36 @@ class SearchResultCard {
         this.selectButton.innerText = 'OK'
     }
 
+    
+    selectElement() {
+
+        srWrapper.classList.toggle('sr-anim-in', false)
+        srWrapper.classList.toggle('sr-anim-out', true)
+
+        setTimeout(function () {
+            srWrapper.classList.toggle('sr-inactive', true)
+            srWrapper.classList.toggle('sr-active', false)
+            srWrapper.classList.toggle('sr-anim-out', false)
+
+        }, 1000
+        )
+    }
+
     appendElement() {
         this.textWrapper.appendChild(this.nameElement);
         this.textWrapper.appendChild(this.releaseDateElement);
         this.textWrapper.appendChild(this.overviewElement)
-        
+
         this.cardElement.appendChild(this.imgElement)
         this.cardElement.appendChild(this.textWrapper)
         this.cardElement.appendChild(this.selectButton)
 
         this.target.appendChild(this.cardElement);
+
+
+        this.selectButton.addEventListener('click', function () {  })
     }
+
 }
 
 // afficher la liste de lecture en ajoutant les encarts de chaque film
@@ -123,7 +147,7 @@ loadTimeline();
 let submit = document.getElementById('add-button')
 submit.addEventListener('click', () => {
     function searchFilm() {
-        
+
         let toSearch = document.getElementById('add-input-field').value
         const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
         const options = {
@@ -137,22 +161,20 @@ submit.addEventListener('click', () => {
         fetch(url, options)
             .then(res => res.json())
             .then(data => {
-                console.log("aaaa",data)
+                // fonction d'affichage des résultats de recherche
+                function displaySearchResults(films, target) {
+                    films.results.forEach(film => {
+                        let filmComponent = new SearchResultCard(film, target);
+                        filmComponent.appendElement();
+                    });
+                }
                 displaySearchResults(data, searchResultsDiv)
+                srWrapper.classList.toggle('sr-anim-in', true)
+                srWrapper.classList.toggle('sr-inactive', false)
+                srWrapper.classList.toggle('sr-active', true)
             })
             .catch(err => console.error('error:' + err));
     }
     searchFilm()
-    // fonction d'affichage des résultats de recherche
-    function displaySearchResults(films, target) {
-        films.results.forEach(film => {
-            let filmComponent = new SearchResultCard(film, target);
-            filmComponent.appendElement();
-        });
-    }
-
-    let wrapper = document.querySelector('.search-results-wrapper') 
-    wrapper.setAttribute('style', 'display: flex;animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;')
-    
 })
 
