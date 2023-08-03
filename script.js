@@ -1,4 +1,4 @@
-
+const loggedUser = "onat"
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
@@ -98,42 +98,33 @@ class SearchResultCard {
     }
 }
 
-// selon l'utilisateur connecté, faire une requête pour récuper la liste de lectuer depuis le local storage
-async function getData(loggedUser) {
-    let films = fetch(`users-profile/${loggedUser}/films.json`)
-        .then(response => response.json())
-        .then(data => {
-            return data
-        })
-        .catch(err => {
-            throw err
-        })
-    return films
-}
-
 // afficher la liste de lecture en ajoutant les encarts de chaque film
-async function displayData(films, target) {
-    films.films.forEach(film => {
+function displayData(data, target) {
+    data.films.forEach(film => {
         let filmComponent = new FilmCard(film, target);
         filmComponent.appendElement();
     });
 }
 
 // séquence de chargement en ouverture de la page (et peux être plus tard pour passer d'une page/vue à une autre ?)
-async function loadTimeline() {
-    let films = await getData('onat');
-    console.log(films)
-    displayData(films, timelineDiv);
+function loadTimeline() {
+    fetch(`users-profile/${loggedUser}/films.json`)
+        .then(response => response.json())
+        .then(data => {
+            displayData(data, timelineDiv);
+        })
+        .catch(err => {
+            throw err
+        })
 }
 
 loadTimeline();
 
 let submit = document.getElementById('add-button')
-submit.addEventListener('click', async () => {
-    async function searchFilm() {
+submit.addEventListener('click', () => {
+    function searchFilm() {
         
         let toSearch = document.getElementById('add-input-field').value
-        console.log("aaa",toSearch)
         const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
         const options = {
             method: 'GET',
@@ -143,25 +134,25 @@ submit.addEventListener('click', async () => {
             }
         };
 
-        let films = fetch(url, options)
+        fetch(url, options)
             .then(res => res.json())
             .then(data => {
-                return data
+                console.log("aaaa",data)
+                displaySearchResults(data, searchResultsDiv)
             })
             .catch(err => console.error('error:' + err));
-        return films;
     }
+    searchFilm()
     // fonction d'affichage des résultats de recherche
-    async function displaySearchResults(films, target) {
+    function displaySearchResults(films, target) {
         films.results.forEach(film => {
             let filmComponent = new SearchResultCard(film, target);
             filmComponent.appendElement();
         });
     }
-    let films = await searchFilm();
-    console.log(searchFilm)
+
     let wrapper = document.querySelector('.search-results-wrapper') 
     wrapper.setAttribute('style', 'display: flex;animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;')
-    displaySearchResults(films, searchResultsDiv);
+    
 })
 
