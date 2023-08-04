@@ -40,3 +40,4 @@ app.get('/api/films', (req, res, next) => {
     .catch(error => res.status(400).json({ error }))
 })
 
+module.exports = app;

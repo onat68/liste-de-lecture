@@ -1,3 +1,4 @@
+const xhr = new XMLHttpRequest();
 const loggedUser = "onat"
 
 const timelineDiv = document.querySelector('.timeline')
@@ -156,3 +157,65 @@ submit.addEventListener('click', () => {
     
 })
 
+
+// fetch('http://localhost:3000/api/products')
+// .then(response => response.json())
+// .then(data => {
+//     console.log(data)
+// })
+// .catch(err => {
+//     throw err
+// })
+
+
+// xhr.open("GET", "http://localhost:3000/api/products");
+// xhr.send();
+// xhr.responseType = "json";
+// xhr.onload = () => {
+//   if (xhr.readyState == 4 && xhr.status == 200) {
+//     const data = xhr.response;
+//     console.log(data);
+//   } else {
+//     console.log(`Error: ${xhr.status}`);
+//   }
+// };
+
+xhr.open("POST", "http://localhost:3000/api/films");
+xhr.setRequestHeader("Content-Type", "application/json");
+const body = JSON.stringify({
+    title: "La soupe aux choux",
+    releaseDate: 1981,
+    realName: "Jean Girault",
+    img: "https://i0.wp.com/www.regarder-films.net/wp-content/uploads/2020/04/la-soupe-aux-choux-scaled.jpg?fit=2000%2C3000&ssl=1",
+    note: "bloublouboublbubouboluou",
+    date: "30-07-2023"
+});
+xhr.onload = () => {
+  if (xhr.readyState == 4 && xhr.status == 201) {
+    console.log(JSON.parse(xhr.responseText));
+  } else {
+    console.log(`Error: ${xhr.status}`);
+  }
+};
+xhr.send(body);
+
+// fetch("http://localhost:3000/api/films", {
+//   method: "post",
+//   headers: {
+//     'Accept': 'application/json',
+//     'Content-Type': 'application/json'
+//   },
+
+//   //make sure to serialize your JSON body
+//   body: JSON.stringify({
+//     "name": "Rainman",
+//     "releaseDate": "1988",
+//     "directorName": "Barry Levinson",
+//     "img": "https://image.tmdb.org/t/p/original/jCvzsYOjeGj0cVqFIUoOrwyML3W.jpg",
+//     "note": "Avec Dustin Hoffman",
+//     "date": "31-07-2023"
+//   })
+// })
+// .then( (response) => { 
+//    console.log(response.res)
+// });
