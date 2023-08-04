@@ -1,8 +1,8 @@
 const xhr = new XMLHttpRequest();
-const loggedUser = "onat"
 // #region Global Vars //
 
-const loggedUser = prompt('enter username (no caps)')
+// const loggedUser = prompt('enter username (no caps)')
+const loggedUser = 'onat'
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
@@ -113,7 +113,8 @@ class Card {
 
 // afficher la liste de lecture en ajoutant les encarts de chaque film
 function displayData(data, target) {
-    data.films.forEach(film => {
+    data.film.forEach(film => {
+        console.log(film)
         let filmComponent = new Card(film, target);
         filmComponent.appendElement();
     });
@@ -121,14 +122,19 @@ function displayData(data, target) {
 
 // séquence de chargement en ouverture de la page (et peux être plus tard pour passer d'une page/vue à une autre ?)
 function loadTimeline() {
-    fetch(`users-profile/${loggedUser}/films.json`)
-        .then(response => response.json())
-        .then(data => {
+
+    xhr.open("GET", "http://localhost:3000/api/films");
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response
             displayData(data, timelineDiv);
-        })
-        .catch(err => {
-            throw err
-        })
+        } 
+        else {
+            console.log(`Error: ${xhr.status}`);
+  }
+};
 }
 
 loadTimeline();
@@ -149,6 +155,7 @@ function searchFilm() {
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
         }
     };
+
 
     fetch(url, options)
         .then(res => res.json())
@@ -183,36 +190,35 @@ addButton.addEventListener('click', () => {
 // })
 
 
-// xhr.open("GET", "http://localhost:3000/api/products");
+// xhr.open("GET", "http://localhost:3000/api/films");
 // xhr.send();
 // xhr.responseType = "json";
 // xhr.onload = () => {
 //   if (xhr.readyState == 4 && xhr.status == 200) {
 //     const data = xhr.response;
-//     console.log(data);
 //   } else {
 //     console.log(`Error: ${xhr.status}`);
 //   }
 // };
 
-xhr.open("POST", "http://localhost:3000/api/films");
-xhr.setRequestHeader("Content-Type", "application/json");
-const body = JSON.stringify({
-    title: "La soupe aux choux",
-    releaseDate: 1981,
-    realName: "Jean Girault",
-    img: "https://i0.wp.com/www.regarder-films.net/wp-content/uploads/2020/04/la-soupe-aux-choux-scaled.jpg?fit=2000%2C3000&ssl=1",
-    note: "bloublouboublbubouboluou",
-    date: "30-07-2023"
-});
-xhr.onload = () => {
-  if (xhr.readyState == 4 && xhr.status == 201) {
-    console.log(JSON.parse(xhr.responseText));
-  } else {
-    console.log(`Error: ${xhr.status}`);
-  }
-};
-xhr.send(body);
+// xhr.open("POST", "http://localhost:3000/api/films");
+// xhr.setRequestHeader("Content-Type", "application/json");
+// const body = JSON.stringify({
+//     title: "The Shining",
+//     releaseDate: "1980",
+//     directorName: "Stanley Kubrick",
+//     img: "https://image.tmdb.org/t/p/original/b6ko0IKC8MdYBBPkkA1aBPLe2yz.jpg",
+//     note: "Le type est un peu fou",
+//     date: new Date()
+// });
+// xhr.onload = () => {
+//   if (xhr.readyState == 4 && xhr.status == 201) {
+//     console.log(JSON.parse(xhr.responseText));
+//   } else {
+//     console.log(`Error: ${xhr.status}`);
+//   }
+// };
+// xhr.send(body);
 
 // fetch("http://localhost:3000/api/films", {
 //   method: "post",
