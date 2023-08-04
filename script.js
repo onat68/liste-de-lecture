@@ -1,6 +1,5 @@
-const xhr = new XMLHttpRequest();
-const loggedUser = "onat"
 // #region Global Vars //
+const xhr = new XMLHttpRequest();
 
 const loggedUser = prompt('enter username (no caps)')
 
@@ -53,7 +52,7 @@ class Card {
 
         this.imgElement = document.createElement('div');
         this.imgElement.classList.add('film-poster-div');
-        this.imgElement.setAttribute('style', `background: url(${filmData['poster_path']})`)
+        this.imgElement.setAttribute('style', `background: url(https://image.tmdb.org/t/p/w500/${filmData['poster_path']})`)
 
         this.cardElement = document.createElement('div');
         this.cardElement.classList.add('result-card')
@@ -64,11 +63,21 @@ class Card {
         this.selectButton.innerText = 'OK'
 
 
-        // "that" est toujours 
+        // !!! probablement à virer ///
+        this.data = {
+            title: filmData['original_title'],
+            releaseDate: filmData['release_date'],
+            img: `https://image.tmdb.org/t/p/w500/${filmData['poster_path']}`,
+            overview: filmData.overview
+        }
+
+        // "that" est toujours = Card 
         let that = this;
 
         this.selectButton.onclick = function () {
-            that.resultToTimeline()
+            that.resultToDataBase();
+            that.resultToTimeline();
+
         }
     }
 
@@ -105,11 +114,27 @@ class Card {
         }, 1000
         )
     }
+
+    resultToDataBase() {
+        xhr.open("POST", "http://localhost:3000/api/films");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        const body = JSON.stringify(this.data);
+        xhr.onload = () => {
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                console.log(JSON.parse(xhr.responseText));
+            } else {
+                console.log(`Error: ${xhr.status}`);
+            }
+        };
+        xhr.send(body);
+    }
 }
 
 // #endregion //
 
 // #region Loading Sequence //
+
+/// !!! gros chantier ///
 
 // afficher la liste de lecture en ajoutant les encarts de chaque film
 function displayData(data, target) {
@@ -153,9 +178,11 @@ function searchFilm() {
     fetch(url, options)
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             // fonction d'affichage des résultats de recherche
             function displaySearchResults(films, target) {
                 films.results.forEach(film => {
+
                     let filmComponent = new Card(film, target);
                     filmComponent.appendElement();
                 });
@@ -172,6 +199,15 @@ addButton.addEventListener('click', () => {
     searchFilm()
 })
 
+addInputField.addEventListener("keypress", function (event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        addButton.click();
+    }
+});
 
 // fetch('http://localhost:3000/api/products')
 // .then(response => response.json())
@@ -195,24 +231,7 @@ addButton.addEventListener('click', () => {
 //   }
 // };
 
-xhr.open("POST", "http://localhost:3000/api/films");
-xhr.setRequestHeader("Content-Type", "application/json");
-const body = JSON.stringify({
-    title: "La soupe aux choux",
-    releaseDate: 1981,
-    realName: "Jean Girault",
-    img: "https://i0.wp.com/www.regarder-films.net/wp-content/uploads/2020/04/la-soupe-aux-choux-scaled.jpg?fit=2000%2C3000&ssl=1",
-    note: "bloublouboublbubouboluou",
-    date: "30-07-2023"
-});
-xhr.onload = () => {
-  if (xhr.readyState == 4 && xhr.status == 201) {
-    console.log(JSON.parse(xhr.responseText));
-  } else {
-    console.log(`Error: ${xhr.status}`);
-  }
-};
-xhr.send(body);
+
 
 // fetch("http://localhost:3000/api/films", {
 //   method: "post",
@@ -234,13 +253,5 @@ xhr.send(body);
 // .then( (response) => { 
 //    console.log(response.res)
 // });
+
 // enter dans le champs = clic sur le bouton d'envoi
-addInputField.addEventListener("keypress", function (event) {
-    // If the user presses the "Enter" key on the keyboard
-    if (event.key === "Enter") {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        addButton.click();
-    }
-});
