@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 const xhr = new XMLHttpRequest();
 const loggedUser = "onat"
-=======
 // #region Global Vars //
 
 const loggedUser = prompt('enter username (no caps)')
->>>>>>> 8ea33510e4d4676124696b54992fe9c1e6396bce
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
@@ -175,7 +172,6 @@ addButton.addEventListener('click', () => {
     searchFilm()
 })
 
-<<<<<<< HEAD
 
 // fetch('http://localhost:3000/api/products')
 // .then(response => response.json())
@@ -238,7 +234,6 @@ xhr.send(body);
 // .then( (response) => { 
 //    console.log(response.res)
 // });
-=======
 // enter dans le champs = clic sur le bouton d'envoi
 addInputField.addEventListener("keypress", function (event) {
     // If the user presses the "Enter" key on the keyboard
@@ -249,4 +244,3 @@ addInputField.addEventListener("keypress", function (event) {
         addButton.click();
     }
 });
->>>>>>> 8ea33510e4d4676124696b54992fe9c1e6396bce
