@@ -88,14 +88,23 @@ class SearchResultCard {
         this.selectButton = document.createElement('button')
         this.selectButton.classList.add('select-button')
         this.selectButton.innerText = 'OK'
+
+        this.selectElement = this.selectElement.bind(this)
+
+        let that = this;
+
+        this.selectButton.onclick = function () {
+            that.selectElement()
+        }
     }
 
-    
     selectElement() {
-
         srWrapper.classList.toggle('sr-anim-in', false)
         srWrapper.classList.toggle('sr-anim-out', true)
-
+        this.selectButton.remove()
+        this.cardElement.remove()
+        timelineDiv.appendChild(this.cardElement);
+        this.cardElement.scrollIntoView();
         setTimeout(function () {
             srWrapper.classList.toggle('sr-inactive', true)
             srWrapper.classList.toggle('sr-active', false)
@@ -104,6 +113,7 @@ class SearchResultCard {
         }, 1000
         )
     }
+
 
     appendElement() {
         this.textWrapper.appendChild(this.nameElement);
@@ -117,7 +127,7 @@ class SearchResultCard {
         this.target.appendChild(this.cardElement);
 
 
-        this.selectButton.addEventListener('click', function () {  })
+        this.selectButton.addEventListener('click', function () { })
     }
 
 }
