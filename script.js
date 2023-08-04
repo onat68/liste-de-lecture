@@ -131,7 +131,8 @@ class Card {
 
 // afficher la liste de lecture en ajoutant les encarts de chaque film
 function displayData(data, target) {
-    data.films.forEach(film => {
+    data.film.forEach(film => {
+        console.log(film)
         let filmComponent = new Card(film, target);
         filmComponent.appendElement();
     });
@@ -240,13 +241,12 @@ addInputField.addEventListener("keypress", function (event) {
 // })
 
 
-// xhr.open("GET", "http://localhost:3000/api/products");
+// xhr.open("GET", "http://localhost:3000/api/films");
 // xhr.send();
 // xhr.responseType = "json";
 // xhr.onload = () => {
 //   if (xhr.readyState == 4 && xhr.status == 200) {
 //     const data = xhr.response;
-//     console.log(data);
 //   } else {
 //     console.log(`Error: ${xhr.status}`);
 //   }
