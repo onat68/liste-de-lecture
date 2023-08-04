@@ -1,7 +1,6 @@
+// #region Global Vars //
 
-
-const loggedUser = "onat"
-
+const loggedUser = prompt('enter username (no caps)')
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
@@ -9,56 +8,29 @@ const searchResultsDiv = document.querySelector('.search-results')
 
 const srWrapper = document.querySelector('.sr-wrapper')
 
-// questions de nommage : 
-// 'real-name' trop ambigu => 'directorName';
-// 'name' => 'title';
-class FilmCard {
-    constructor(filmData, target) {
-        // élément parent cible (on peut faire ça mieux ?)
-        this.target = target;
+const cancelButton = document.querySelector('.cancel-button');
 
-        this.nameElement = document.createElement('h3');
-        this.nameElement.classList.add('film-name-h3');
-        this.nameElement.innerText = filmData.name;
+const addInputField = document.getElementById('add-input-field');
 
-        this.releaseDateElement = document.createElement('p');
-        this.releaseDateElement.classList.add('release-date-p');
-        this.releaseDateElement.innerText = filmData.releaseDate;
-
-        this.realNameElement = document.createElement('p');
-        this.realNameElement.classList.add('real-name-p');
-        this.realNameElement.innerText = filmData.realName
-
-        this.imgElement = document.createElement('div');
-        this.imgElement.classList.add('film-poster-div');
-        this.imgElement.setAttribute('style', `background: url(${filmData.img})`)
-
-        this.noteElement = document.createElement('p');
-        this.noteElement.classList.add('film-note-p');
-        this.noteElement.innerText = filmData.note
+const addButton = document.getElementById('add-button')
 
 
-        this.dateElement = document.createElement('p');
-        this.dateElement.classList.add('film-date-p');
-        this.dateElement.innerText = filmData.date
+cancelButton.onclick = function () {
+    srWrapper.classList.toggle('sr-anim-in', false)
+    srWrapper.classList.toggle('sr-anim-out', true)
+    setTimeout(function () {
+        srWrapper.classList.toggle('sr-inactive', true)
+        srWrapper.classList.toggle('sr-active', false)
+        srWrapper.classList.toggle('sr-anim-out', false)
 
-        this.cardElement = document.createElement('div');
-        this.cardElement.classList.add('film-div')
-        this.cardElement.id = filmData.name;
-    }
-    // ajouter le composant complet dans le HTML
-    appendElement() {
-        this.cardElement.appendChild(this.nameElement);
-        this.cardElement.appendChild(this.releaseDateElement);
-        this.cardElement.appendChild(this.realNameElement)
-        this.cardElement.appendChild(this.imgElement)
-        this.cardElement.appendChild(this.noteElement)
-        this.cardElement.appendChild(this.dateElement)
-        this.target.appendChild(this.cardElement);
-    }
+    }, 1000
+    )
 }
 
-class SearchResultCard {
+// #endregion //
+
+// #region classes //
+class Card {
     constructor(filmData, target) {
         this.target = target;
 
@@ -89,32 +61,16 @@ class SearchResultCard {
         this.selectButton.classList.add('select-button')
         this.selectButton.innerText = 'OK'
 
-        this.selectElement = this.selectElement.bind(this)
 
+        // "that" est toujours 
         let that = this;
 
         this.selectButton.onclick = function () {
-            that.selectElement()
+            that.resultToTimeline()
         }
     }
 
-    selectElement() {
-        srWrapper.classList.toggle('sr-anim-in', false)
-        srWrapper.classList.toggle('sr-anim-out', true)
-        this.selectButton.remove()
-        this.cardElement.remove()
-        timelineDiv.appendChild(this.cardElement);
-        this.cardElement.scrollIntoView();
-        setTimeout(function () {
-            srWrapper.classList.toggle('sr-inactive', true)
-            srWrapper.classList.toggle('sr-active', false)
-            srWrapper.classList.toggle('sr-anim-out', false)
-
-        }, 1000
-        )
-    }
-
-
+    // insertion des résultats de recherche dans le div
     appendElement() {
         this.textWrapper.appendChild(this.nameElement);
         this.textWrapper.appendChild(this.releaseDateElement);
@@ -125,17 +81,38 @@ class SearchResultCard {
         this.cardElement.appendChild(this.selectButton)
 
         this.target.appendChild(this.cardElement);
-
-
-        this.selectButton.addEventListener('click', function () { })
     }
 
+    // ajout du choix user dans la timeline, disparition animée de la vue "search results" et plus tard POST vers DB
+    resultToTimeline() {
+        // gestion des animations CSS avec un switch de classe
+        srWrapper.classList.toggle('sr-anim-in', false)
+        srWrapper.classList.toggle('sr-anim-out', true)
+        this.selectButton.remove()
+        this.cardElement.remove()
+        timelineDiv.appendChild(this.cardElement);
+
+        // faire défiler la timeline sur le dernier élement ajouté
+        this.cardElement.scrollIntoView();
+        setTimeout(function () {
+            // idem pour la gestion de display: none;
+            srWrapper.classList.toggle('sr-inactive', true)
+            srWrapper.classList.toggle('sr-active', false)
+            srWrapper.classList.toggle('sr-anim-out', false)
+
+        }, 1000
+        )
+    }
 }
+
+// #endregion //
+
+// #region Loading Sequence //
 
 // afficher la liste de lecture en ajoutant les encarts de chaque film
 function displayData(data, target) {
     data.films.forEach(film => {
-        let filmComponent = new FilmCard(film, target);
+        let filmComponent = new Card(film, target);
         filmComponent.appendElement();
     });
 }
@@ -154,37 +131,52 @@ function loadTimeline() {
 
 loadTimeline();
 
-let submit = document.getElementById('add-button')
-submit.addEventListener('click', () => {
-    function searchFilm() {
+// #endregion
 
-        let toSearch = document.getElementById('add-input-field').value
-        const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
+// #region Search & Add Items
+
+function searchFilm() {
+
+    let toSearch = addInputField.value
+
+    const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
+        }
+    };
+
+    fetch(url, options)
+        .then(res => res.json())
+        .then(data => {
+            // fonction d'affichage des résultats de recherche
+            function displaySearchResults(films, target) {
+                films.results.forEach(film => {
+                    let filmComponent = new Card(film, target);
+                    filmComponent.appendElement();
+                });
             }
-        };
+            displaySearchResults(data, searchResultsDiv)
+            srWrapper.classList.toggle('sr-anim-in', true)
+            srWrapper.classList.toggle('sr-inactive', false)
+            srWrapper.classList.toggle('sr-active', true)
+        })
+        .catch(err => console.error('error:' + err));
+}
 
-        fetch(url, options)
-            .then(res => res.json())
-            .then(data => {
-                // fonction d'affichage des résultats de recherche
-                function displaySearchResults(films, target) {
-                    films.results.forEach(film => {
-                        let filmComponent = new SearchResultCard(film, target);
-                        filmComponent.appendElement();
-                    });
-                }
-                displaySearchResults(data, searchResultsDiv)
-                srWrapper.classList.toggle('sr-anim-in', true)
-                srWrapper.classList.toggle('sr-inactive', false)
-                srWrapper.classList.toggle('sr-active', true)
-            })
-            .catch(err => console.error('error:' + err));
-    }
+addButton.addEventListener('click', () => {
     searchFilm()
 })
 
+// enter dans le champs = clic sur le bouton d'envoi
+addInputField.addEventListener("keypress", function (event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        addButton.click();
+    }
+});
