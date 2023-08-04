@@ -1,7 +1,7 @@
 // #region Global Vars //
 const xhr = new XMLHttpRequest();
 
-const loggedUser = prompt('enter username (no caps)')
+// const loggedUser = prompt('enter username (no caps)')
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
@@ -35,20 +35,22 @@ class Card {
     constructor(filmData, target) {
         this.target = target;
 
+        this.data = filmData
+
         this.textWrapper = document.createElement('div')
         this.textWrapper.classList.add('text-wrapper');
 
         this.nameElement = document.createElement('h3');
         this.nameElement.classList.add('film-name-h3');
-        this.nameElement.innerText = filmData['original_title'];
+        this.nameElement.innerText = filmData.title;
 
         this.releaseDateElement = document.createElement('p');
         this.releaseDateElement.classList.add('release-date-p');
         this.releaseDateElement.innerText = filmData['release_date'];
 
-        this.overviewElement = document.createElement('p');
-        this.overviewElement.classList.add('overview-p');
-        this.overviewElement.innerText = filmData.overview
+        // this.overviewElement = document.createElement('p');
+        // this.overviewElement.classList.add('overview-p');
+        // this.overviewElement.innerText = filmData.overview
 
         this.imgElement = document.createElement('div');
         this.imgElement.classList.add('film-poster-div');
@@ -56,20 +58,13 @@ class Card {
 
         this.cardElement = document.createElement('div');
         this.cardElement.classList.add('result-card')
-        this.cardElement.id = filmData['original_title'];
+        this.cardElement.id = filmData.title;
 
         this.selectButton = document.createElement('button')
         this.selectButton.classList.add('select-button')
         this.selectButton.innerText = 'OK'
 
 
-        // !!! probablement à virer ///
-        this.data = {
-            title: filmData['original_title'],
-            releaseDate: filmData['release_date'],
-            img: `https://image.tmdb.org/t/p/w500/${filmData['poster_path']}`,
-            overview: filmData.overview
-        }
 
         // "that" est toujours = Card 
         let that = this;
@@ -85,8 +80,8 @@ class Card {
     appendElement() {
         this.textWrapper.appendChild(this.nameElement);
         this.textWrapper.appendChild(this.releaseDateElement);
-        this.textWrapper.appendChild(this.overviewElement)
-
+        // this.textWrapper.appendChild(this.overviewElement)
+        
         this.cardElement.appendChild(this.imgElement)
         this.cardElement.appendChild(this.textWrapper)
         this.cardElement.appendChild(this.selectButton)
@@ -134,8 +129,6 @@ class Card {
 
 // #region Loading Sequence //
 
-/// !!! gros chantier ///
-
 // afficher la liste de lecture en ajoutant les encarts de chaque film
 function displayData(data, target) {
     data.films.forEach(film => {
@@ -146,14 +139,17 @@ function displayData(data, target) {
 
 // séquence de chargement en ouverture de la page (et peux être plus tard pour passer d'une page/vue à une autre ?)
 function loadTimeline() {
-    fetch(`users-profile/${loggedUser}/films.json`)
-        .then(response => response.json())
-        .then(data => {
-            displayData(data, timelineDiv);
-        })
-        .catch(err => {
-            throw err
-        })
+    xhr.open("GET", `http://localhost:3000/api/films`);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            displayData(data, timelineDiv)
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
 }
 
 loadTimeline();
@@ -164,35 +160,60 @@ loadTimeline();
 
 function searchFilm() {
 
+    function displaySearchResults(films, target) {
+        films.results.forEach(film => {
+
+            let filmComponent = new Card(film, target);
+            filmComponent.appendElement();
+        });
+    }
+
     let toSearch = addInputField.value
 
-    const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
-        }
-    };
+    xhr.open("GET", `http://localhost:3000/api/films?${toSearch}`);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
 
-    fetch(url, options)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            // fonction d'affichage des résultats de recherche
-            function displaySearchResults(films, target) {
-                films.results.forEach(film => {
-
-                    let filmComponent = new Card(film, target);
-                    filmComponent.appendElement();
-                });
-            }
             displaySearchResults(data, searchResultsDiv)
             srWrapper.classList.toggle('sr-anim-in', true)
             srWrapper.classList.toggle('sr-inactive', false)
             srWrapper.classList.toggle('sr-active', true)
-        })
-        .catch(err => console.error('error:' + err));
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+    // const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
+    // const options = {
+    //     method: 'GET',
+    //     headers: {
+    //         accept: 'application/json',
+    //         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
+    //     }
+    // };
+
+    // fetch(url, options)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data)
+    //         // fonction d'affichage des résultats de recherche
+    //         function displaySearchResults(films, target) {
+    //             films.results.forEach(film => {
+
+    //                 let filmComponent = new Card(film, target);
+    //                 filmComponent.appendElement();
+    //             });
+    //         }
+    //         displaySearchResults(data, searchResultsDiv)
+    //         srWrapper.classList.toggle('sr-anim-in', true)
+    //         srWrapper.classList.toggle('sr-inactive', false)
+    //         srWrapper.classList.toggle('sr-active', true)
+    //     })
+    //     .catch(err => console.error('error:' + err));
 }
 
 addButton.addEventListener('click', () => {
