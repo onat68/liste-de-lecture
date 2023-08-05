@@ -49,7 +49,7 @@ class Card {
 
         this.overviewElement = document.createElement('p');
         this.overviewElement.classList.add('overview-p');
-        this.overviewElement.innerText = filmData.overview
+        this.overviewElement.innerText = filmData['overview']
 
         this.imgElement = document.createElement('div');
         this.imgElement.classList.add('film-poster-div');
@@ -138,8 +138,13 @@ class Card {
 /// !!! gros chantier ///
 
 // afficher la liste de lecture en ajoutant les encarts de chaque film
-function displayData(data, target) {
+function displayData(data, target, fromDB) {
     data.films.forEach(film => {
+        if(fromDB){
+            film.original_title = film.title
+            film.release_date = film.releaseDate
+            film.overview = film.note
+        }
         let filmComponent = new Card(film, target);
         filmComponent.appendElement();
     });
@@ -154,7 +159,7 @@ function loadTimeline() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             // console.log(films)
             const data = xhr.response;
-            displayData(data, timelineDiv)
+            displayData(data, timelineDiv, true)
         } else {
             console.log(`Error: ${xhr.status}`);
         }
