@@ -36,13 +36,8 @@ app.post('/api/films', (req, res, next) => {
 
 app.get('/api/films', (req, res, next) => {
     Film.find()
-    .then(film => {
-        res.status(200).json({ film })
-    })
+    .then(products => res.status(200).json({ film }))
     .catch(error => res.status(400).json({ error }))
 })
 
 module.exports = app;
-
-
-
