@@ -53,7 +53,7 @@ class Card {
 
         this.imgElement = document.createElement('div');
         this.imgElement.classList.add('film-poster-div');
-        this.imgElement.setAttribute('style', `background: url(https://image.tmdb.org/t/p/w500/${filmData['poster_path']})`)
+        this.imgElement.setAttribute('style', `background: url(https://image.tmdb.org/t/p/w45/${filmData['poster_path']})`)
 
         this.cardElement = document.createElement('div');
         this.cardElement.classList.add('result-card')
