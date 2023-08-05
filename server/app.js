@@ -42,66 +42,7 @@ app.get('/api/films', (req, res, next) => {
     .catch(error => res.status(400).json({ error }))
 })
 
-// app.get('/api/films?toSearch', (req, res, next) => {
-//     const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
-//     const options = {
-//         method: 'GET',
-//         headers: {
-//             accept: 'application/json',
-//             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
-//         }
-//     };
-
-//     fetch(url, options)
-//         .then(res => res.json())
-//         .then(data => {
-//             console.log(data)
-//             res.status(200).json( {data} )
-    
-//         })
-//         .catch(err => console.error('error:' + err));
-// })
-
-const url = `https://api.themoviedb.org/3/search/movie?query=salut}`;
-const options = {
-    method: 'GET',
-    headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
-    }
-};
-
-fetch(url, options)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-        res.status(200).json( {data} )
-
-    })
-    .catch(err => console.error('error:' + err));
-
 module.exports = app;
 
 
-// function searchFilm() {
 
-//     let toSearch = addInputField.value
-
-//     const url = `https://api.themoviedb.org/3/search/movie?query=${escape(toSearch)}`;
-//     const options = {
-//         method: 'GET',
-//         headers: {
-//             accept: 'application/json',
-//             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk'
-//         }
-//     };
-
-
-//     fetch(url, options)
-//         .then(res => res.json())
-//         .then(data => {
-//             // fonction d'affichage des résultats de recherche
-    
-//         })
-//         .catch(err => console.error('error:' + err));
-// }

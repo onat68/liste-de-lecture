@@ -161,6 +161,9 @@ loadTimeline();
 
 function searchFilm() {
 
+
+
+
     function displaySearchResults(films, target) {
         films.results.forEach(film => {
 
