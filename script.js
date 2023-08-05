@@ -69,7 +69,8 @@ class Card {
             title: filmData['original_title'],
             releaseDate: filmData['release_date'],
             img: `https://image.tmdb.org/t/p/w500/${filmData['poster_path']}`,
-            overview: filmData.overview
+            note: filmData.overview,
+            date : new Date()
         }
 
         // "that" est toujours = Card 
@@ -191,7 +192,7 @@ function searchFilm() {
             console.log(data)
             // fonction d'affichage des résultats de recherche
             function displaySearchResults(films, target) {
-                searchResultsDiv.innerHTML = ""
+                searchResultsDiv.innerHTML = "" 
                 films.results.forEach(film => {
 
                     let filmComponent = new Card(film, target);
@@ -220,49 +221,5 @@ addInputField.addEventListener("keypress", function (event) {
     }
 });
 
-// fetch('http://localhost:3000/api/products')
-// .then(response => response.json())
-// .then(data => {
-//     console.log(data)
-// })
-// .catch(err => {
-//     throw err
-// })
-
-
-// xhr.open("GET", "http://localhost:3000/api/products");
-// xhr.send();
-// xhr.responseType = "json";
-// xhr.onload = () => {
-//   if (xhr.readyState == 4 && xhr.status == 200) {
-//     const data = xhr.response;
-//     console.log(data);
-//   } else {
-//     console.log(`Error: ${xhr.status}`);
-//   }
-// };
-
-
-
-// fetch("http://localhost:3000/api/films", {
-//   method: "post",
-//   headers: {
-//     'Accept': 'application/json',
-//     'Content-Type': 'application/json'
-//   },
-
-//   //make sure to serialize your JSON body
-//   body: JSON.stringify({
-//     "name": "Rainman",
-//     "releaseDate": "1988",
-//     "directorName": "Barry Levinson",
-//     "img": "https://image.tmdb.org/t/p/original/jCvzsYOjeGj0cVqFIUoOrwyML3W.jpg",
-//     "note": "Avec Dustin Hoffman",
-//     "date": "31-07-2023"
-//   })
-// })
-// .then( (response) => { 
-//    console.log(response.res)
-// });
 
 // enter dans le champs = clic sur le bouton d'envoi
