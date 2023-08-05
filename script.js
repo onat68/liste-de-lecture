@@ -53,7 +53,7 @@ class Card {
 
         this.imgElement = document.createElement('div');
         this.imgElement.classList.add('film-poster-div');
-        this.imgElement.setAttribute('style', `background: url(https://image.tmdb.org/t/p/w45/${filmData['poster_path']})`)
+        this.imgElement.setAttribute('style', `background: url(https://image.tmdb.org/t/p/w92/${filmData['poster_path']})`)
 
         this.cardElement = document.createElement('div');
         this.cardElement.classList.add('result-card')
@@ -68,7 +68,7 @@ class Card {
         this.data = {
             title: filmData['original_title'],
             releaseDate: filmData['release_date'],
-            img: `https://image.tmdb.org/t/p/w500/${filmData['poster_path']}`,
+            img: filmData['poster_path'],
             note: filmData.overview,
             date : new Date()
         }
@@ -145,6 +145,7 @@ function displayData(data, target, fromDB) {
             film.original_title = film.title
             film.release_date = film.releaseDate
             film.overview = film.note
+            film.poster_path = film.img
         }
         let filmComponent = new Card(film, target);
         filmComponent.appendElement();

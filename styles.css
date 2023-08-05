@@ -142,9 +142,10 @@ label {
 /* image du film */
 .film-poster-div {
   background-size: contain;
-  height: 40px;
-  width: 40px;
+  height: 135px;
+  width: 92px;
   flex: none;
+  display: center;
 }
 
 /* Vue alternative ou overlay a animer au moment d'une recherche */
