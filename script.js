@@ -1,7 +1,8 @@
 // #region Global Vars //
 const xhr = new XMLHttpRequest();
 
-const loggedUser = prompt('enter username (no caps)')
+// const loggedUser = prompt('enter username (no caps)')
+const loggedUser = 'onat'
 
 const timelineDiv = document.querySelector('.timeline')
 // const listDiv = document.querySelector('.list')
@@ -146,14 +147,18 @@ function displayData(data, target) {
 
 // séquence de chargement en ouverture de la page (et peux être plus tard pour passer d'une page/vue à une autre ?)
 function loadTimeline() {
-    fetch(`users-profile/${loggedUser}/films.json`)
-        .then(response => response.json())
-        .then(data => {
-            displayData(data, timelineDiv);
-        })
-        .catch(err => {
-            throw err
-        })
+    xhr.open("GET", `http://localhost:3000/api/films`);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // console.log(films)
+            const data = xhr.response;
+            displayData(data, timelineDiv)
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
 }
 
 loadTimeline();
