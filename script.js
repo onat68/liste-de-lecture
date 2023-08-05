@@ -148,6 +148,9 @@ function displayData(data, target, fromDB) {
         }
         let filmComponent = new Card(film, target);
         filmComponent.appendElement();
+        if(fromDB){
+            filmComponent.selectButton.remove()
+        }
     });
 }
 
