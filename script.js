@@ -57,7 +57,7 @@ class Card {
 
         this.cardElement = document.createElement('div');
         this.cardElement.classList.add('result-card')
-        this.cardElement.id = filmData['original_title'];
+        this.cardElement.id = filmData._id; // changé de original_title à id pour permettre la suppression de la DB
 
         this.selectButton = document.createElement('button')
         this.selectButton.classList.add('select-button')
@@ -191,6 +191,7 @@ function searchFilm() {
             console.log(data)
             // fonction d'affichage des résultats de recherche
             function displaySearchResults(films, target) {
+                searchResultsDiv.innerHTML = ""
                 films.results.forEach(film => {
 
                     let filmComponent = new Card(film, target);
