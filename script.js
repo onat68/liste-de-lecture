@@ -181,7 +181,7 @@ function searchFilm() {
 
     let toSearch = addInputField.value
 
-    const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURL(toSearch)}`;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(toSearch)}`;
     const options = {
         method: 'GET',
         headers: {
