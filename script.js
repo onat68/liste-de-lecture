@@ -227,3 +227,20 @@ addInputField.addEventListener("keypress", function (event) {
 
 
 // enter dans le champs = clic sur le bouton d'envoi
+
+// ---------------Requête delete film----------------
+
+// function deleteId(type, id){ // type : films
+
+//     xhr.open("DELETE", `http://localhost:3000/api/${type}/${id}`, true);
+//     xhr.onload = function () {
+//         var film = JSON.parse(xhr.responseText);
+//         if (xhr.readyState == 4 && xhr.status == "200") {
+//             console.table(film);
+//         } else {
+//             console.error(film);
+//         }
+//     }
+//     xhr.send(null);
+// }
+// --------------------------------------------

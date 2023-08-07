@@ -35,9 +35,11 @@ app.post('/api/films', (req, res, next) => {
 });
 
 app.delete('/api/films/:id', (req, res, next) => {
-    console.log('hello', req.params.id)
     Film.deleteOne({ _id : req.params.id })
-    .then(film => res.status(200).json({ film, message: 'Deleted'}))
+    .then(film => {
+        console.log(req.params.id, ' supprimé')
+        res.status(200).json({ film, message: 'Deleted'})
+    })
     .catch(error => res.status(400).json({ error }))
 })
 
