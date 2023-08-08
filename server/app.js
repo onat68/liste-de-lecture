@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Film = require("./models/film");
+const Book = require("./models/book");
 const bodyParser = require("body-parser");
 const app = express();
 const generateTimeline = require("./generateTimeline");
@@ -14,7 +15,7 @@ mongoose
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
-app.use(express.json()); // ????
+app.use(express.json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -40,6 +41,19 @@ app.post("/api/films", (req, res, next) => {
     .save()
     .then(() => {
       res.status(201).json({ film });
+    })
+    .catch((error) => res.status(400).json({ error }));
+});
+
+app.post("/api/books", (req, res, next) => {
+  delete req.body._id;
+  const book = new Book({
+    ...req.body,
+  });
+  book
+    .save()
+    .then(() => {
+      res.status(201).json({ book });
     })
     .catch((error) => res.status(400).json({ error }));
 });

@@ -30,7 +30,7 @@ cancelButton.onclick = function () {
 
 // #region classes //
 class Card {
-  constructor(title, releaseDate, note, img, target) {
+  constructor(title, releaseDate, note, img, target, type) {
     this.target = target;
 
     this.textWrapper = document.createElement("div");
@@ -63,6 +63,7 @@ class Card {
     this.selectButton = document.createElement("button");
     this.selectButton.classList.add("select-button");
     this.selectButton.innerText = "OK";
+    this.selectButton.path = type
 
     // !!! probablement à virer ///
     this.data = {
@@ -77,7 +78,7 @@ class Card {
     let that = this;
 
     this.selectButton.onclick = function () {
-      that.resultToDataBase();
+      that.resultToDataBase(that.selectButton.path);
       that.resultToTimeline();
     };
   }
@@ -114,8 +115,9 @@ class Card {
     }, 1000);
   }
 
-  resultToDataBase() {
-    xhr.open("POST", "http://localhost:3000/api/films");
+  resultToDataBase(type) {
+    console.log(type)
+    xhr.open("POST", `http://localhost:3000/api/${type}`);
     xhr.setRequestHeader("Content-Type", "application/json");
     const body = JSON.stringify(this.data);
     xhr.onload = () => {
@@ -193,7 +195,7 @@ function searchFilm() {
           releaseDate = film.release_date
           note = film.overview
           img = `https://image.tmdb.org/t/p/w92/${film["poster_path"]}`
-          let filmComponent = new Card(title, releaseDate, note, img, target);
+          let filmComponent = new Card(title, releaseDate, note, img, target, "films");
           filmComponent.appendElement();
         });
       }
@@ -222,7 +224,7 @@ function searchBook() {
           releaseDate = book.volumeInfo.publishedDate
           note = book.volumeInfo.description
           book.volumeInfo.imageLinks != undefined ? img = book.volumeInfo.imageLinks.thumbnail : img = 'none'
-          let bookComponent = new Card(title, releaseDate, note, img, target);
+          let bookComponent = new Card(title, releaseDate, note, img, target, "books");
           bookComponent.appendElement();
         });
       }
