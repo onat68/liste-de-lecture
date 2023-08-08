@@ -38,21 +38,21 @@ class Card {
 
     this.nameElement = document.createElement("h3");
     this.nameElement.classList.add("film-name-h3");
-    this.nameElement.innerText = filmData["original_title"];
+    this.nameElement.innerText = filmData["original_title"]; //filmData.volumeInfo.title
 
     this.releaseDateElement = document.createElement("p");
     this.releaseDateElement.classList.add("release-date-p");
-    this.releaseDateElement.innerText = filmData["release_date"];
+    this.releaseDateElement.innerText = filmData["release_date"]; //filmData.volumeInfo.publishedDate
 
     this.overviewElement = document.createElement("p");
     this.overviewElement.classList.add("overview-p");
-    this.overviewElement.innerText = filmData["overview"];
+    this.overviewElement.innerText = filmData["overview"]; //filmData.volumeInfo.description
 
     this.imgElement = document.createElement("div");
     this.imgElement.classList.add("film-poster-div");
     this.imgElement.setAttribute(
       "style",
-      `background: url(https://image.tmdb.org/t/p/w92/${filmData["poster_path"]})`
+      `background: url(https://image.tmdb.org/t/p/w92/${filmData["poster_path"]})` //filmData.volumeInfo.imageLinks.thumbnail
     );
 
     this.cardElement = document.createElement("div");
@@ -65,7 +65,7 @@ class Card {
 
     // !!! probablement à virer ///
     this.data = {
-      title: filmData["original_title"],
+      title: filmData, //["original_title"],
       releaseDate: filmData["release_date"],
       img: filmData["poster_path"],
       note: filmData.overview,
@@ -208,8 +208,33 @@ function searchFilm() {
     .catch((err) => console.error("error:" + err));
 }
 
+function searchBook() {
+  let toSearch = addInputField.value;
+
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURI(toSearch)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`;
+  
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      function displaySearchResults(books, target) {
+        searchResultsDiv.innerHTML = "";
+        console.log(books.docs)
+        books.items.forEach((book) => {
+          let bookComponent = new Card(book, target);
+          console.log(bookComponent)
+          bookComponent.appendElement();
+        });
+      }
+      displaySearchResults(data, searchResultsDiv);
+      srWrapper.classList.toggle("sr-anim-in", true);
+      srWrapper.classList.toggle("sr-inactive", false);
+      srWrapper.classList.toggle("sr-active", true);
+    })
+    .catch((err) => console.error('error:'+ err));
+}
+
 addButton.addEventListener("click", () => {
-  searchFilm();
+  searchBook();
 });
 
 addInputField.addEventListener("keypress", function (event) {
@@ -240,3 +265,6 @@ addInputField.addEventListener("keypress", function (event) {
 //     xhr.send(null);
 // }
 // --------------------------------------------
+
+
+
