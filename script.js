@@ -50,10 +50,10 @@ class Card {
 
     this.imgElement = document.createElement("div");
     this.imgElement.classList.add("film-poster-div");
-    // this.imgElement.setAttribute(
-    //   "style",
-    //   `background: url(${img})` //filmData.volumeInfo.imageLinks.thumbnail // https://image.tmdb.org/t/p/w92/${filmData["poster_path"]}
-    // );
+    this.imgElement.setAttribute(
+      "style",
+      `background: url(${img})`
+    );
 
     this.cardElement = document.createElement("div");
     this.cardElement.classList.add("result-card");
@@ -189,10 +189,10 @@ function searchFilm() {
       function displaySearchResultsFilms(films, target) {
         searchResultsDiv.innerHTML = "";
         films.results.forEach((film) => {
-          title = book.volumeInfo.title ////////////////////////
-          releaseDate = book.volumeInfo.publishedDate
-          note = book.volumeInfo.description
-          img = book.volumeInfo.imageLinks.thumbnail
+          title = film.original_title
+          releaseDate = film.release_date
+          note = film.overview
+          img = `https://image.tmdb.org/t/p/w92/${film["poster_path"]}`
           let filmComponent = new Card(title, releaseDate, note, img, target);
           filmComponent.appendElement();
         });
@@ -215,13 +215,11 @@ function searchBook() {
     .then((data) => {
       function displaySearchResultsBooks(books, target) {
         searchResultsDiv.innerHTML = "";
-        console.log(books.items)
         books.items.forEach((book) => {
           title = book.volumeInfo.title
           releaseDate = book.volumeInfo.publishedDate
           note = book.volumeInfo.description
-          img = ''
-          // book.volumeInfo.imageLinks.thumbnail ? img = book.volumeInfo.imageLinks.thumbnail:img = 'aa'
+          book.volumeInfo.imageLinks != undefined ? img = book.volumeInfo.imageLinks.thumbnail : img = 'none'
           let bookComponent = new Card(title, releaseDate, note, img, target);
           console.log(bookComponent)
           bookComponent.appendElement();
@@ -236,7 +234,7 @@ function searchBook() {
 }
 
 addButton.addEventListener("click", () => {
-  searchBook();
+  searchFilm();
 });
 
 addInputField.addEventListener("keypress", function (event) {
