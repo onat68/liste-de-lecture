@@ -38,18 +38,19 @@ class Card {
 
     this.nameElement = document.createElement("h3");
     this.nameElement.classList.add("film-name-h3");
-    this.nameElement.innerText = title // filmData["original_title"]; //filmData.volumeInfo.title
+    this.nameElement.innerText = title
 
     this.releaseDateElement = document.createElement("p");
     this.releaseDateElement.classList.add("release-date-p");
-    this.releaseDateElement.innerText = releaseDate // filmData["release_date"]; //filmData.volumeInfo.publishedDate
+    this.releaseDateElement.innerText = releaseDate
 
     this.overviewElement = document.createElement("p");
     this.overviewElement.classList.add("overview-p");
-    this.overviewElement.innerText = note // filmData["overview"]; //filmData.volumeInfo.description
+    this.overviewElement.innerText = note
 
     this.imgElement = document.createElement("div");
     this.imgElement.classList.add("film-poster-div");
+    this.imgElement.url = img
     this.imgElement.setAttribute(
       "style",
       `background: url(${img})`
@@ -67,7 +68,7 @@ class Card {
     this.data = {
       title: this.nameElement.innerText,
       releaseDate: this.releaseDateElement.innerText,
-      // img: this.imgElement, ////// A modifier
+      img: this.imgElement.url,
       note: this.overviewElement.innerText,
       date: new Date(),
     };
@@ -134,13 +135,13 @@ class Card {
 
 /// !!! gros chantier ///
 
-// afficher la liste de lecture en ajoutant les encarts de chaque film
+
 function displayData(data, target) {
   data.films.forEach((element) => {
 
     let timelineComponent = new Card(element.title, element.releaseDate, element.note, element.img, target);
     timelineComponent.appendElement();
-    //   filmComponent.selectButton.remove();
+    timelineComponent.selectButton.remove();
   });
 }
 
@@ -184,8 +185,7 @@ function searchFilm() {
   fetch(url, options)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      // fonction d'affichage des résultats de recherche
+
       function displaySearchResultsFilms(films, target) {
         searchResultsDiv.innerHTML = "";
         films.results.forEach((film) => {
@@ -198,6 +198,7 @@ function searchFilm() {
         });
       }
       displaySearchResultsFilms(data, searchResultsDiv);
+      srWrapper.scrollTop = 0
       srWrapper.classList.toggle("sr-anim-in", true);
       srWrapper.classList.toggle("sr-inactive", false);
       srWrapper.classList.toggle("sr-active", true);
@@ -213,6 +214,7 @@ function searchBook() {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
+
       function displaySearchResultsBooks(books, target) {
         searchResultsDiv.innerHTML = "";
         books.items.forEach((book) => {
@@ -221,7 +223,6 @@ function searchBook() {
           note = book.volumeInfo.description
           book.volumeInfo.imageLinks != undefined ? img = book.volumeInfo.imageLinks.thumbnail : img = 'none'
           let bookComponent = new Card(title, releaseDate, note, img, target);
-          console.log(bookComponent)
           bookComponent.appendElement();
         });
       }
@@ -234,7 +235,7 @@ function searchBook() {
 }
 
 addButton.addEventListener("click", () => {
-  searchFilm();
+  searchBook(); 
 });
 
 addInputField.addEventListener("keypress", function (event) {
