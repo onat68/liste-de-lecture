@@ -67,11 +67,15 @@ app.delete("/api/films/:id", (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 });
 
-app.get("/api/films", (req, res, next) => {
-  Film.find()
-    .then((films) => {
-      generateTimeline(films);
-      res.status(200).json({ films });
+app.get("/api", (req, res, next) => {
+  let promises = new Array ()
+  promises.push(Film.find())
+  promises.push(Book.find())
+    Promise.all(promises).then((all) => {
+      console.log(all[1])
+      let results = all[0].concat(all[1])
+      generateTimeline(results);
+      res.status(200).json({ results });
     })
     .catch((error) => res.status(400).json({ error }));
 });

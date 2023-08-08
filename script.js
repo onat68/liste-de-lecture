@@ -139,7 +139,7 @@ class Card {
 
 
 function displayData(data, target) {
-  data.films.forEach((element) => {
+  data.results.forEach((element) => {
 
     let timelineComponent = new Card(element.title, element.releaseDate, element.note, element.img, target);
     timelineComponent.appendElement();
@@ -149,7 +149,7 @@ function displayData(data, target) {
 
 // séquence de chargement en ouverture de la page (et peux être plus tard pour passer d'une page/vue à une autre ?)
 function loadTimeline() {
-  xhr.open("GET", `http://localhost:3000/api/films`);
+  xhr.open("GET", `http://localhost:3000/api`);
   xhr.send();
   xhr.responseType = "json";
   xhr.onload = () => {

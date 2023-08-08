@@ -1,13 +1,13 @@
-function generateTimeline(films) {
-  let index = films.length;
+function generateTimeline(results) {
+  let index = results.length;
 
   while (index != 0) {
     let randomIndex = Math.floor(Math.random() * index);
     index--;
-    [films[index], films[randomIndex]] = [films[randomIndex], films[index]];
+    [results[index], results[randomIndex]] = [results[randomIndex], results[index]];
   }
-  console.log(films);
-  return films;
+  console.log(results);
+  return results;
 }
 
 // export {generateTimeline}
