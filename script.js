@@ -30,7 +30,7 @@ cancelButton.onclick = function () {
 
 // #region classes //
 class Card {
-  constructor(filmData, target) {
+  constructor(title, releaseDate, note, img, target) {
     this.target = target;
 
     this.textWrapper = document.createElement("div");
@@ -38,26 +38,26 @@ class Card {
 
     this.nameElement = document.createElement("h3");
     this.nameElement.classList.add("film-name-h3");
-    this.nameElement.innerText = filmData["original_title"]; //filmData.volumeInfo.title
+    this.nameElement.innerText = title // filmData["original_title"]; //filmData.volumeInfo.title
 
     this.releaseDateElement = document.createElement("p");
     this.releaseDateElement.classList.add("release-date-p");
-    this.releaseDateElement.innerText = filmData["release_date"]; //filmData.volumeInfo.publishedDate
+    this.releaseDateElement.innerText = releaseDate // filmData["release_date"]; //filmData.volumeInfo.publishedDate
 
     this.overviewElement = document.createElement("p");
     this.overviewElement.classList.add("overview-p");
-    this.overviewElement.innerText = filmData["overview"]; //filmData.volumeInfo.description
+    this.overviewElement.innerText = note // filmData["overview"]; //filmData.volumeInfo.description
 
     this.imgElement = document.createElement("div");
     this.imgElement.classList.add("film-poster-div");
-    this.imgElement.setAttribute(
-      "style",
-      `background: url(https://image.tmdb.org/t/p/w92/${filmData["poster_path"]})` //filmData.volumeInfo.imageLinks.thumbnail
-    );
+    // this.imgElement.setAttribute(
+    //   "style",
+    //   `background: url(${img})` //filmData.volumeInfo.imageLinks.thumbnail // https://image.tmdb.org/t/p/w92/${filmData["poster_path"]}
+    // );
 
     this.cardElement = document.createElement("div");
     this.cardElement.classList.add("result-card");
-    this.cardElement.id = filmData._id; // changé de original_title à id pour permettre la suppression de la DB
+    // this.cardElement.id = filmData._id; // changé de original_title à id pour permettre la suppression de la DB
 
     this.selectButton = document.createElement("button");
     this.selectButton.classList.add("select-button");
@@ -65,10 +65,10 @@ class Card {
 
     // !!! probablement à virer ///
     this.data = {
-      title: filmData, //["original_title"],
-      releaseDate: filmData["release_date"],
-      img: filmData["poster_path"],
-      note: filmData.overview,
+      title: this.nameElement.innerText,
+      releaseDate: this.releaseDateElement.innerText,
+      // img: this.imgElement, ////// A modifier
+      note: this.overviewElement.innerText,
       date: new Date(),
     };
 
@@ -135,19 +135,12 @@ class Card {
 /// !!! gros chantier ///
 
 // afficher la liste de lecture en ajoutant les encarts de chaque film
-function displayData(data, target, fromDB) {
-  data.films.forEach((film) => {
-    if (fromDB) {
-      film.original_title = film.title;
-      film.release_date = film.releaseDate;
-      film.overview = film.note;
-      film.poster_path = film.img;
-    }
-    let filmComponent = new Card(film, target);
-    filmComponent.appendElement();
-    if (fromDB) {
-      filmComponent.selectButton.remove();
-    }
+function displayData(data, target) {
+  data.films.forEach((element) => {
+
+    let timelineComponent = new Card(element.title, element.releaseDate, element.note, element.img, target);
+    timelineComponent.appendElement();
+    //   filmComponent.selectButton.remove();
   });
 }
 
@@ -160,7 +153,7 @@ function loadTimeline() {
     if (xhr.readyState == 4 && xhr.status == 200) {
       // console.log(films)
       const data = xhr.response;
-      displayData(data, timelineDiv, true);
+      displayData(data, timelineDiv);
     } else {
       console.log(`Error: ${xhr.status}`);
     }
@@ -193,14 +186,18 @@ function searchFilm() {
     .then((data) => {
       console.log(data);
       // fonction d'affichage des résultats de recherche
-      function displaySearchResults(films, target) {
+      function displaySearchResultsFilms(films, target) {
         searchResultsDiv.innerHTML = "";
         films.results.forEach((film) => {
-          let filmComponent = new Card(film, target);
+          title = book.volumeInfo.title ////////////////////////
+          releaseDate = book.volumeInfo.publishedDate
+          note = book.volumeInfo.description
+          img = book.volumeInfo.imageLinks.thumbnail
+          let filmComponent = new Card(title, releaseDate, note, img, target);
           filmComponent.appendElement();
         });
       }
-      displaySearchResults(data, searchResultsDiv);
+      displaySearchResultsFilms(data, searchResultsDiv);
       srWrapper.classList.toggle("sr-anim-in", true);
       srWrapper.classList.toggle("sr-inactive", false);
       srWrapper.classList.toggle("sr-active", true);
@@ -216,16 +213,21 @@ function searchBook() {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      function displaySearchResults(books, target) {
+      function displaySearchResultsBooks(books, target) {
         searchResultsDiv.innerHTML = "";
-        console.log(books.docs)
+        console.log(books.items)
         books.items.forEach((book) => {
-          let bookComponent = new Card(book, target);
+          title = book.volumeInfo.title
+          releaseDate = book.volumeInfo.publishedDate
+          note = book.volumeInfo.description
+          img = ''
+          // book.volumeInfo.imageLinks.thumbnail ? img = book.volumeInfo.imageLinks.thumbnail:img = 'aa'
+          let bookComponent = new Card(title, releaseDate, note, img, target);
           console.log(bookComponent)
           bookComponent.appendElement();
         });
       }
-      displaySearchResults(data, searchResultsDiv);
+      displaySearchResultsBooks(data, searchResultsDiv);
       srWrapper.classList.toggle("sr-anim-in", true);
       srWrapper.classList.toggle("sr-inactive", false);
       srWrapper.classList.toggle("sr-active", true);
