@@ -1,5 +1,6 @@
 // #region Global Vars //
 const xhr = new XMLHttpRequest();
+// const searchFilm = require('./search').searchFilm
 
 // const loggedUser = prompt('enter username (no caps)')
 const loggedUser = "onat";
@@ -290,5 +291,5 @@ function deleteId(type, id){ // type : films
     xhr.send(null);
 }
 
-deleteId('films','64d245925ef0e6c330bddc82')
+// deleteId('films','64d245925ef0e6c330bddc82')
 // --------------------------------------------
