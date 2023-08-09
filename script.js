@@ -30,40 +30,40 @@ cancelButton.onclick = function () {
 
 // #region classes //
 class Card {
-  constructor(title, releaseDate, note, img, target, type) {
+  constructor(title, releaseDate, note, img, target, type, id) {
     this.target = target;
+    this.id = id;
+    this.type = type;
 
     this.textWrapper = document.createElement("div");
     this.textWrapper.classList.add("text-wrapper");
 
+
     this.nameElement = document.createElement("h3");
     this.nameElement.classList.add("film-name-h3");
-    this.nameElement.innerText = title
+    this.nameElement.innerText = title;
 
     this.releaseDateElement = document.createElement("p");
     this.releaseDateElement.classList.add("release-date-p");
-    this.releaseDateElement.innerText = releaseDate
+    this.releaseDateElement.innerText = releaseDate;
 
     this.overviewElement = document.createElement("p");
     this.overviewElement.classList.add("overview-p");
-    this.overviewElement.innerText = note
+    this.overviewElement.innerText = note;
 
     this.imgElement = document.createElement("div");
     this.imgElement.classList.add("film-poster-div");
-    this.imgElement.url = img
-    this.imgElement.setAttribute(
-      "style",
-      `background: url(${img})`
-    );
+    this.imgElement.url = img;
+    this.imgElement.setAttribute("style", `background: url(${img})`);
 
     this.cardElement = document.createElement("div");
     this.cardElement.classList.add("result-card");
-    // this.cardElement.id = filmData._id; // changé de original_title à id pour permettre la suppression de la DB
+    this.cardElement.id = this.id
 
     this.selectButton = document.createElement("button");
     this.selectButton.classList.add("select-button");
     this.selectButton.innerText = "OK";
-    this.selectButton.path = type
+    this.selectButton.path = type;
 
     // !!! probablement à virer ///
     this.data = {
@@ -116,7 +116,7 @@ class Card {
   }
 
   resultToDataBase(type) {
-    console.log(type)
+    console.log(type);
     xhr.open("POST", `http://localhost:3000/api/${type}`);
     xhr.setRequestHeader("Content-Type", "application/json");
     const body = JSON.stringify(this.data);
@@ -137,11 +137,17 @@ class Card {
 
 /// !!! gros chantier ///
 
-
 function displayData(data, target) {
   data.results.forEach((element) => {
-
-    let timelineComponent = new Card(element.title, element.releaseDate, element.note, element.img, target);
+    let timelineComponent = new Card(
+      element.title,
+      element.releaseDate,
+      element.note,
+      element.img,
+      target,
+      "type",
+      element._id
+    );
     timelineComponent.appendElement();
     timelineComponent.selectButton.remove();
   });
@@ -187,20 +193,26 @@ function searchFilm() {
   fetch(url, options)
     .then((res) => res.json())
     .then((data) => {
-
       function displaySearchResultsFilms(films, target) {
         searchResultsDiv.innerHTML = "";
         films.results.forEach((film) => {
-          title = film.original_title
-          releaseDate = film.release_date
-          note = film.overview
-          img = `https://image.tmdb.org/t/p/w92/${film["poster_path"]}`
-          let filmComponent = new Card(title, releaseDate, note, img, target, "films");
+          title = film.original_title;
+          releaseDate = film.release_date;
+          note = film.overview;
+          img = `https://image.tmdb.org/t/p/w92/${film["poster_path"]}`;
+          let filmComponent = new Card(
+            title,
+            releaseDate,
+            note,
+            img,
+            target,
+            "films"
+          );
           filmComponent.appendElement();
         });
       }
       displaySearchResultsFilms(data, searchResultsDiv);
-      srWrapper.scrollTop = 0
+      srWrapper.scrollTop = 0;
       srWrapper.classList.toggle("sr-anim-in", true);
       srWrapper.classList.toggle("sr-inactive", false);
       srWrapper.classList.toggle("sr-active", true);
@@ -211,20 +223,30 @@ function searchFilm() {
 function searchBook() {
   let toSearch = addInputField.value;
 
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURI(toSearch)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`;
-  
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURI(
+    toSearch
+  )}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`;
+
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-
       function displaySearchResultsBooks(books, target) {
         searchResultsDiv.innerHTML = "";
         books.items.forEach((book) => {
-          title = book.volumeInfo.title
-          releaseDate = book.volumeInfo.publishedDate
-          note = book.volumeInfo.description
-          book.volumeInfo.imageLinks != undefined ? img = book.volumeInfo.imageLinks.thumbnail : img = 'none'
-          let bookComponent = new Card(title, releaseDate, note, img, target, "books");
+          title = book.volumeInfo.title;
+          releaseDate = book.volumeInfo.publishedDate;
+          note = book.volumeInfo.description;
+          book.volumeInfo.imageLinks != undefined
+            ? (img = book.volumeInfo.imageLinks.thumbnail)
+            : (img = "none");
+          let bookComponent = new Card(
+            title,
+            releaseDate,
+            note,
+            img,
+            target,
+            "books"
+          );
           bookComponent.appendElement();
         });
       }
@@ -233,11 +255,11 @@ function searchBook() {
       srWrapper.classList.toggle("sr-inactive", false);
       srWrapper.classList.toggle("sr-active", true);
     })
-    .catch((err) => console.error('error:'+ err));
+    .catch((err) => console.error("error:" + err));
 }
 
 addButton.addEventListener("click", () => {
-  searchBook(); 
+  searchBook();
 });
 
 addInputField.addEventListener("keypress", function (event) {
@@ -254,20 +276,19 @@ addInputField.addEventListener("keypress", function (event) {
 
 // ---------------Requête delete film----------------
 
-// function deleteId(type, id){ // type : films
+function deleteId(type, id){ // type : films
 
-//     xhr.open("DELETE", `http://localhost:3000/api/${type}/${id}`, true);
-//     xhr.onload = function () {
-//         var film = JSON.parse(xhr.responseText);
-//         if (xhr.readyState == 4 && xhr.status == "200") {
-//             console.table(film);
-//         } else {
-//             console.error(film);
-//         }
-//     }
-//     xhr.send(null);
-// }
+    xhr.open("DELETE", `http://localhost:3000/api/${type}/${id}`, true);
+    xhr.onload = function () {
+        var film = JSON.parse(xhr.responseText);
+        if (xhr.readyState == 4 && xhr.status == "200") {
+            console.table(film);
+        } else {
+            console.error(film);
+        }
+    }
+    xhr.send(null);
+}
+
+deleteId('films','64d245925ef0e6c330bddc82')
 // --------------------------------------------
-
-
-
