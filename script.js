@@ -237,7 +237,7 @@ function searchBook() {
 }
 
 addButton.addEventListener("click", () => {
-  searchFilm(); 
+  searchBook(); 
 });
 
 addInputField.addEventListener("keypress", function (event) {
