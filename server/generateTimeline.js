@@ -6,6 +6,7 @@ function generateTimeline(results) {
     index--;
     [results[index], results[randomIndex]] = [results[randomIndex], results[index]];
   }
+  results.push(1)
   return results;
 }
 
