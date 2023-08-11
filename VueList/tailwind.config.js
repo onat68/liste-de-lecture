@@ -21,7 +21,6 @@ module.exports = {
       borderRadius: {
         s5: '5px'
       },
-
     },
   },
   plugins: [],

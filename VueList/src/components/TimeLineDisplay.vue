@@ -1,5 +1,6 @@
 <script setup>
 import SearchBar from './SearchBar.vue'
+import Card from './Card.vue'
 </script>
 
 <template>
@@ -14,8 +15,10 @@ import SearchBar from './SearchBar.vue'
           <div class="w-0.5 h-full bg-opgr1"></div>
         </div>
         <div
-          class="Frame28 w-full h-full pr-2 flex-col justify-center items-center gap-2 inline-flex"
-        ></div>
+          class="Frame28 w-full h-full flex-col justify-center items-center gap-2 inline-flex"
+        >
+          <Card></Card>
+        </div>
       </div>
     </div>
     <SearchBar></SearchBar>
