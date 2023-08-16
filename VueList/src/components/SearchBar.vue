@@ -1,3 +1,7 @@
+<script setup>
+
+</script>
+
 <template>
   <div
     class="Property1Timelineresearch w-full h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex"
@@ -11,8 +15,14 @@
         class="w-5 aspect-auto fill-white"
       />
     </div>
-    <input type="field" id="search-field" class="SearchField px-4 py-2 text-xl text-center w-full h-full bg-neutral-200 rounded-s5 shadow-inner">
-    <div
+    <input
+      v-model="text"
+      type="field"
+      id="search-field"
+      class="SearchField px-4 py-2 text-xl text-center w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
+    />
+    <button
+      @click="launchSearch"
       class="Button w-[60px] h-[60px] bg-green-500 rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
     >
       <img
@@ -20,6 +30,6 @@
         alt="Icon of a magnifying-glass to indicate a search button"
         class="w-5 aspect-auto fill-white"
       />
-    </div>
+    </button>
   </div>
 </template>
