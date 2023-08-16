@@ -21,6 +21,12 @@ module.exports = {
       borderRadius: {
         s5: '5px'
       },
+      backgroundColor: {
+        brGr: '#C2E000',
+      },
+      color: {
+        brGr: '#C2E000'
+      }
     },
   },
   plugins: [],

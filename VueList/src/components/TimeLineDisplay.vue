@@ -1,6 +1,6 @@
 <script setup>
 import SearchBar from './SearchBar.vue'
-import Card from './Card.vue'
+import itemCard from './itemCard.vue'
 </script>
 
 <template>
@@ -17,7 +17,7 @@ import Card from './Card.vue'
         <div
           class="Frame28 w-full h-full flex-col justify-center items-center gap-2 inline-flex"
         >
-          <Card></Card>
+          <itemCard></itemCard>
         </div>
       </div>
     </div>
