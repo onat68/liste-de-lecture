@@ -14,8 +14,19 @@ const responseData = ref([
     type: 'Movie',
     _id: '123',
     genre: 'Action/Crime'
+  },
+  {
+    title: 'Un bouquin',
+    releaseDate: '2023',
+    note: 'Un bouquin de ouf',
+    img: '',
+    type: 'Book',
+    _id: '123',
+    genre: 'Action/Crime'
   }
 ])
+
+// const xhr = new XMLHttpRequest()
 
 // function loadTimeline() {
 //   xhr.open('GET', `http://localhost:3000/api/all`)
@@ -24,12 +35,14 @@ const responseData = ref([
 //   xhr.onload = () => {
 //     if (xhr.readyState == 4 && xhr.status == 200) {
 //       // console.log(films)
-//       createCards(xhr.response)
+//       return xhr.response
 //     } else {
 //       console.log(`Error: ${xhr.status}`)
 //     }
 //   }
 // }
+
+// const responseData = ref(loadTimeline())
 </script>
 
 <template>

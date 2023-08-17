@@ -38,6 +38,17 @@ module.exports = {
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
         mdBl: '#007399'
+      },
+      animation: {
+        'down': 'slide 800ms ease-out 1'
+      },
+      keyframes: {
+        slide: {
+          '0%':{transform: 'translateY(-100%)'},
+          '50%': {transform: 'translateY(8%)'},
+          '75%': {transform:'translateY(-5%)'},
+          '100%': {transform: 'translateY(0%)'}
+        }
       }
     },
   },

@@ -34,12 +34,12 @@ const typeColor = assignTypeColor(type.value)
 <template>
   <div
     :id="cardId"
-    class="CardElement text-offBlck font-bold w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
+    class="animate-down CardElement text-offBlck font-bold w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
   >
     <div class="Wrapper0 h-full self-stretch rounded-s5 justify-center items-start inline-flex">
       <div class="ImgWrapper w-fit h-fit flex">
         <img
-          class="Jwposter1 h-[12Opx] w-20 aspect-auto rounded-tl-s5 rounded-bl-s5"
+          class="Jwposter1 h-[12Opx] w-20 aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin"
           :src="img"
           alt="A poster, book or album cover or similar image related to the element displayed in the card"
         />
