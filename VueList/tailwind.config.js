@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         display: '"Neue Montreal", Arial, sans-serif',
-        body: 'Lexend, "Atkinson Hyperlegible", sans-serif'
+        body: '"Lexend", "Atkinson Hyperlegible", sans-serif'
       },
       width: {
         iphone8: '375px'
@@ -27,6 +27,10 @@ module.exports = {
       },
       backgroundColor: {
         brGr: '#C2E000',
+        offBlck: '#0E1116',
+        mdPrpl: '#9747FF',
+        drkRd: '#9D0026',
+        mdBl: '#007399'
       },
       textColor: {
         brGr: '#C2E000',

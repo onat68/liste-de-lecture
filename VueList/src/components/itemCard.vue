@@ -34,7 +34,7 @@ const typeColor = assignTypeColor(type.value)
 <template>
   <div
     :id="cardId"
-    class="CardElement text-offBlck font-display w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
+    class="CardElement text-offBlck font-bold w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
   >
     <div class="Wrapper0 h-full self-stretch rounded-s5 justify-center items-start inline-flex">
       <div class="ImgWrapper w-fit h-fit flex">
@@ -45,7 +45,7 @@ const typeColor = assignTypeColor(type.value)
         />
       </div>
       <section
-        class="TextWrapper h-full w-full grow shrink basis-0 self-stretch pl-1 pr-2 py-1 rounded-s5 flex-col justify-start items-start inline-flex"
+        class="TextWrapper font-display h-full w-full grow shrink basis-0 self-stretch pl-1 pr-2 py-1 rounded-s5 flex-col justify-start items-start inline-flex"
       >
         <section
           class="MainInfoWrapper h-min w-full flex-col self-stretch justify-between items-baseline inline-flex"
@@ -53,17 +53,17 @@ const typeColor = assignTypeColor(type.value)
           <div
             class="TitleTypeWrapper w-full h-min flex-row justify-between items-start inline-flex"
           >
-            <h3 class="Title text-neutral-900 text-base font-bold leading-tight">
+            <h3 class="Title text-base font-display font-bold leading-5">
               {{ title }}
             </h3>
-            <p :class="typeColor" class="Type text-base font-light leading-tight">{{ type }}</p>
+            <p :class="typeColor" class="Type text-base font-medium leading-tight">{{ type }}</p>
           </div>
           <div
-            class="AuthorInfosWrapper w-full h-min text-neutral-900 font-normal flex flex-row justify-between"
+            class="AuthorInfosWrapper w-full h-mi font-medium flex flex-row justify-between"
           >
-            <h4 class="Author text-xs font-medium leading-4 h-min">Chad Stahelski</h4>
+            <h4 class="Author text-xs leading-4 h-min">Chad Stahelski</h4>
             <section
-              class="InfosWrapper h-min flex-row wrap text-[10px] leading-4 font-normal gap-0.5 inline-flex self-end"
+              class="InfosWrapper h-min flex-row wrap text-[10px] leading-4 gap-0.5 inline-flex self-end"
             >
               <p class="Genre">{{ genre }}</p>
               <p class="Dash">-</p>

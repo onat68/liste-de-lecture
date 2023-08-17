@@ -7,7 +7,7 @@
     class="Property1Timelineresearch w-full h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex"
   >
     <div
-      class="Button w-[60px] h-[60px] box-border pl-[9px] pr-[7px] bg-sky-700 rounded-s5 shrink-0 justify-center items-center inline-flex"
+      class="Button w-[60px] h-[60px] box-border pl-[9px] pr-[7px] bg-mdBl rounded-s5 shrink-0 justify-center items-center inline-flex"
     >
       <img
         src="../assets/FolderIcon.svg"
@@ -23,7 +23,7 @@
     />
     <button
       @click="launchSearch"
-      class="Button w-[60px] h-[60px] bg-green-500 rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
+      class="Button w-[60px] h-[60px] bg-brGr rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
     >
       <img
         src="../assets/SearchIcon.svg"
