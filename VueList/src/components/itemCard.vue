@@ -18,19 +18,23 @@ const type = ref(data.type)
 const cardId = ref(data._id)
 const genre = ref(data.genre)
 
-function isSearchResult(target) {
-  if (target == 'search results') {
-    return true
-  } else {
-    return false
+ function assignTypeColor(type) {
+  if (type == 'Movie') {
+    return 'text-mdPrpl'
+  } else if (type == 'Book') {
+    return 'text-drkRd'
+  } else if (type == 'Album') {
+    return 'text-mdBl'
   }
 }
+
+const typeColor = assignTypeColor(type.value)
 </script>
 
 <template>
   <div
     :id="cardId"
-    class="CardElement font-['Neue Helvetica'] w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
+    class="CardElement text-offBlck font-display w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
   >
     <div class="Wrapper0 h-full self-stretch rounded-s5 justify-center items-start inline-flex">
       <div class="ImgWrapper w-fit h-fit flex">
@@ -52,7 +56,7 @@ function isSearchResult(target) {
             <h3 class="Title text-neutral-900 text-base font-bold leading-tight">
               {{ title }}
             </h3>
-            <p class="Type text-purple-500 text-base font-light leading-tight">{{ type }}</p>
+            <p :class="typeColor" class="Type text-base font-light leading-tight">{{ type }}</p>
           </div>
           <div
             class="AuthorInfosWrapper w-full h-min text-neutral-900 font-normal flex flex-row justify-between"
@@ -77,7 +81,7 @@ function isSearchResult(target) {
           </p>
         </section>
       </section>
-      <addButton :v-if="isSearchResult"></addButton>
+      <addButton v-if="props.target == 'searchResults'"></addButton>
     </div>
   </div>
 </template>

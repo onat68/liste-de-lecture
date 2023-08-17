@@ -11,7 +11,7 @@ const responseData = ref([
     releaseDate: '2023',
     note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
     img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'MOVIE',
+    type: 'Movie',
     _id: '123',
     genre: 'Action/Crime'
   }
@@ -34,7 +34,7 @@ const responseData = ref([
 
 <template>
   <div
-    class="Property1Vuetimeline w-iphone8 h-iphone8 rounded-md flex-col justify-center items-center inline-flex border border-gray-400"
+    class="font-body Property1Vuetimeline w-iphone8 h-iphone8 rounded-md flex-col justify-center items-center inline-flex border border-gray-400"
   >
     <div class="Screen p-2 pb-0 rounded-s5 bg-white w-full h-full">
       <div
