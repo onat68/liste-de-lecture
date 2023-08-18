@@ -5,8 +5,7 @@ import { ref } from 'vue'
 
 const props = defineProps({
   data: Object,
-  target: String,
-  indexnum: Number
+  target: String
 })
 
 const data = props.data
