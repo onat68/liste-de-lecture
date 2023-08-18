@@ -5,7 +5,8 @@ import { ref } from 'vue'
 
 const props = defineProps({
   data: Object,
-  target: String
+  target: String,
+  indexnum: Number
 })
 
 const data = props.data
@@ -18,7 +19,7 @@ const type = ref(data.type)
 const cardId = ref(data._id)
 const genre = ref(data.genre)
 
- function assignTypeColor(type) {
+function assignTypeColor(type) {
   if (type == 'Movie') {
     return 'text-mdPrpl'
   } else if (type == 'Book') {
@@ -28,13 +29,15 @@ const genre = ref(data.genre)
   }
 }
 
+
+
 const typeColor = assignTypeColor(type.value)
 </script>
 
 <template>
   <div
     :id="cardId"
-    class="animate-down CardElement text-offBlck font-bold w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
+    class="CardElement text-offBlck font-bold w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
   >
     <div class="Wrapper0 h-full self-stretch rounded-s5 justify-center items-start inline-flex">
       <div class="ImgWrapper w-fit h-fit flex">
@@ -58,9 +61,7 @@ const typeColor = assignTypeColor(type.value)
             </h3>
             <p :class="typeColor" class="Type text-base font-medium leading-tight">{{ type }}</p>
           </div>
-          <div
-            class="AuthorInfosWrapper w-full h-mi font-medium flex flex-row justify-between"
-          >
+          <div class="AuthorInfosWrapper w-full h-mi font-medium flex flex-row justify-between">
             <h4 class="Author text-xs leading-4 h-min">Chad Stahelski</h4>
             <section
               class="InfosWrapper h-min flex-row wrap text-[10px] leading-4 gap-0.5 inline-flex self-end"
