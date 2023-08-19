@@ -22,7 +22,7 @@ module.exports = {
       },
       backgroundImage: {
         custom1: 'linear-gradient(179.18deg, #1B0B27 0.7 %, #007EA7 47.43 %, #1B0B27 99.3 %)',
-        mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 33.67%, rgba(0, 0, 0, 0) 50%,  rgba(0, 0, 0, 0) 100%)',
+        mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.4) 33.67%, rgba(0, 0, 0, 0) 50%,  rgba(0, 0, 0, 0) 100%)',
         opgr1: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%)'
       },
       borderRadius: {

@@ -1,5 +1,16 @@
 <script setup>
+import gsap from 'gsap'
+import { ref } from 'vue'
+const onOver = (el) => {
+ gsap.to(el, {  translateY: -4,
+duration: 1})
+}
 
+const onLeave = (el) => {
+  console.log(el)
+  gsap.to(el, {  translateY: 0,
+duration: 1})
+}
 </script>
 
 <template>
@@ -22,7 +33,9 @@
       class="SearchField px-4 py-2 text-xl text-center w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
     />
     <button
-      @click="launchSearch"
+      @mouseover="onOver"
+      @mouseleave="onLeave"
+      @click="triggerSearch"
       class="Button w-[60px] h-[60px] bg-brGr rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
     >
       <img

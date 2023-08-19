@@ -75,7 +75,7 @@ const typeColor = assignTypeColor(type.value)
           class="OverviewWrapper self-stretch grow shrink basis-0 pt-1 flex-col justify-start items-start gap-2.5 flex"
         >
           <p
-            class="self-stretch h-full w-full grow shrink basis-0 text-neutral-900 text-[10px] font-extralight text-ellipsis truncate whitespace-normal"
+            class="self-stretch h-full w-full grow shrink basis-0 text-neutral-900 text-[10px] font-extralight text-ellipsis overflow-hidden whitespace-normal"
           >
             {{ overview }}
           </p>
