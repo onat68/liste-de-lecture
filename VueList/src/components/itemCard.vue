@@ -36,7 +36,7 @@ const typeColor = assignTypeColor(type.value)
 <template>
   <div
     :id="cardId"
-    class="CardElement text-offBlck font-bold w-full h-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
+    class="CardElement text-offBlck font-bold w-full basis-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
   >
     <div class="Wrapper0 h-full self-stretch rounded-s5 justify-center items-start inline-flex">
       <div class="ImgWrapper w-fit h-fit flex">

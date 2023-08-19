@@ -93,18 +93,19 @@ const responseData = ref([
 
 <template>
   <div
-    class="font-body Property1Vuetimeline w-iphone8 h-iphone8 rounded-md flex-col justify-center items-center inline-flex border border-gray-400"
+    class="font-body Property1Vuetimeline rounded-md flex-col justify-end items-center inline-flex border shrink grow h-full"
   >
-    <div class="Screen p-2 pb-0 rounded-s5 bg-white w-full h-full">
+    <div class="Screen p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
       <div
-        class="Innerscreen rounded-s5 w-full h-full self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip"
+        class="Innerscreen rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip"
       >
         <div class="Line w-fit h-full py-2">
           <div class="w-0.5 h-full bg-opgr1"></div>
         </div>
         <div
-          class="Frame28 w-full h-full flex-col-reverse justify-start items-center gap-2 inline-flex overflow-scroll"
+          class="Frame28 flex-col-reverse justify-start items-center gap-2 h-full inline-flex overflow-y-scroll"
         >
+          <div class="absolute bg-mask1 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-50 p-2 pb-20 bg-clip-content"></div>
           <TransitionGroup appear @before-enter="beforeEnter" @enter="onEnter"
             ><itemCard
               v-for="(data, index) in responseData"
