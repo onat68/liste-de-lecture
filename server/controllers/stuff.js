@@ -1,5 +1,5 @@
-const Film = require("../models/Film");
-const Book = require("../models/Book");
+const Film = require("../models/film.js");
+const Book = require("../models/book.js");
 const generateTimeline = require("../generateTimeline");
 
 exports.createFilm = (req, res, next) => {

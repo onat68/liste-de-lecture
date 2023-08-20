@@ -25,71 +25,72 @@ import itemCard from './itemCard.vue'
 
 const target = ref('timeline')
 import { ref } from 'vue'
-const responseData = ref([
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  },
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  },
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  },
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  },
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  }
-])
-
-// const xhr = new XMLHttpRequest()
-
-// function loadTimeline() {
-//   xhr.open('GET', `http://localhost:3000/api/all`)
-//   xhr.send()
-//   xhr.responseType = 'json'
-//   xhr.onload = () => {
-//     if (xhr.readyState == 4 && xhr.status == 200) {
-//       // console.log(films)
-//       return xhr.response
-//     } else {
-//       console.log(`Error: ${xhr.status}`)
-//     }
+// const responseData = ref([
+//   {
+//     title: 'John Wick: Chapter 4',
+//     releaseDate: '2023',
+//     note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
+//     img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
+//     type: 'Movie',
+//     _id: '123',
+//     genre: 'Action/Crime'
+//   },
+//   {
+//     title: 'John Wick: Chapter 4',
+//     releaseDate: '2023',
+//     note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
+//     img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
+//     type: 'Movie',
+//     _id: '123',
+//     genre: 'Action/Crime'
+//   },
+//   {
+//     title: 'John Wick: Chapter 4',
+//     releaseDate: '2023',
+//     note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
+//     img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
+//     type: 'Movie',
+//     _id: '123',
+//     genre: 'Action/Crime'
+//   },
+//   {
+//     title: 'John Wick: Chapter 4',
+//     releaseDate: '2023',
+//     note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
+//     img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
+//     type: 'Movie',
+//     _id: '123',
+//     genre: 'Action/Crime'
+//   },
+//   {
+//     title: 'John Wick: Chapter 4',
+//     releaseDate: '2023',
+//     note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
+//     img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
+//     type: 'Movie',
+//     _id: '123',
+//     genre: 'Action/Crime'
 //   }
-// }
+// ])
 
-// const responseData = ref(loadTimeline())
+const xhr = new XMLHttpRequest()
+let response =""
+ function loadTimeline() {
+   xhr.open('GET', `http://localhost:3000/api/all`)
+   xhr.send()
+   xhr.responseType = 'json'
+   xhr.onload = () => {
+     if (xhr.readyState == 4 && xhr.status == 200) {
+       // console.log(films)
+       response = xhr.response
+     } else {
+       console.log(`Error: ${xhr.status}`)
+     }
+   }
+ }
+ const responseData = ref(response)
+ loadTimeline();
+ console.log(responseData.value)
 </script>
 
 <template>
@@ -114,6 +115,7 @@ const responseData = ref([
               :data="data"
               :target="target"
               :data-index="index"
+              ref="responseData"
             ></itemCard
           ></TransitionGroup>
         </div>
