@@ -1,6 +1,5 @@
 const generateTimeline = require('../server/generateTimeline')
 
-// console.log(generateTimeline([0,1]))
 
 describe('Timeline', () => {
     it('should return a different array', () => {

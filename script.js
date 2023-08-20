@@ -157,6 +157,8 @@ function displayData(data, target) {
 // séquence de chargement en ouverture de la page (et peux être plus tard pour passer d'une page/vue à une autre ?)
 function loadTimeline() {
   xhr.open("GET", `http://localhost:3000/api/all`);
+  xhr.setRequestHeader('Authorization', 'Bearer ' + 'TOLKIEN');
+  // xhr.  ('Bearer f4f4994a875f461ca4d7708b9e027df4')
   xhr.send();
   xhr.responseType = "json";
   xhr.onload = () => {
@@ -260,7 +262,7 @@ function searchBook() {
 }
 
 addButton.addEventListener("click", () => {
-  searchBook();
+  searchFilm();
 });
 
 addInputField.addEventListener("keypress", function (event) {
