@@ -103,7 +103,7 @@ const responseData = ref([
       >
         <div class="absolute bg-mask2 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"></div>
         <div
-          class="CardWrapper flex-col justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scroll-m-0 "
+          class="CardWrapper flex-col justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scrollbar-none"
         >
           <TransitionGroup appear @before-enter="beforeEnter" @enter="onEnter"
             ><itemCard

@@ -1,15 +1,4 @@
 <script setup>
-import gsap from 'gsap'
-
-const onOver = (el) => {
-  gsap.to(el, { translateY: -4, duration: 1 })
-}
-
-const onLeave = (el) => {
-  console.log(el)
-  gsap.to(el, { translateY: 0, duration: 1 })
-}
-
 import { search } from '../search'
 </script>
 

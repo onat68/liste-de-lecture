@@ -38,7 +38,7 @@ const typeColor = assignTypeColor(type.value)
 <template>
   <div
     :id="cardId"
-    class="CardElement text-offBlck font-bold w-full basis-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
+    class="CardElement transition duration-1000 hover:bg-transparent text-offBlck font-bold w-full basis-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
   >
     <div class="Wrapper0 h-full self-stretch rounded-s5 justify-center items-start inline-flex">
       <div class="ImgWrapper w-fit h-fit flex">
@@ -77,7 +77,7 @@ const typeColor = assignTypeColor(type.value)
           class="OverviewWrapper self-stretch grow shrink basis-0 pt-1 flex-col justify-start items-start gap-2.5 flex"
         >
           <p
-            class="self-stretch h-full w-full grow shrink basis-0 text-neutral-900 text-[10px] font-extralight text-ellipsis overflow-hidden whitespace-normal"
+            class="self-stretch h-full w-full grow shrink basis-0 text-[10px] font-extralight text-ellipsis overflow-hidden whitespace-normal"
           >
             {{ overview }}
           </p>

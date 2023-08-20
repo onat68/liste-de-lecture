@@ -1,6 +1,16 @@
 <template>
   <button
-    class="flex flex-col grow-0 justify-center items-center p-[10px] 
-    w-10 h-full bg-brGr rounded-br-s5 rounded-tr-s5 text-white"
-  ><img src="../assets/PlusSignIcon.svg" class="text-white" alt="Image of a plus sign to indicate a button that adds the result to the database"></button>
+    class="flex flex-col grow-0 justify-center items-center w-10 h-full bg-brGr rounded-br-s5 rounded-tr-s5 fill-white transition hover:bg-white hover:fill-brGr duration-300"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 448 512"
+      class="w-full h-full p-[10px] aspect-auto fill-inherit"
+    >
+      <path
+        class="fill-inherit"
+        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+      />
+    </svg>
+  </button>
 </template>
