@@ -3,6 +3,8 @@ import addButton from './addButton.vue'
 
 import { ref } from 'vue'
 
+import { search } from '../search';
+
 const props = defineProps({
   data: Object,
   target: String
@@ -81,7 +83,7 @@ const typeColor = assignTypeColor(type.value)
           </p>
         </section>
       </section>
-      <addButton v-if="props.target == 'searchResults'"></addButton>
+      <addButton v-if="search.searching"></addButton>
     </div>
   </div>
 </template>

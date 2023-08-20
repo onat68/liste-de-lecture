@@ -9,7 +9,7 @@ function onEnter(el, done) {
     el,
     {
       opacity: 0,
-      translateY: -window.innerHeight
+      translateY: window.innerHeight
     },
     {
       opacity: 1,
@@ -99,11 +99,11 @@ const responseData = ref([
   >
     <div class="Screen p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
       <div
-        class="Innerscreen relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip"
+        class="Innerscreen relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-srRes shadow-inner justify-center items-center gap-2 flex overflow-clip"
       >
-        <div class="absolute bg-mask1 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"></div>
+        <div class="absolute bg-mask2 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"></div>
         <div
-          class="CardWrapper flex-col-reverse justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scroll-m-0 "
+          class="CardWrapper flex-col justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scroll-m-0 "
         >
           <TransitionGroup appear @before-enter="beforeEnter" @enter="onEnter"
             ><itemCard

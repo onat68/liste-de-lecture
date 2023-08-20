@@ -23,7 +23,9 @@ module.exports = {
       backgroundImage: {
         custom1: 'linear-gradient(179.18deg, #1B0B27 0.7 %, #007EA7 47.43 %, #1B0B27 99.3 %)',
         mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 1) 100%)',
-        opgr1: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%)'
+        mask2: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 1) 100%)',
+        opgr1: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%)',
+        srRes: 'linear-gradient(134deg, #001E6C 0%, #FFF 100%);'
       },
       borderRadius: {
         s5: '5px'
@@ -64,26 +66,21 @@ module.exports = {
         mdBl: '#007399'
       },
       animation: {
-        'down': 'slide 800ms ease-out 1',
-        'up': 'slide 800ms ease-out 1 reverse'
+        'down': 'slide 300ms ease-out 1 reverse forwards',
+        'up': 'slide 300ms ease-out 1 normal forwards'
       },
       keyframes: {
         slide: {
           '0%': {
-            transform: 'translateY(-100%)'
+            transform: 'translateY(0px)',
           },
-          '5%': {
-            transform: 'translateY(-100%)'
-          },
-          '50%': { transform: 'translateY(8%)' },
-          '75%': { transform: 'translateY(-5%)' },
-          '100%': { transform: 'translateY(0%)' }
+          '100%': { transform: 'translateY(-2px)' }
         }
       }
     },
   },
   plugins: [
     require('tailwind-scrollbar'),
-]
+  ]
 }
 
