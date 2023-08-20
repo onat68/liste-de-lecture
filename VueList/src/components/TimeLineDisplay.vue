@@ -3,6 +3,9 @@ import SearchBar from './SearchBar.vue'
 import gsap from 'gsap'
 
 
+import {list} from '../list'
+list.getData();
+
 function onEnter(el, done) {
   gsap.fromTo(
     el,
@@ -73,24 +76,7 @@ import { ref } from 'vue'
 //   }
 // ])
 
-const xhr = new XMLHttpRequest()
-let response =""
- function loadTimeline() {
-   xhr.open('GET', `http://localhost:3000/api/all`)
-   xhr.send()
-   xhr.responseType = 'json'
-   xhr.onload = () => {
-     if (xhr.readyState == 4 && xhr.status == 200) {
-       // console.log(films)
-       response = xhr.response
-     } else {
-       console.log(`Error: ${xhr.status}`)
-     }
-   }
- }
- const responseData = ref(response)
- loadTimeline();
- console.log(responseData.value)
+
 </script>
 
 <template>
@@ -104,18 +90,20 @@ let response =""
         <div class="Line w-fit h-full py-2">
           <div class="w-0.5 h-full bg-opgr1"></div>
         </div>
-        <div class="absolute bg-mask1 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"></div>
         <div
-          class="CardWrapper flex-col-reverse justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scrollbar-none "
+          class="absolute bg-mask1 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"
+        ></div>
+        <div
+          class="CardWrapper flex-col-reverse justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scrollbar-none"
         >
-          <TransitionGroup appear @before-enter="beforeEnter" @enter="onEnter"
+        <TransitionGroup @enter="onEnter"
+        v-if="list.responseData != undefined"
             ><itemCard
-              v-for="(data, index) in responseData"
+              v-for="(data, index) in list.responseData"
               :key="data._id"
               :data="data"
               :target="target"
               :data-index="index"
-              ref="responseData"
             ></itemCard
           ></TransitionGroup>
         </div>

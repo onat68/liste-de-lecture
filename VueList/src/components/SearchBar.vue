@@ -1,5 +1,7 @@
 <script setup>
 import { search } from '../search'
+import { ref } from 'vue'
+const text = ref('')
 </script>
 
 <template>

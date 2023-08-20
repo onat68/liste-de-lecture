@@ -2,8 +2,8 @@
 import TimeLineDisplay from './components/TimeLineDisplay.vue'
 import SearchResultDisplay from './components/SearchResultDisplay.vue'
 import { search } from './search.js'
-import { gsap } from 'gsap'
-function appear(el, done) {
+import gsap from 'gsap'
+function onEnter(el, done) {
   gsap.fromTo(
     el,
     {
@@ -13,7 +13,7 @@ function appear(el, done) {
   )
 }
 
-function leave(el, done) {
+function onLeave(el, done) {
   gsap.fromTo(
     el,
     {
@@ -22,17 +22,15 @@ function leave(el, done) {
     { opacity: 0, duration: 5, onComplete: done }
   )
 }
+
+
 </script>
 
 <template>
-  <TimeLineDisplay
-    v-if="search.searching == false"
-    @vnode-mounted="appear"
-    @vnode-unmounted="leave"
-  ></TimeLineDisplay>
-  <SearchResultDisplay
-    v-if="search.searching == true"
-    @vnode-mounted="appear"
-    @vnode-unmounted="leave"
-  ></SearchResultDisplay>
+  <transition @enter="onEnter" @leave="onLeave">
+    <TimeLineDisplay v-if="search.searching == false"></TimeLineDisplay
+  ></transition>
+  <Transition>
+    <SearchResultDisplay v-if="search.searching == true"></SearchResultDisplay
+  ></Transition>
 </template>
