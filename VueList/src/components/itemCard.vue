@@ -4,6 +4,7 @@ import addButton from './addButton.vue'
 import { ref } from 'vue'
 
 import { search } from '../search'
+import { list } from '../list';
 
 const props = defineProps({
   data: Object,
@@ -29,6 +30,10 @@ function assignTypeColor(type) {
   } else if (type == 'Album') {
     return 'text-mdBl'
   }
+}
+
+function addItem() {
+  list.sendData(data)
 }
 
 const typeColor = assignTypeColor(type.value)
@@ -83,7 +88,7 @@ const typeColor = assignTypeColor(type.value)
           </p>
         </section>
       </section>
-      <addButton v-if="search.searching"></addButton>
+      <addButton v-if="search.searching" @click="addItem"></addButton>
     </div>
   </div>
 </template>

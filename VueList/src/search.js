@@ -5,7 +5,6 @@ export const search = reactive({
     searchResults: [],
 
     searchBook(query) {
-        this.searching = true
         const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURI(
             query
         )}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`;
@@ -33,7 +32,6 @@ export const search = reactive({
     },
 
     searchFilm(query) {
-        this.searching = true
         const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(
             query
         )}`;
@@ -56,7 +54,9 @@ export const search = reactive({
                     thisFilm.title = film.original_title;
                     thisFilm.releaseDate = film.release_date;
                     thisFilm.note = film.overview;
-                    thisFilm.img = `https://image.tmdb.org/t/p/w92/${film["poster_path"]}`;
+                    if (film.poster_path != null) {
+                        thisFilm.img = `https://image.tmdb.org/t/p/w92/${film["poster_path"]}`
+                    } else { thisFilm.img = 'none' };
                     thisFilm.type = 'Movie'
                     let thisFilmDetails = []
                     const url2 = `https://api.themoviedb.org/3/movie/${film.id}?append_to_response=credits`;
@@ -68,7 +68,7 @@ export const search = reactive({
                                 "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk",
                         },
                     };
-                    
+
                     fetch(url2, options2)
                         .then((res) => res.json())
                         .then((data) => {
@@ -85,7 +85,14 @@ export const search = reactive({
     },
 
     search(query) {
+        this.searching = true;
         this.searchBook(query)
         this.searchFilm(query)
+    },
+
+    cancelSearch() {
+        setTimeout(this.searching = false, 1000)
     }
+
+
 })

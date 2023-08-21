@@ -20,8 +20,13 @@ export const list = reactive({
     },
 
     sendData(data) {
-        let type = data.type
-        this.xhr.open("POST", `http://localhost:3000/api/${type}`);
+        let target 
+        if(data.type == 'Book') {
+            target = 'books'
+        } else if (data.type == 'Movie') {
+            target = 'films'
+        }
+        this.xhr.open("POST", `http://localhost:3000/api/${target}`);
         this.xhr.setRequestHeader("Content-Type", "application/json");
         const body = JSON.stringify(this.data);
         this.xhr.onload = () => {
