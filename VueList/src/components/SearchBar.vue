@@ -27,7 +27,7 @@ const text = ref('')
     <button
       @mouseover="onOver"
       @mouseleave="onLeave"
-      @click="search.triggerSearch()"
+      @click="search.search(text)"
       class="Button w-[60px] h-[60px] hover:bg-white hover:border-brGr hover:border-2 hover:fill-brGr transition-transform duration-300 hover:-translate-y-1 hover:shadow-md fill-white bg-brGr rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
     >
       <svg

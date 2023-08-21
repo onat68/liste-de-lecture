@@ -2,8 +2,6 @@
 import SearchBar from './SearchBar.vue'
 import gsap from 'gsap'
 
-
-
 function onEnter(el, done) {
   gsap.fromTo(
     el,
@@ -26,71 +24,8 @@ import itemCard from './itemCard.vue'
 
 const target = ref('timeline')
 import { ref } from 'vue'
-const responseData = ref([
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  },
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  },
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  },
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  },
-  {
-    title: 'John Wick: Chapter 4',
-    releaseDate: '2023',
-    note: 'With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.',
-    img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg&f=1&nofb=1&ipt=92930009c5415ffb7c7f8e2ce07f42a0bfe0db7cee81c5ba8eec8b3eeeb29171&ipo=images',
-    type: 'Movie',
-    _id: '123',
-    genre: 'Action/Crime'
-  }
-])
 
-// const xhr = new XMLHttpRequest()
-
-// function loadTimeline() {
-//   xhr.open('GET', `http://localhost:3000/api/all`)
-//   xhr.send()
-//   xhr.responseType = 'json'
-//   xhr.onload = () => {
-//     if (xhr.readyState == 4 && xhr.status == 200) {
-//       // console.log(films)
-//       return xhr.response
-//     } else {
-//       console.log(`Error: ${xhr.status}`)
-//     }
-//   }
-// }
-
-// const responseData = ref(loadTimeline())
+import { search } from '../search'
 </script>
 
 <template>
@@ -101,14 +36,16 @@ const responseData = ref([
       <div
         class="Innerscreen relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-srRes shadow-inner justify-center items-center gap-2 flex overflow-clip"
       >
-        <div class="absolute bg-mask2 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"></div>
+        <div
+          class="absolute bg-mask2 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"
+        ></div>
         <div
           class="CardWrapper flex-col justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scrollbar-none"
         >
-          <TransitionGroup appear @before-enter="beforeEnter" @enter="onEnter"
+          <TransitionGroup @enter="onEnter"
             ><itemCard
-              v-for="(data, index) in responseData"
-              :key="data._id"
+              v-for="(data, index) in search.searchResults"
+              :key="data.id"
               :data="data"
               :target="target"
               :data-index="index"

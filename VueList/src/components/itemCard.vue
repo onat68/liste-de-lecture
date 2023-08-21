@@ -3,7 +3,7 @@ import addButton from './addButton.vue'
 
 import { ref } from 'vue'
 
-import { search } from '../search';
+import { search } from '../search'
 
 const props = defineProps({
   data: Object,
@@ -19,6 +19,7 @@ const img = ref(data.img)
 const type = ref(data.type)
 const cardId = ref(data._id)
 const genre = ref(data.genre)
+const author = ref(data.author)
 
 function assignTypeColor(type) {
   if (type == 'Movie') {
@@ -29,8 +30,6 @@ function assignTypeColor(type) {
     return 'text-mdBl'
   }
 }
-
-
 
 const typeColor = assignTypeColor(type.value)
 </script>
@@ -43,6 +42,7 @@ const typeColor = assignTypeColor(type.value)
     <div class="Wrapper0 h-full self-stretch rounded-s5 justify-center items-start inline-flex">
       <div class="ImgWrapper w-fit h-fit flex">
         <img
+          v-if="img != 'none' || undefined"
           class="Jwposter1 h-[12Opx] w-20 aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin"
           :src="img"
           alt="A poster, book or album cover or similar image related to the element displayed in the card"
@@ -63,12 +63,12 @@ const typeColor = assignTypeColor(type.value)
             <p :class="typeColor" class="Type text-base font-medium leading-tight">{{ type }}</p>
           </div>
           <div class="AuthorInfosWrapper w-full h-mi font-medium flex flex-row justify-between">
-            <h4 class="Author text-xs leading-4 h-min">Chad Stahelski</h4>
+            <h4 class="Author text-xs leading-4 h-min">{{ author }}</h4>
             <section
               class="InfosWrapper h-min flex-row wrap text-[10px] leading-4 gap-0.5 inline-flex self-end"
             >
               <p class="Genre">{{ genre }}</p>
-              <p class="Dash">-</p>
+              <!-- <p class="Dash">-</p> -->
               <p class="ReleaseYear">{{ releaseDate }}</p>
             </section>
           </div>
