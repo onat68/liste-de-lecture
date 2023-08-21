@@ -1,5 +1,6 @@
 <script setup>
 import addButton from './addButton.vue'
+import MusicButton from './MusicButton.vue'
 
 import { ref } from 'vue'
 
@@ -21,22 +22,31 @@ const type = ref(data.type)
 const cardId = ref(data._id)
 const genre = ref(data.genre)
 const author = ref(data.author)
+const albumUrl = ref(data.url)
 
-function assignTypeColor(type) {
+// static for now, ref later
+const userDefStreamingService = 'Deezer'
+
+function assignTypeStyles(type) {
+  let styles = {}
   if (type == 'Movie') {
-    return 'text-mdPrpl'
+    styles.color = 'text-mdPrpl'
+    styles.imageHeight = 'h-[120px]'
   } else if (type == 'Book') {
-    return 'text-drkRd'
+    styles.color = 'text-drkRd'
+    styles.imageHeight = 'h-fit'
   } else if (type == 'Album') {
-    return 'text-mdBl'
+    styles.imageHeight = 'h-20'
+    styles.color = 'text-mdBl'
   }
+  return styles
 }
 
 function addItem() {
   list.sendData(data)
 }
 
-const typeColor = assignTypeColor(type.value)
+const typeStyles = assignTypeStyles(type.value)
 </script>
 
 <template>
@@ -48,7 +58,8 @@ const typeColor = assignTypeColor(type.value)
       <div class="ImgWrapper w-fit h-fit flex">
         <img
           v-if="img != 'none' || undefined"
-          class="Jwposter1 h-[12Opx] w-20 aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin"
+          :class="typeStyles.imageHeight"
+          class="Jwposter1 w-20 aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin"
           :src="img"
           alt="A poster, book or album cover or similar image related to the element displayed in the card"
         />
@@ -65,7 +76,7 @@ const typeColor = assignTypeColor(type.value)
             <h3 class="Title text-base font-display font-bold leading-5">
               {{ title }}
             </h3>
-            <p :class="typeColor" class="Type text-base font-medium leading-tight">{{ type }}</p>
+            <p :class="typeStyles.color" class="Type text-base font-medium leading-tight">{{ type }}</p>
           </div>
           <div class="AuthorInfosWrapper w-full h-mi font-medium flex flex-row justify-between">
             <h4 class="Author text-xs leading-4 h-min">{{ author }}</h4>
@@ -78,7 +89,11 @@ const typeColor = assignTypeColor(type.value)
             </section>
           </div>
         </section>
-        <section
+        <section v-if="(type == 'Album')" class="streamingServicesWrapper">
+        <MusicButton :brand="userDefStreamingService"
+        :url="albumUrl"></MusicButton>
+        </section>
+        <section v-if="(type != 'Book' || 'Movie')"
           class="OverviewWrapper self-stretch grow shrink basis-0 pt-1 flex-col justify-start items-start gap-2.5 flex"
         >
           <p

@@ -84,8 +84,38 @@ export const search = reactive({
             .catch((err) => console.error("error:" + err));
     },
 
+    searchMusic(query) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `https://api.deezer.com/search/album?q=${query}`);
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.setRequestHeader('Access-Control-Allow-Origin', https://amazing.site);
+        xhr.send();
+        xhr.onload = () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // console.log(films)
+                let data = xhr.response.data
+                console.log(data)
+                data.forEach((album) => {
+                    let thisAlbum = {}
+                    thisAlbum.id = album.id
+                    thisAlbum.title = album.title
+                    thisAlbum.url = album.link
+                    thisAlbum.img = album.cover
+                    thisAlbum.authors = album.artist.name
+                    thisAlbum.type = album.type
+                    console.log(thisAlbum)
+                    this.searchResults.push(thisAlbum)
+                })
+            } else {
+                console.log(`Error: ${xhr.status}`)
+            }
+        }
+    },
+
+
     search(query) {
         this.searching = true;
+        this.searchMusic(query)
         this.searchBook(query)
         this.searchFilm(query)
     },
