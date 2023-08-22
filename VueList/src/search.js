@@ -114,9 +114,10 @@ export const search = reactive({
 
     search(query) {
         this.searching = true;
+        this.searchResults = []
         this.searchMusic(query)
-        // this.searchBook(query)
-        // this.searchFilm(query)
+        this.searchBook(query)
+        this.searchFilm(query)
     },
 
     cancelSearch() {
