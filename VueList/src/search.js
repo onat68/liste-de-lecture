@@ -86,9 +86,9 @@ export const search = reactive({
 
     searchMusic(query) {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `https://api.deezer.com/search/album?q=${query}`);
+        // xhr.open('GET', `https://api.deezer.com/search/album?q=${query}`);
+        xhr.open('GET', `https://api.deezer.com/album/302127`);
         xhr.setRequestHeader('Accept', 'application/json');
-        xhr.setRequestHeader('Access-Control-Allow-Origin', https://amazing.site);
         xhr.send();
         xhr.onload = () => {
             if (xhr.readyState == 4 && xhr.status == 200) {
