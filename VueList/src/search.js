@@ -85,39 +85,38 @@ export const search = reactive({
     },
 
     searchMusic(query) {
-        const xhr = new XMLHttpRequest();
-        // xhr.open('GET', `https://api.deezer.com/search/album?q=${query}`);
-        xhr.open('GET', `https://api.deezer.com/album/302127`);
-        xhr.setRequestHeader('Accept', 'application/json');
-        xhr.send();
-        xhr.onload = () => {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // console.log(films)
-                let data = xhr.response.data
+        const url = `api/search/album?q=${query}`;
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: "application/json"
+            }
+        };
+
+        fetch(url, options)
+            .then((res) => res.json())
+            .then((data) => {
                 console.log(data)
-                data.forEach((album) => {
+                data.data.forEach((album) => {
                     let thisAlbum = {}
                     thisAlbum.id = album.id
                     thisAlbum.title = album.title
                     thisAlbum.url = album.link
                     thisAlbum.img = album.cover
                     thisAlbum.authors = album.artist.name
-                    thisAlbum.type = album.type
+                    thisAlbum.type = 'Album'
                     console.log(thisAlbum)
                     this.searchResults.push(thisAlbum)
                 })
-            } else {
-                console.log(`Error: ${xhr.status}`)
-            }
-        }
+            })
+            .catch((err) => console.error("error:" + err));
     },
-
 
     search(query) {
         this.searching = true;
         this.searchMusic(query)
-        this.searchBook(query)
-        this.searchFilm(query)
+        // this.searchBook(query)
+        // this.searchFilm(query)
     },
 
     cancelSearch() {

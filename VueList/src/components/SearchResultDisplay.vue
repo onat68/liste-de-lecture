@@ -32,15 +32,15 @@ import { search } from '../search'
   <div
     class="font-body Vuetimeline w-iphone8 h-iphone8 rounded-md flex-col justify-end items-center inline-flex border shrink"
   >
-    <div class="Screen p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
+    <div class="Screen p-2 pb-0 rounded-s5 bg-white w-full flex shrink grow overflow-hidden">
       <div
-        class="Innerscreen relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-srRes shadow-inner justify-center items-center gap-2 flex overflow-clip"
+        class="Innerscreen relative w-full rounded-s5 self-stretch grow shrink basis-0 p-2 bg-srRes shadow-inner justify-center items-center gap-2 flex overflow-clip"
       >
         <div
           class="absolute bg-mask2 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"
         ></div>
         <div
-          class="CardWrapper flex-col justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scrollbar-none"
+          class="CardWrapper flex-col justify-start items-center gap-2 h-full w-full pb-20 inline-flex overflow-y-scroll scrollbar-none"
         >
           <TransitionGroup @enter="onEnter"
             ><itemCard

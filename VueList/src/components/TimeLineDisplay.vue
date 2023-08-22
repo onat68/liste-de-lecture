@@ -83,9 +83,9 @@ import { ref } from 'vue'
   <div
     class="font-body Vuetimeline w-iphone8 h-iphone8 rounded-md flex-col justify-end items-center inline-flex border shrink"
   >
-    <div class="Screen p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
+    <div class="Screen w-full p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
       <div
-        class="Innerscreen relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip"
+        class="Innerscreen w-full relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip"
       >
         <div class="Line w-fit h-full py-2">
           <div class="w-0.5 h-full bg-opgr1"></div>

@@ -5,7 +5,7 @@ import MusicButton from './MusicButton.vue'
 import { ref } from 'vue'
 
 import { search } from '../search'
-import { list } from '../list';
+import { list } from '../list'
 
 const props = defineProps({
   data: Object,
@@ -21,7 +21,7 @@ const img = ref(data.img)
 const type = ref(data.type)
 const cardId = ref(data._id)
 const genre = ref(data.genre)
-const author = ref(data.author)
+const author = ref(data.authors)
 const albumUrl = ref(data.url)
 
 // static for now, ref later
@@ -52,33 +52,37 @@ const typeStyles = assignTypeStyles(type.value)
 <template>
   <div
     :id="cardId"
+    :class="imageHeight"
     class="CardElement text-offBlck font-bold w-full basis-[120px] bg-white rounded-s5 shadow flex-col justify-start items-start inline-flex"
   >
-    <div class="Wrapper0 h-full self-stretch rounded-s5 justify-center items-start inline-flex">
-      <div class="ImgWrapper w-fit h-fit flex">
+    <div
+      class="Wrapper0 h-full w-full rounded-s5 justify-center items-start inline-flex"
+    >
+      <section class="ImgWrapper w-fit h-fit flex grow-0 shrink-0" v-if="img != 'none' || undefined">
         <img
-          v-if="img != 'none' || undefined"
           :class="typeStyles.imageHeight"
           class="Jwposter1 w-20 aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin"
           :src="img"
           alt="A poster, book or album cover or similar image related to the element displayed in the card"
         />
-      </div>
+      </section>
       <section
-        class="TextWrapper font-display h-full w-full grow shrink basis-0 self-stretch pl-1 pr-2 py-1 rounded-s5 flex-col justify-start items-start inline-flex"
+        class="TextWrapper font-display h-full grow shrink basis-0 self-stretch pl-1 pr-2 py-1 rounded-s5 flex-col justify-start items-start inline-flex"
       >
         <section
-          class="MainInfoWrapper h-min w-full flex-col self-stretch justify-between items-baseline inline-flex"
+          class="MainInfoWrapper h-min flex-col self-stretch justify-between items-baseline inline-flex"
         >
           <div
-            class="TitleTypeWrapper w-full h-min flex-row justify-between items-start inline-flex"
+            class="TitleTypeWrapper self-stretch h-min gap-1 flex-row justify-between items-start inline-flex"
           >
-            <h3 class="Title text-base font-display font-bold leading-5">
+            <h3 class="Title text-base self-stretch font-display w-[15ch] font-bold leading-5 truncate">
               {{ title }}
             </h3>
-            <p :class="typeStyles.color" class="Type text-base font-medium leading-tight">{{ type }}</p>
+            <p :class="typeStyles.color" class="Type text-base font-medium leading-tight">
+              {{ type }}
+            </p>
           </div>
-          <div class="AuthorInfosWrapper w-full h-mi font-medium flex flex-row justify-between">
+          <div class="AuthorInfosWrapper h-mi font-medium flex flex-row justify-between">
             <h4 class="Author text-xs leading-4 h-min">{{ author }}</h4>
             <section
               class="InfosWrapper h-min flex-row wrap text-[10px] leading-4 gap-0.5 inline-flex self-end"
@@ -89,15 +93,18 @@ const typeStyles = assignTypeStyles(type.value)
             </section>
           </div>
         </section>
-        <section v-if="(type == 'Album')" class="streamingServicesWrapper">
-        <MusicButton :brand="userDefStreamingService"
-        :url="albumUrl"></MusicButton>
+        <section
+          v-if="type == 'Album'"
+          class="streamingServicesWrapper h-full flex items-end content-end gap-1 self-stretch wrap"
+        >
+          <MusicButton :brand="userDefStreamingService" :url="albumUrl"></MusicButton>
         </section>
-        <section v-if="(type != 'Book' || 'Movie')"
+        <section
+          v-if="type == 'Book' || 'Movie'"
           class="OverviewWrapper self-stretch grow shrink basis-0 pt-1 flex-col justify-start items-start gap-2.5 flex"
         >
           <p
-            class="self-stretch h-full w-full grow shrink basis-0 text-[10px] font-extralight text-ellipsis overflow-hidden whitespace-normal"
+            class="self-stretch h-full grow shrink basis-0 text-[10px] font-extralight text-ellipsis overflow-hidden whitespace-normal"
           >
             {{ overview }}
           </p>
