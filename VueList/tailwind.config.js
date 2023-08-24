@@ -25,7 +25,8 @@ module.exports = {
         mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 1) 100%)',
         mask2: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 1) 100%)',
         opgr1: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%)',
-        srRes: 'linear-gradient(134deg, #001E6C 0%, #FFF 100%);'
+        srRes: 'linear-gradient(134deg, #001E6C 0%, #FFF 100%);',
+        rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
       },
       borderRadius: {
         s5: '5px'
@@ -35,14 +36,17 @@ module.exports = {
         offBlck: '#0E1116',
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
-        mdBl: '#007399'
+        mdBl: '#007399',
+        rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
       },
       borderColor: {
         brGr: '#C2E000',
         offBlck: '#0E1116',
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
-        mdBl: '#007399'
+        mdBl: '#007399',
+        rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
+
       },
       outlineColor: {
         brGr: '#C2E000',
@@ -56,7 +60,8 @@ module.exports = {
         offBlck: '#0E1116',
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
-        mdBl: '#007399'
+        mdBl: '#007399',
+        rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
       },
       textColor: {
         brGr: '#C2E000',

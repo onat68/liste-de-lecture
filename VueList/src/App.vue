@@ -7,20 +7,34 @@ function onEnter(el, done) {
   gsap.fromTo(
     el,
     {
-      opacity: 0
+      opacity: 0,
+      scaleY: 0
     },
-    { opacity: 1, duration: 1, onComplete: done }
+    { opacity: 1, scaleY: 1, duration: 5, onComplete: done }
   )
 }
 
-
+function onLeave(el, done) {
+  gsap.fromTo(
+    el,
+    {
+      opacity: 1,
+      scaleY: 1
+    },
+    { opacity: 0, scaleY: 0, duration: 5, onComplete: done }
+  )
+}
 </script>
 
 <template>
-  <transition @enter="onEnter" @leave="onLeave">
+  <transition @after-enter="onEnter" @leave="onLeave">
     <TimeLineDisplay v-if="search.searching == false"></TimeLineDisplay
   ></transition>
   <Transition>
-    <SearchResultDisplay v-if="search.searching == true"></SearchResultDisplay
+    <SearchResultDisplay
+      @before-enter="onEnter"
+      @leave="onLeave"
+      v-if="search.searching == true"
+    ></SearchResultDisplay
   ></Transition>
 </template>

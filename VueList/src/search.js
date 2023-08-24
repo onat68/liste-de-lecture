@@ -113,11 +113,11 @@ export const search = reactive({
     },
 
     search(query) {
-        this.searching = true;
+        setTimeout(this.searching = true, 500)
         this.searchResults = []
         this.searchMusic(query)
-        this.searchBook(query)
-        this.searchFilm(query)
+         this.searchBook(query)
+         this.searchFilm(query)
     },
 
     cancelSearch() {
