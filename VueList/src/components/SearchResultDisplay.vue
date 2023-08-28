@@ -45,7 +45,7 @@ import { search } from '../search'
           <TransitionGroup @enter="onEnter"
             ><itemCard
               v-for="(data, index) in search.searchResults"
-              :key="data.id"
+              :key="data.externalId"
               :data="data"
               :target="target"
               :data-index="index"

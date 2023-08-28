@@ -14,7 +14,7 @@ export const search = reactive({
             .then((data) => {
                 data.items.forEach((book) => {
                     let thisBook = {}
-                    thisBook.id = book.id
+                    thisBook.externalId = book.id
                     thisBook.title = book.volumeInfo.title;
                     thisBook.releaseDate = book.volumeInfo.publishedDate;
                     thisBook.note = book.volumeInfo.description;
@@ -50,7 +50,7 @@ export const search = reactive({
                 for (const film of data.results) {
 
                     let thisFilm = {}
-                    thisFilm.id = film.id
+                    thisFilm.externalId = film.id
                     thisFilm.title = film.original_title;
                     thisFilm.releaseDate = film.release_date;
                     thisFilm.note = film.overview;
@@ -99,7 +99,7 @@ export const search = reactive({
                 console.log(data)
                 data.data.forEach((album) => {
                     let thisAlbum = {}
-                    thisAlbum.id = album.id
+                    thisAlbum.externalId = album.id
                     thisAlbum.title = album.title
                     thisAlbum.url = album.link
                     thisAlbum.img = album.cover
