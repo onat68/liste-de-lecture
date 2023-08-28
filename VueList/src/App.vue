@@ -21,18 +21,18 @@ function onLeave(el, done) {
       opacity: 1,
       scaleY: 1
     },
-    { opacity: 0, scaleY: 0, duration: 5, onComplete: done }
+    { opacity: 0, scaleY: 0, duration: 0, onComplete: done }
   )
 }
 </script>
 
 <template>
-  <transition @after-enter="onEnter" @leave="onLeave">
+  <transition @enter="onEnter" @leave="onLeave">
     <TimeLineDisplay v-if="search.searching == false"></TimeLineDisplay
   ></transition>
   <Transition>
     <SearchResultDisplay
-      @before-enter="onEnter"
+      @nter="onEnter"
       @leave="onLeave"
       v-if="search.searching == true"
     ></SearchResultDisplay

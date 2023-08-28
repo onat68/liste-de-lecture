@@ -112,12 +112,23 @@ export const search = reactive({
             .catch((err) => console.error("error:" + err));
     },
 
-    search(query) {
+    search(query, type) {
         setTimeout(this.searching = true, 500)
         this.searchResults = []
-        this.searchMusic(query)
-         this.searchBook(query)
-         this.searchFilm(query)
+        if (type == 'Album') {
+            this.searchMusic(query)
+        } else if (type == 'Book') {
+            this.searchBook(query)
+        } else if (type == 'Movie') {
+            this.searchFilm(query)
+        } else {
+            this.searchMusic(query)
+
+            this.searchBook(query)
+
+            this.searchFilm(query)
+
+        }
     },
 
     cancelSearch() {
