@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const bookSchema = new mongoose.Schema({
+const albumSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  releaseDate: { type: String, required: false },
+  releaseDate: { type: String, required: true },
   authorName: { type: String, required: false },
   note: { type: String, required: false },
   img: { type: String, required: false },
@@ -10,6 +10,6 @@ const bookSchema = new mongoose.Schema({
   type: { type: String, required: true }
 });
 
-const Book = mongoose.model("Book", bookSchema);
+const Album = mongoose.model("Album", albumSchema);
 
-module.exports = Book
+module.exports = Album

@@ -44,6 +44,8 @@ function assignTypeStyles(type) {
 
 function addItem() {
   list.sendData(data)
+
+  setTimeout((search.searching = false), 800)
 }
 
 const typeStyles = assignTypeStyles(type.value)

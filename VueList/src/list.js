@@ -3,40 +3,44 @@ import { reactive } from 'vue'
 export const list = reactive({
 
     responseData: {},
-    xhr: new XMLHttpRequest(),
+
 
     getData() {
-        this.xhr.open('GET', `http://localhost:3000/api/all`)
-        this.xhr.send()
-        this.xhr.responseType = 'json'
-        this.xhr.onload = () => {
-            if (this.xhr.readyState == 4 && this.xhr.status == 200) {
+        const xhr = new XMLHttpRequest()
+        
+        xhr.open('GET', `db/all`)
+        xhr.send()
+        xhr.responseType = 'json'
+        xhr.onload = () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
                 // console.log(films)
-                this.responseData = this.xhr.response.results
+                this.responseData = xhr.response.results
             } else {
-                console.log(`Error: ${this.xhr.status}`)
+                console.log(`Error: ${xhr.status}`)
             }
         }
     },
 
     sendData(data) {
-        let target 
-        if(data.type == 'Book') {
+        const xhr = new XMLHttpRequest()
+
+        let target
+        if (data.type == 'Book') {
             target = 'books'
         } else if (data.type == 'Movie') {
             target = 'films'
-        }
-        this.xhr.open("POST", `http://localhost:3000/api/${target}`);
-        this.xhr.setRequestHeader("Content-Type", "application/json");
-        const body = JSON.stringify(this.data);
-        this.xhr.onload = () => {
-            if (this.xhr.readyState == 4 && this.xhr.status == 201) {
-                console.log(JSON.parse(this.xhr.responseText));
+        } else if (data.type == 'Album') { target = 'albums' }
+        xhr.open("POST", `db/${target}`);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        const body = JSON.stringify(data);
+        xhr.onload = () => {
+            if (xhr.readyState == 4 && xhr.status == 201) {
+                console.log(JSON.parse(xhr.responseText));
             } else {
-                console.log(`Error: ${this.xhr.status}`);
+                console.log(`Error: ${xhr.status}`);
             }
         };
-        this.xhr.send(body);
+        xhr.send(body);
     }
 }
 )

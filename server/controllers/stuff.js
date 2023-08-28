@@ -1,5 +1,6 @@
 const Film = require("../models/film.js");
 const Book = require("../models/book.js");
+const Album = require("../models/album.js");
 const generateTimeline = require("../generateTimeline");
 
 exports.createFilm = (req, res, next) => {
@@ -28,6 +29,19 @@ exports.createBook = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+exports.createAlbum = (req, res, next) => {
+  delete req.body._id;
+  const album = new Album({
+    ...req.body,
+  });
+  album
+    .save()
+    .then(() => {
+      res.status(201).json({ album });
+    })
+    .catch((error) => res.status(400).json({ error }));
+};
+
 exports.deleteOneFilm = (req, res, next) => {
   Film.deleteOne({ _id: req.params.id })
     .then((film) => {
@@ -37,9 +51,18 @@ exports.deleteOneFilm = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+exports.deleteOneAlbum = (req, res, next) => {
+  Film.deleteOne({ _id: req.params.id })
+    .then((album) => {
+      console.log(req.params.id, " supprimé");
+      res.status(200).json({ album, message: "Deleted" });
+    })
+    .catch((error) => res.status(400).json({ error }));
+};
+
 exports.deleteOneBook = (req, res, next) => {
     Book.deleteOne({ _id: req.params.id })
-      .then((film) => {
+      .then((book) => {
         console.log(req.params.id, " supprimé");
         res.status(200).json({ book, message: "Deleted" });
       })
@@ -50,6 +73,7 @@ exports.getAllThings = (req, res, next) => {
   let promises = new Array();
   promises.push(Film.find());
   promises.push(Book.find());
+  promises.push(Album.find());
   Promise.all(promises)
     .then((all) => {
       let results = all[0].concat(all[1]);

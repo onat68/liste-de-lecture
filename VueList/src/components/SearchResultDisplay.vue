@@ -13,7 +13,7 @@ function onEnter(el, done) {
       opacity: 1,
       translateY: 0,
       ease: 'elastic.out(0.1, 0.5)',
-      duration: 3,
+      duration: 2,
       delay: el.dataset.index * 0.25,
       onComplete: done
     }
