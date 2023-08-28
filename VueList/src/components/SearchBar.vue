@@ -5,27 +5,40 @@ import { ref } from 'vue'
 const text = ref('')
 
 const types = {
-  All: { typeColor: 'bg-rainbow hover:text-rainbow hover:border-rainbow' },
-  Album: { typeColor: 'bg-mdBl hover:text-mdBl hover:border-mdBl' },
-  Book: { typeColor: 'bg-drkRd hover:text-mdPrpl hover:border-drkRd' },
-  Film: { typeColor: 'bg-mdPrpl  hover:text-mdPrpl hover:border-mdPrpl' }
+  All: {
+    typeName: 'All',
+    typeColor: 'bg-rainbow hover:text-rainbow hover:border-none',
+    focusColor: 'focus-visible:border-grey-500'
+  },
+  Album: {
+    typeName: 'Album',
+    typeColor: 'bg-mdBl hover:text-mdBl hover:border-mdBl',
+    focusColor: 'focus-visible:border-mdBl'
+  },
+  Book: {
+    typeName: 'Book',
+    typeColor: 'bg-drkRd hover:text-drkRd hover:border-drkRd',
+    focusColor: 'focus-visible:border-drkRd'
+  },
+  Movie: {
+    typeName: 'Movie',
+    typeColor: 'bg-mdPrpl  hover:text-mdPrpl hover:border-mdPrpl',
+    focusColor: 'focus-visible:border-mdPrpl'
+  }
 }
-let currentType = types.All
+const currentType = ref(types.All)
 
-let buttonHovered = ref(false)
+const typeMenuIsOpen = ref(false)
 
 function dropdown() {
-  buttonHovered.value = true
-  console.log(buttonHovered)
+  typeMenuIsOpen.value = true
+  console.log(typeMenuIsOpen.value)
 }
 
-function rollup() {
-  buttonHovered.value = false
-  console.log(buttonHovered)
-}
-
-function changeCurrentType(el) {
-  currentType = types[el.id]
+function rollup(arg) {
+  typeMenuIsOpen.value = false
+  currentType.value = arg
+  console.log(typeMenuIsOpen.value)
 }
 </script>
 
@@ -33,38 +46,48 @@ function changeCurrentType(el) {
   <div
     class="SearchBar font-display w-full h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex"
   >
-    <div class="buttonWrapper relative w-[60px] h-[60px]">
-      <SearchTypeButton @click="dropdown" :class="currentType.typeColor">{{
-        currentType
-      }}</SearchTypeButton>
-      <div class="menu flex-col-reverse absolute gap-0 bottom-16 left-0 z-50">
-        <template v-if="buttonHovered">
-          <SearchTypeButton
-            id="Album"
-            @click="changeCurrentType, rollup"
-            :class="types.Album.typeColor"
-            >Album</SearchTypeButton
-          >
-          <SearchTypeButton
-            id="Book"
-            @click="changeCurrentType, rollup"
-            :class="types.Book.typeColor"
-            >Book</SearchTypeButton
-          >
-          <SearchTypeButton
-            id="Film"
-            @click="changeCurrentType, rollup"
-            :class="types.Film.typeColor"
-            >Movie</SearchTypeButton
-          ></template
-        >
-      </div>
+    <div class="menu flex flex-row gap-2 h-[60px] bottom-0 left-0 z-50">
+      <SearchTypeButton
+        v-if="typeMenuIsOpen != true"
+        @click="dropdown"
+        :class="currentType.typeColor"
+        :type="currentType.typeName"
+      ></SearchTypeButton>
+
+      <template v-if="typeMenuIsOpen">
+        <SearchTypeButton
+          id="All"
+          @click="rollup(types.All)"
+          :class="types.All.typeColor"
+          :type="types.All.typeName"
+        ></SearchTypeButton>
+        <SearchTypeButton
+          id="Album"
+          @click="rollup(types.Album)"
+          :class="types.Album.typeColor"
+          :type="types.Album.typeName"
+        ></SearchTypeButton>
+        <SearchTypeButton
+          id="Book"
+          @click="rollup(types.Book)"
+          :class="types.Book.typeColor"
+          :type="types.Book.typeName"
+        ></SearchTypeButton>
+        <SearchTypeButton
+          id="Movie"
+          @click="rollup(types.Movie)"
+          :class="types.Movie.typeColor"
+          :type="types.Movie.typeName"
+        ></SearchTypeButton
+      ></template>
     </div>
     <input
       v-model="text"
+      v-show="typeMenuIsOpen != true"
       type="field"
       id="search-field"
-      class="SearchField focus-visible:outline-none focus-visible:border-mdBl focus-visible:border-2 px-4 py-2 text-2xl font-medium w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
+      :class="currentType.focusColor"
+      class="SearchField focus-visible:outline-none focus-visible:border-2 px-4 py-2 text-2xl font-medium w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
     />
     <button
       @mouseover="onOver"
