@@ -4,18 +4,28 @@ import SearchTypeButton from './SearchTypeButton.vue'
 import { ref } from 'vue'
 const text = ref('')
 
-const All = 'bg-rainbow hover:text-rainbow hover:border-rainbow'
-const Album = 'bg-mdBl hover:text-mdBl hover:border-mdBl'
-const Book = 'bg-drkRd hover:text-mdPrpl hover:border-drkRd'
-const Film = 'bg-mdPrpl  hover:text-mdPrpl hover:border-mdPrpl'
+const types = {
+  All: { typeColor: 'bg-rainbow hover:text-rainbow hover:border-rainbow' },
+  Album: { typeColor: 'bg-mdBl hover:text-mdBl hover:border-mdBl' },
+  Book: { typeColor: 'bg-drkRd hover:text-mdPrpl hover:border-drkRd' },
+  Film: { typeColor: 'bg-mdPrpl  hover:text-mdPrpl hover:border-mdPrpl' }
+}
+let currentType = types.All
 
-const currentType = ref('All')
-const currentTypeColor = All
-
-let buttonHovered = false
+let buttonHovered = ref(false)
 
 function dropdown() {
-  buttonHovered = true
+  buttonHovered.value = true
+  console.log(buttonHovered)
+}
+
+function rollup() {
+  buttonHovered.value = false
+  console.log(buttonHovered)
+}
+
+function changeCurrentType(el) {
+  currentType = types[el.id]
 }
 </script>
 
@@ -23,12 +33,33 @@ function dropdown() {
   <div
     class="SearchBar font-display w-full h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex"
   >
-    <TransitionGroup class="typeButtonWrapper flex-col-reverse overflow-visible" @mouseover="dropdown">
-      <SearchTypeButton :class="currentTypeColor"></SearchTypeButton>
-      <SearchTypeButton :class="Album"></SearchTypeButton>
-      <SearchTypeButton :class="Film"></SearchTypeButton>
-      <SearchTypeButton :class="Book"></SearchTypeButton>
-    </TransitionGroup>
+    <div class="buttonWrapper relative w-[60px] h-[60px]">
+      <SearchTypeButton @click="dropdown" :class="currentType.typeColor">{{
+        currentType
+      }}</SearchTypeButton>
+      <div class="menu flex-col-reverse absolute gap-0 bottom-16 left-0 z-50">
+        <template v-if="buttonHovered">
+          <SearchTypeButton
+            id="Album"
+            @click="changeCurrentType, rollup"
+            :class="types.Album.typeColor"
+            >Album</SearchTypeButton
+          >
+          <SearchTypeButton
+            id="Book"
+            @click="changeCurrentType, rollup"
+            :class="types.Book.typeColor"
+            >Book</SearchTypeButton
+          >
+          <SearchTypeButton
+            id="Film"
+            @click="changeCurrentType, rollup"
+            :class="types.Film.typeColor"
+            >Movie</SearchTypeButton
+          ></template
+        >
+      </div>
+    </div>
     <input
       v-model="text"
       type="field"
