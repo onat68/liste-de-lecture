@@ -97,10 +97,10 @@ const typeStyles = assignTypeStyles(type.value)
         v-if="type == 'Album'"
         class="streamingServicesWrapper h-full flex items-end content-end gap-1 self-stretch wrap"
       >
-        <MusicButton :brand="userDefStreamingService" :url="albumUrl"></MusicButton>
+        <MusicButton :brand="userDefStreamingService" :albumUrl="albumUrl"></MusicButton>
       </section>
       <section
-        v-if="type == 'Book' || 'Movie'"
+        v-if="type == 'Book' || type == 'Movie'"
         class="OverviewWrapper self-stretch grow shrink basis-0 pt-1 flex-col justify-start items-start gap-2.5 flex"
       >
         <p

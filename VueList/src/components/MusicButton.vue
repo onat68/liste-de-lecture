@@ -1,10 +1,17 @@
 <script setup>
 const props = defineProps({
   brand: String,
-  url: String
+  albumUrl: String
 })
 
+
 const brand = props.brand
+const albumUrl = props.albumUrl
+
+function openLink() {  
+  console.log(albumUrl)
+  window.open(albumUrl, '_blank')
+}
 const alt = `Brand logo for ${brand} indicating a button linking to their music streaming service`
 
 const brandStyle = {}
@@ -19,14 +26,15 @@ if (brand == 'YouTube') {
 </script>
 
 <template>
-  <div
-    :class="brandStyle.bg"
-    class="Button w-12 h-5 p-1 rounded-[5px] shadow flex-col justify-center items-center gap-2.5 inline-flex"
+    <button
+      :class="brandStyle.bg"
+      class="Button relative transition duration-150 hover:scale-105 hover:shadow-md hover:shadow-gray-400 w-16 h-6 p-1 rounded-[5px] shadow flex-col justify-center items-center gap-2.5 inline-flex" 
+      @click="openLink"
+    >
+      <img
+        class="Logo w-12 h-4 aspect-auto"
+        src="../assets/Brand logos/Logotype-Deezer/Logotype/DIGITAL RGB/SVG/Deezer_Logo_RVB_MonoWhite.svg"
+        :alt="alt"
+      /></button
   >
-    <img
-      class="Logo w-10 h-3 aspect-auto"
-      src="../assets/Brand logos/Logotype-Deezer/Logotype/DIGITAL RGB/SVG/Deezer_Logo_RVB_MonoWhite.svg"
-      :alt="alt"
-    />
-  </div>
 </template>
