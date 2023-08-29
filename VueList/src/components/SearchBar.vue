@@ -1,6 +1,9 @@
 <script setup>
 import { search } from '../search'
 import SearchTypeButton from './SearchTypeButton.vue'
+import CancelButton from './CancelButton.vue'
+import { gsap } from 'gsap'
+
 import { ref } from 'vue'
 const text = ref('')
 
@@ -32,11 +35,27 @@ const typeMenuIsOpen = ref(false)
 
 function dropdown() {
   typeMenuIsOpen.value = true
+  gsap.fromTo(
+    '.menu',
+    {
+      width: 0
+    },
+    {
+      width: 'auto',
+      ease: 'easeIn',
+      duration: 0.8
+    }
+  )
   console.log(typeMenuIsOpen.value)
 }
 
 function rollup(arg) {
-  typeMenuIsOpen.value = false
+  gsap.to('.menu', {
+    width: 0,
+    ease: 'easeOut',
+    duration: 1
+  })
+  setTimeout((typeMenuIsOpen.value = false), 1000)
   currentType.value = arg
   console.log(typeMenuIsOpen.value)
 }
@@ -44,16 +63,19 @@ function rollup(arg) {
 
 <template>
   <div
-    class="SearchBar font-display w-full h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex"
+    class="SearchBar font-display h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex "
   >
-    <div class="menu flex flex-row gap-2 h-[60px] bottom-0 left-0 z-50">
-      <SearchTypeButton
-        v-if="typeMenuIsOpen != true"
-        @click="dropdown"
-        :class="currentType.typeColor"
-        :type="currentType.typeName"
-      ></SearchTypeButton>
+    <SearchTypeButton
+      v-if="typeMenuIsOpen != true"
+      @click="dropdown"
+      :class="currentType.typeColor"
+      :type="currentType.typeName"
+    ></SearchTypeButton>
 
+    <div
+      v-show="typeMenuIsOpen"
+      class="menu flex flex-row gap-2 h-[60px] bottom-0 left-0 z-40 justify-center overflow-hidden"
+    >
       <template v-if="typeMenuIsOpen">
         <SearchTypeButton
           id="All"
@@ -81,15 +103,17 @@ function rollup(arg) {
         ></SearchTypeButton
       ></template>
     </div>
+    <CancelButton v-if="search.searching"></CancelButton>
     <input
       v-model="text"
-      v-show="typeMenuIsOpen != true"
+      v-show="typeMenuIsOpen == false"
       type="field"
       id="search-field"
       :class="currentType.focusColor"
-      class="SearchField focus-visible:outline-none focus-visible:border-2 px-4 py-2 text-2xl font-medium w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
+      class="SearchField flex grow focus-visible:outline-none focus-visible:border-2 px-2 py-1 text-xl font-medium w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
     />
     <button
+      v-show="typeMenuIsOpen == false"
       @mouseover="onOver"
       @mouseleave="onLeave"
       @click="search.search(text, currentType.typeName)"

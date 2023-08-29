@@ -61,13 +61,13 @@ exports.deleteOneAlbum = (req, res, next) => {
 };
 
 exports.deleteOneBook = (req, res, next) => {
-    Book.deleteOne({ _id: req.params.id })
-      .then((book) => {
-        console.log(req.params.id, " supprimé");
-        res.status(200).json({ book, message: "Deleted" });
-      })
-      .catch((error) => res.status(400).json({ error }));
-  };
+  Book.deleteOne({ _id: req.params.id })
+    .then((book) => {
+      console.log(req.params.id, " supprimé");
+      res.status(200).json({ book, message: "Deleted" });
+    })
+    .catch((error) => res.status(400).json({ error }));
+};
 
 exports.getAllThings = (req, res, next) => {
   let promises = new Array();
@@ -76,7 +76,8 @@ exports.getAllThings = (req, res, next) => {
   promises.push(Album.find());
   Promise.all(promises)
     .then((all) => {
-      let results = all[0].concat(all[1]);
+      let results = all[0].concat(all[1]).concat(all[2]);
+      console.log(results)
       generateTimeline(results);
       res.status(200).json({ results });
     })

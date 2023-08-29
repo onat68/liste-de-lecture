@@ -22,7 +22,7 @@ module.exports = {
       },
       backgroundImage: {
         custom1: 'linear-gradient(179.18deg, #1B0B27 0.7 %, #007EA7 47.43 %, #1B0B27 99.3 %)',
-        mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 1) 100%)',
+        mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 0) 100%)',
         mask2: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 1) 100%)',
         opgr1: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%)',
         srRes: 'linear-gradient(134deg, #001E6C 0%, #FFF 100%);',
@@ -37,6 +37,7 @@ module.exports = {
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
         mdBl: '#007399',
+        brOrng: '#ff8811',
         rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
       },
       borderColor: {
@@ -45,6 +46,7 @@ module.exports = {
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
         mdBl: '#007399',
+        brOrng: '#ff8811',
         rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
 
       },
@@ -53,7 +55,8 @@ module.exports = {
         offBlck: '#0E1116',
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
-        mdBl: '#007399'
+        mdBl: '#007399',
+        brOrng: '#ff8811',
       },
       fill: {
         brGr: '#C2E000',
@@ -61,6 +64,7 @@ module.exports = {
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
         mdBl: '#007399',
+        brOrng: '#ff8811',
         rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
       },
       textColor: {
@@ -68,7 +72,8 @@ module.exports = {
         offBlck: '#0E1116',
         mdPrpl: '#9747FF',
         drkRd: '#9D0026',
-        mdBl: '#007399'
+        mdBl: '#007399',
+        brOrng: '#ff8811',
       },
       animation: {
         'down': 'slide 300ms ease-out 1 reverse forwards',
