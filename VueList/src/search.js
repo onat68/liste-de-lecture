@@ -105,6 +105,13 @@ export const search = reactive({
                     thisAlbum.img = album.cover
                     thisAlbum.authors = album.artist.name
                     thisAlbum.type = 'Album'
+                    
+                    const url2 = `api/genre/${album.genre_id}`;
+                    fetch(url2, options)
+                    .then((res) => res.json())
+                    .then((data) => {
+                        thisAlbum.genre = data.name
+                    })
                     console.log(thisAlbum)
                     this.searchResults.push(thisAlbum)
                 })
