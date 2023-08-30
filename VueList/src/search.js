@@ -28,7 +28,7 @@ export const search = reactive({
         thisAlbum.title = album.title
         thisAlbum.url = album.link
         thisAlbum.img = album.cover
-        thisAlbum.author = album.artist.name
+        thisAlbum.authors = album.artist.name
         thisAlbum.type = 'Album'
         thisAlbum.genre = ''
 
@@ -48,11 +48,11 @@ export const search = reactive({
         thisBook.externalId = book.id
         thisBook.title = book.volumeInfo.title;
         thisBook.releaseDate = book.volumeInfo.publishedDate;
-        thisBook.about = book.volumeInfo.description;
+        thisBook.note = book.volumeInfo.description;
 
         if (book.volumeInfo.authors != undefined) {
-            thisBook.author = book.volumeInfo.authors.join(', ')
-        } else { thisBook.author = book.volumeInfo.publisher }
+            thisBook.authors = book.volumeInfo.authors.join(', ')
+        } else { thisBook.authors = book.volumeInfo.publisher }
         thisBook.type = 'Book'
         book.volumeInfo.imageLinks != undefined
             ? (thisBook.img = book.volumeInfo.imageLinks.thumbnail)
@@ -67,9 +67,9 @@ export const search = reactive({
         thisMovie.externalId = movie.id
         thisMovie.title = movie.original_title;
         thisMovie.releaseDate = movie.release_date;
-        thisMovie.about = movie.overview;
+        thisMovie.note = movie.overview;
         thisMovie.genre = ''
-        thisMovie.author = ''  
+        thisMovie.authors = ''  
         if (movie.poster_path != null) {
             thisMovie.img = `https://image.tmdb.org/t/p/w92/${movie["poster_path"]}`
         } else { thisMovie.img = 'none' }
@@ -81,7 +81,7 @@ export const search = reactive({
         fetch(creditsAndGenreUrl, this.movieGet)
             .then((res) => res.json())
             .then((secondaryData) => {
-                thisMovie.author = secondaryData.credits.crew[0].original_name
+                thisMovie.authors = secondaryData.credits.crew[0].original_name
                 thisMovie.genre = secondaryData.genres[0].name
                 this.searchResults.push(thisMovie)
             })

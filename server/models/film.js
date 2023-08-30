@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const filmSchema = new mongoose.Schema({
-  about: { type: String, required: false },
-  author: { type: String, required: false },
+  note: { type: String, required: false },
+  authors: { type: String, required: false },
   date: { type: String, required: true },
   externalId: { type: String, required: false },
   genre: {type: String, required: false},

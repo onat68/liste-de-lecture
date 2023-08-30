@@ -16,7 +16,7 @@ const props = defineProps({
 
 const data = props.data
 
-const about = ref(data.about)
+const note = ref(data.note)
 const img = ref(data.img)
 const type = ref(data.type)
 const cardId = ref(data._id)
@@ -50,7 +50,7 @@ function addItem() {
   <div
     :id="cardId"
     :class="typeStyles.imageHeight"
-    class="CardElement text-offBlck font-bold w-full bg-white rounded-s5 shadow flex-row justify-center items-start inline-flex"
+    class="CardElement text-offBlckfont-bold w-full bg-white rounded-s5 shadow flex-row justify-center items-start inline-flex"
   >
     <section class="ImgWrapper w-fit h-fit flex grow-0 shrink-0" v-if="img != 'none' || undefined">
       <img
@@ -65,7 +65,7 @@ function addItem() {
     >
       <infosSection :data="props.data" :typeStyles="typeStyles"></infosSection>
       <streamingSection v-if="type == 'Album'" :albumUrl="albumUrl"> </streamingSection>
-      <overviewSection v-if="type != 'Album'" :about="about"></overviewSection>
+      <overviewSection v-if="type != 'Album'" :note="note"></overviewSection>
     </section>
     <addButton v-if="search.searching" @click="addItem"></addButton>
   </div>

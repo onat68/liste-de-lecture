@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const albumSchema = new mongoose.Schema({
-  about: { type: String, required: false },
+  note: { type: String, required: false },
   albumUrl: { type: String, require: true },
-  author: { type: String, required: false },
+  authors: { type: String, required: false },
   date: { type: String, required: true },
   externalId: { type: String, required: false },
   genre: { type: String, required: false },
