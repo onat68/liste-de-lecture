@@ -13,7 +13,7 @@ export const list = reactive({
         xhr.responseType = 'json'
         xhr.onload = () => {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                // console.log(films)
+                // console.log(movies)
                 this.responseData = xhr.response.results
             } else {
                 console.log(`Error: ${xhr.status}`)
@@ -28,7 +28,7 @@ export const list = reactive({
         if (data.type == 'Book') {
             target = 'books'
         } else if (data.type == 'Movie') {
-            target = 'films'
+            target = 'movies'
         } else if (data.type == 'Album') { target = 'albums' }
         xhr.open("POST", `db/${target}`);
         xhr.setRequestHeader("Content-Type", "application/json");

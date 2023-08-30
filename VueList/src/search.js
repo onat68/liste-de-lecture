@@ -1,146 +1,179 @@
 import { reactive } from 'vue'
+import { tmdbToken } from './private/encryptBearerTokens.js'
+
 
 export const search = reactive({
-    searching: false,
     searchResults: [],
+    searching: false,
+
+    basicGet: {
+        method: "GET",
+        headers: {
+            accept: "application/json",
+        },
+    },
+
+
+
+    movieGet: {
+        method: "GET",
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${tmdbToken}`
+        },
+    },
+
+
+    albumToObj(album) {
+        let thisAlbum = {}
+
+        thisAlbum.externalId = album.id
+        thisAlbum.title = album.title
+        thisAlbum.url = album.link
+        thisAlbum.img = album.cover
+        thisAlbum.authors = album.artist.name
+        thisAlbum.type = 'Album'
+
+        const genreUrl = `api/genre/${album.genre_id}`;
+        fetch(genreUrl, this.basicGet)
+            .then((res) => res.json())
+            .then((secondaryData) => {
+                thisAlbum.genre = secondaryData.name
+            })
+            .catch((err) => console.error("error:" + err))
+
+        this.searchResults.push(thisAlbum)
+    },
+
+    bookToObj(book) {
+        let thisBook = {}
+        thisBook.externalId = book.id
+        thisBook.title = book.volumeInfo.title;
+        thisBook.releaseDate = book.volumeInfo.publishedDate;
+        thisBook.note = book.volumeInfo.description;
+
+        if (book.volumeInfo.authors != undefined) {
+            thisBook.author = book.volumeInfo.authors.join(', ')
+        } else { thisBook.author = book.volumeInfo.publisher }
+        thisBook.type = 'Book'
+        book.volumeInfo.imageLinks != undefined
+            ? (thisBook.img = book.volumeInfo.imageLinks.thumbnail)
+            : (thisBook.img = "none");
+
+        this.searchResults.push(thisBook)
+    },
+
+    movieToObj(movie) {
+        let thisMovie = {}
+
+        thisMovie.externalId = movie.id
+        thisMovie.title = movie.original_title;
+        thisMovie.releaseDate = movie.release_date;
+        thisMovie.note = movie.overview;
+
+        if (movie.poster_path != null) {
+            thisMovie.img = `https://image.tmdb.org/t/p/w92/${movie["poster_path"]}`
+        } else { thisMovie.img = 'none' }
+
+        thisMovie.type = 'Movie'
+
+        const creditsAndGenreUrl = `tmdb/movie/${movie.id}?append_to_response=credits`;
+
+        fetch(creditsAndGenreUrl, this.movieGet)
+            .then((res) => res.json())
+            .then((secondaryData) => {
+                thisMovie.authors = secondaryData.credits.cast[0].original_name
+                thisMovie.genre = secondaryData.genres[0].name
+            })
+            .catch((err) => console.error("error:" + err))
+
+        this.searchResults.push(thisMovie)
+
+    },
+
+    parseResponse(data) {
+        if (this.type === 'Album') {
+            let albums = data.data
+            albums.forEach(album => {
+                this.albumToObj(album)
+            })
+        }
+        else if (this.type === 'Book') {
+            let books = data.items
+            books.forEach((book) => {
+                this.bookToObj(book)
+            })
+        }
+        else if (this.type === 'Movie') {
+            let movies = data.results
+            movies.forEach((movie) => {
+                this.movieToObj(movie)
+            })
+        }
+    },
 
     searchBook(query) {
-        const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURI(
+        const url = `gb/v1/volumes?q=${encodeURI(
             query
         )}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`;
 
-        fetch(url)
+        fetch(url, this.basicGet)
             .then((res) => res.json())
             .then((data) => {
-                data.items.forEach((book) => {
-                    let thisBook = {}
-                    thisBook.externalId = book.id
-                    thisBook.title = book.volumeInfo.title;
-                    thisBook.releaseDate = book.volumeInfo.publishedDate;
-                    thisBook.note = book.volumeInfo.description;
-                    if (book.volumeInfo.authors != undefined) {
-                        thisBook.author = book.volumeInfo.authors.join(', ')
-                    } else { thisBook.author = book.volumeInfo.publisher }
-                    thisBook.type = 'Book'
-                    book.volumeInfo.imageLinks != undefined
-                        ? (thisBook.img = book.volumeInfo.imageLinks.thumbnail)
-                        : (thisBook.img = "none");
-                    this.searchResults.push(thisBook)
-                });
-            })
-            .catch((err) => console.error("error:" + err));
-    },
-
-    searchFilm(query) {
-        const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(
-            query
-        )}`;
-        const options = {
-            method: "GET",
-            headers: {
-                accept: "application/json",
-                Authorization:
-                    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk",
-            },
-        };
-
-        fetch(url, options)
-            .then((res) => res.json())
-            .then((data) => {
-                for (const film of data.results) {
-
-                    let thisFilm = {}
-                    thisFilm.externalId = film.id
-                    thisFilm.title = film.original_title;
-                    thisFilm.releaseDate = film.release_date;
-                    thisFilm.note = film.overview;
-                    if (film.poster_path != null) {
-                        thisFilm.img = `https://image.tmdb.org/t/p/w92/${film["poster_path"]}`
-                    } else { thisFilm.img = 'none' };
-                    thisFilm.type = 'Movie'
-                    let thisFilmDetails = []
-                    const url2 = `https://api.themoviedb.org/3/movie/${film.id}?append_to_response=credits`;
-                    const options2 = {
-                        method: "GET",
-                        headers: {
-                            accept: "application/json",
-                            Authorization:
-                                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk",
-                        },
-                    };
-
-                    fetch(url2, options2)
-                        .then((res) => res.json())
-                        .then((data) => {
-                            thisFilmDetails.authors = data.credits.cast[0].original_name
-                            console.log(thisFilm.authors + + thisFilm.title)
-                            thisFilmDetails.genre = `${data.genres[0].name}/${data.genres[1].name} -`
-                        })
-                    thisFilm.authors = thisFilmDetails[0]
-                    this.searchResults.push(thisFilm)
-                };
+                this.parseResponse(data)
             }
             )
-            .catch((err) => console.error("error:" + err));
+            .catch((err) => console.error("error:" + err))
     },
 
-    searchMusic(query) {
-        const url = `api/search/album?q=${query}`;
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: "application/json"
-            }
-        };
+    searchMovie(query) {
+        const url = `tmdb/search/movie?query=${encodeURI(
+            query
+        )}`;
 
-        fetch(url, options)
+        fetch(url, this.movieGet)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
-                data.data.forEach((album) => {
-                    let thisAlbum = {}
-                    thisAlbum.externalId = album.id
-                    thisAlbum.title = album.title
-                    thisAlbum.url = album.link
-                    thisAlbum.img = album.cover
-                    thisAlbum.authors = album.artist.name
-                    thisAlbum.type = 'Album'
-                    
-                    const url2 = `api/genre/${album.genre_id}`;
-                    fetch(url2, options)
-                    .then((res) => res.json())
-                    .then((data) => {
-                        thisAlbum.genre = data.name
-                    })
-                    console.log(thisAlbum)
-                    this.searchResults.push(thisAlbum)
-                })
-            })
-            .catch((err) => console.error("error:" + err));
+                this.parseResponse(data)
+            }
+            )
+            .catch((err) => console.error("error:" + err))
+    },
+
+    searchAlbum(query) {
+        const url = `dzr/search/album?q=${query}`;
+
+        fetch(url, this.basicGet)
+            .then((res) => res.json())
+            .then((data) => {
+                this.parseResponse(data)
+            }
+            )
+            .catch((err) => console.error("error:" + err))
     },
 
     search(query, type) {
-        setTimeout(this.searching = true, 500)
+        this.type = type
         this.searchResults = []
-        if (type == 'Album') {
-            this.searchMusic(query)
-        } else if (type == 'Book') {
+        this.searching = true
+        if (type === 'All') {
+            this.searchAlbum(query)
             this.searchBook(query)
-        } else if (type == 'Movie') {
-            this.searchFilm(query)
-        } else {
-            this.searchMusic(query)
-
+            this.searchMovie(query)
+        }
+        else if (type === 'Album') {
+            this.searchAlbum(query)
+        }
+        if (type === 'Book') {
             this.searchBook(query)
-
-            this.searchFilm(query)
-
+        }
+        if (type === 'Movie') {
+            this.searchMovie(query)
         }
     },
 
     cancelSearch() {
-        setTimeout(this.searching = false, 1000)
-    }
-
+        this.searching = false, 1000
+    },
 
 })

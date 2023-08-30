@@ -1,2 +1,4 @@
 node_modules
 coverage
+VueList/src/private/encryptBearerTokens.js
+private

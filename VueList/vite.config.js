@@ -7,17 +7,29 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   server: {
     proxy: {
-      "/api": {
+      "/dzr": {
         target: "https://api.deezer.com",
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        rewrite: (path) => path.replace(/^\/dzr/, ""),
       },
       "/db": {
         target: "http://localhost:3000/api",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/db/, ""),
+      },
+      "/tmdb": {
+        target: "https://api.themoviedb.org/3",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/tmdb/, ""),
+      },
+      "/gb": {
+        target: "https://www.googleapis.com/books",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/gb/, ""),
       },
     },
   },
