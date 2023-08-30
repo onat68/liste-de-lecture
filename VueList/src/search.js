@@ -13,8 +13,6 @@ export const search = reactive({
         },
     },
 
-
-
     movieGet: {
         method: "GET",
         headers: {
@@ -23,7 +21,6 @@ export const search = reactive({
         },
     },
 
-
     albumToObj(album) {
         let thisAlbum = {}
 
@@ -31,7 +28,7 @@ export const search = reactive({
         thisAlbum.title = album.title
         thisAlbum.url = album.link
         thisAlbum.img = album.cover
-        thisAlbum.authors = album.artist.name
+        thisAlbum.author = album.artist.name
         thisAlbum.type = 'Album'
         thisAlbum.genre = ''
 
@@ -51,7 +48,7 @@ export const search = reactive({
         thisBook.externalId = book.id
         thisBook.title = book.volumeInfo.title;
         thisBook.releaseDate = book.volumeInfo.publishedDate;
-        thisBook.note = book.volumeInfo.description;
+        thisBook.about = book.volumeInfo.description;
 
         if (book.volumeInfo.authors != undefined) {
             thisBook.author = book.volumeInfo.authors.join(', ')
@@ -70,7 +67,7 @@ export const search = reactive({
         thisMovie.externalId = movie.id
         thisMovie.title = movie.original_title;
         thisMovie.releaseDate = movie.release_date;
-        thisMovie.note = movie.overview;
+        thisMovie.about = movie.overview;
         thisMovie.genre = ''
         thisMovie.author = ''  
         if (movie.poster_path != null) {

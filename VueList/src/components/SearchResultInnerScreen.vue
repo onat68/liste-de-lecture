@@ -19,7 +19,7 @@ function onEnter(el, done) {
   )
 }
 
-import itemCard from './itemCard.vue'
+import itemCard from './cards/itemCard.vue'
 
 const target = ref('timeline')
 import { ref } from 'vue'
