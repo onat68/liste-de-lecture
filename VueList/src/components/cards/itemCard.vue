@@ -61,7 +61,7 @@ function addItem() {
     </section>
 
     <section
-      class="cardBody font-display h-full grow shrink self-stretch pl-1 pr-2 pt-1 pb-2 rounded-s5 flex-col justify-start items-start inline-flex gap-0.5"
+      class="cardBody font-display h-full grow shrink self-stretch pl-1 pr-2 pt-1 pb-2 rounded-s5 flex-col justify-between items-start inline-flex gap-0.5"
     >
       <infosSection :data="props.data" :typeStyles="typeStyles"></infosSection>
       <streamingSection v-if="type == 'Album'" :albumUrl="albumUrl"> </streamingSection>

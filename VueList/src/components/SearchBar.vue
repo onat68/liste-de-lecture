@@ -43,7 +43,7 @@ function dropdown() {
     {
       width: 'auto',
       ease: 'easeIn',
-      duration: 0.8
+      duration: 0.5
     }
   )
   console.log(typeMenuIsOpen.value)
@@ -63,7 +63,7 @@ function rollup(arg) {
 
 <template>
   <div
-    class="SearchBar font-display h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex "
+    class="SearchBar font-display h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex"
   >
     <SearchTypeButton
       v-if="typeMenuIsOpen != true"
@@ -110,6 +110,7 @@ function rollup(arg) {
       type="field"
       id="search-field"
       :class="currentType.focusColor"
+      @keypress.enter="search.search(text, currentType.typeName)"
       class="SearchField flex grow focus-visible:outline-none focus-visible:border-2 px-2 py-1 text-xl font-medium w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
     />
     <button
