@@ -7,7 +7,8 @@ const about = ref(props.about)
 </script>
 
 <template>
-  <p class="text-[10px] align-text-bottom leading-snug w-full pb-1 font-extralight text-ellipsis line-clamp-5">
+  <section class="aboutSection flex h-full justify-end">
+  <p class="text-[10px] leading-snug w-full font-extralight text-ellipsis line-clamp-5">
     {{ about }}
-  </p>
+  </p></section>
 </template>
