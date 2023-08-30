@@ -33,16 +33,17 @@ export const search = reactive({
         thisAlbum.img = album.cover
         thisAlbum.authors = album.artist.name
         thisAlbum.type = 'Album'
+        thisAlbum.genre = ''
 
-        const genreUrl = `api/genre/${album.genre_id}`;
+        const genreUrl = `dzr/genre/${album.genre_id}`;
         fetch(genreUrl, this.basicGet)
             .then((res) => res.json())
             .then((secondaryData) => {
                 thisAlbum.genre = secondaryData.name
+                this.searchResults.push(thisAlbum)
             })
             .catch((err) => console.error("error:" + err))
 
-        this.searchResults.push(thisAlbum)
     },
 
     bookToObj(book) {
@@ -70,7 +71,8 @@ export const search = reactive({
         thisMovie.title = movie.original_title;
         thisMovie.releaseDate = movie.release_date;
         thisMovie.note = movie.overview;
-
+        thisMovie.genre = ''
+        thisMovie.author = ''  
         if (movie.poster_path != null) {
             thisMovie.img = `https://image.tmdb.org/t/p/w92/${movie["poster_path"]}`
         } else { thisMovie.img = 'none' }
@@ -82,34 +84,35 @@ export const search = reactive({
         fetch(creditsAndGenreUrl, this.movieGet)
             .then((res) => res.json())
             .then((secondaryData) => {
-                thisMovie.authors = secondaryData.credits.cast[0].original_name
+                thisMovie.author = secondaryData.credits.crew[0].original_name
                 thisMovie.genre = secondaryData.genres[0].name
+                this.searchResults.push(thisMovie)
             })
             .catch((err) => console.error("error:" + err))
 
-        this.searchResults.push(thisMovie)
 
     },
 
-    parseResponse(data) {
-        if (this.type === 'Album') {
-            let albums = data.data
-            albums.forEach(album => {
-                this.albumToObj(album)
-            })
-        }
-        else if (this.type === 'Book') {
-            let books = data.items
-            books.forEach((book) => {
-                this.bookToObj(book)
-            })
-        }
-        else if (this.type === 'Movie') {
-            let movies = data.results
-            movies.forEach((movie) => {
-                this.movieToObj(movie)
-            })
-        }
+    parseResponseMovies(data) {
+        let movies = data.results
+        movies.forEach((movie) => {
+            this.movieToObj(movie)
+
+        })
+    },
+
+    parseResponseAlbums(data) {
+        let albums = data.data
+        albums.forEach(album => {
+            this.albumToObj(album)
+        })
+    },
+
+    parseResponseBooks(data) {
+        let books = data.items
+        books.forEach((book) => {
+            this.bookToObj(book)
+        })
     },
 
     searchBook(query) {
@@ -120,7 +123,7 @@ export const search = reactive({
         fetch(url, this.basicGet)
             .then((res) => res.json())
             .then((data) => {
-                this.parseResponse(data)
+                this.parseResponseBooks(data)
             }
             )
             .catch((err) => console.error("error:" + err))
@@ -134,7 +137,7 @@ export const search = reactive({
         fetch(url, this.movieGet)
             .then((res) => res.json())
             .then((data) => {
-                this.parseResponse(data)
+                this.parseResponseMovies(data)
             }
             )
             .catch((err) => console.error("error:" + err))
@@ -146,7 +149,7 @@ export const search = reactive({
         fetch(url, this.basicGet)
             .then((res) => res.json())
             .then((data) => {
-                this.parseResponse(data)
+                this.parseResponseAlbums(data)
             }
             )
             .catch((err) => console.error("error:" + err))

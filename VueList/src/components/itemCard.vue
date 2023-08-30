@@ -21,7 +21,7 @@ const img = ref(data.img)
 const type = ref(data.type)
 const cardId = ref(data._id)
 const genre = ref(data.genre)
-const author = ref(data.authors)
+const author = ref(data.author)
 const albumUrl = ref(data.url)
 
 // static for now, ref later
