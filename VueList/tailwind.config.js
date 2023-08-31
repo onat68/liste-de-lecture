@@ -76,7 +76,7 @@ module.exports = {
         brOrng: '#ff8811',
       },
       animation: {
-        'softPulse': 'pulse3D 3s 1 normal forwards',
+        'softPulse': 'pulse3D 2s 1s 1 normal forwards',
         'down': 'slide 300ms ease-out 1 reverse forwards',
         'up': 'slide 300ms ease-out 1 normal forwards'
       },
