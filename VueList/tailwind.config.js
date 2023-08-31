@@ -76,7 +76,7 @@ module.exports = {
         brOrng: '#ff8811',
       },
       animation: {
-        'softPulse': 'pulse3D 3s infinite',
+        'softPulse': 'pulse3D 3s 1 normal forwards',
         'down': 'slide 300ms ease-out 1 reverse forwards',
         'up': 'slide 300ms ease-out 1 normal forwards'
       },
@@ -89,19 +89,13 @@ module.exports = {
         },
         pulse3D: {
           '0%': {
-            transform: 'perspective(100px) translateZ(0px) rotateY(0deg) rotateX(0.2deg)'
-          },
-          '25%': {
-            'z-index': '50',
-            transform: 'perspective(100px) translateZ(-3px) rotateY(-0.5deg) rotateX(0.5deg)'
-          },
-          '75%': {
-            'z-index': '50',
-            transform: 'perspective(100px) translateZ(1px) rotateY(0.5deg) rotateX(-0.5deg)',
+            position: 'relative',
+            transform: 'perspective(100px) translateZ(0px) rotateX(0deg)'
           },
           '100%': {
-            transform: 'perspective(100px) translateZ(0px) rotateY(0deg) rotateX(0.2deg)'
-          }
+            position: 'relative',
+            transform: 'perspective(100px) translateZ(0px) rotateX(-1deg)',
+          },
         }
       }
     },

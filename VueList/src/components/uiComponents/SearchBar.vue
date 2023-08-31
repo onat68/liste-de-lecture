@@ -50,11 +50,6 @@ function dropdown() {
 }
 
 function rollup(arg) {
-  gsap.to('.menu', {
-    width: 0,
-    ease: 'easeOut',
-    duration: 1
-  })
   setTimeout((typeMenuIsOpen.value = false), 1000)
   currentType.value = arg
   console.log(typeMenuIsOpen.value)
@@ -63,7 +58,7 @@ function rollup(arg) {
 
 <template>
   <div
-    class="SearchBar font-display h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex"
+    class="SearchBar font-display h-20 p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex overflow-visible z-40"
   >
     <SearchTypeButton
       v-if="typeMenuIsOpen != true"
@@ -74,7 +69,7 @@ function rollup(arg) {
 
     <div
       v-show="typeMenuIsOpen"
-      class="menu flex flex-row gap-2 h-[60px] bottom-0 left-0 z-40 justify-center overflow-hidden"
+      class="menu flex flex-row gap-2 h-[60px] bottom-0 left-0 z-40 justify-center overflow-visible"
     >
       <template v-if="typeMenuIsOpen">
         <SearchTypeButton
