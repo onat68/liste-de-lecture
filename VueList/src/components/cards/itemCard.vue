@@ -28,12 +28,12 @@ function assignTypeStyles(type) {
   let styles = {}
   if (type == 'Movie') {
     styles.color = 'text-mdPrpl'
-    styles.imageHeight = 'h-[120px]'
+    styles.imageH = 'h-[120px] md:h-[180px] lg:h-[240px] '
   } else if (type == 'Book') {
     styles.color = 'text-drkRd'
-    styles.imageHeight = 'h-fit'
+    styles.imageH = 'h-fit md:h-[180px] lg:h-[240px]'
   } else if (type == 'Album') {
-    styles.imageHeight = 'h-20'
+    styles.imageH = 'h-20 md:h-30 lg:h-40'
     styles.color = 'text-mdBl'
   }
   return styles
@@ -51,12 +51,13 @@ function addItem() {
 <template>
   <div
     :id="cardId"
-    :class="typeStyles.imageHeight"
-    class="CardElement hover:animate-softPulse text-offBlckfont-bold w-full bg-white rounded-s5 shadow flex-row justify-center items-start inline-flex"
+    :class="typeStyles.imageH"
+    class="CardElement hover:animate-softPulse text-offBlck w-full bg-white rounded-s5 shadow flex-row justify-center items-start inline-flex"
   >
     <section class="ImgWrapper w-fit h-fit flex grow-0 shrink-0" v-if="img != 'none' || undefined">
       <img
-        class="Jwposter1 w-20 aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin"
+        class="Image aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin w-20 md:w-30 lg:w-40"
+        :class="typeStyles.imageH"
         :src="img"
         alt="A poster, book or album cover or similar image related to the element displayed in the card"
       />

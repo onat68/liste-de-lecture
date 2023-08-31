@@ -28,11 +28,11 @@ if (brand == 'YouTube') {
 <template>
   <button
     :class="brandStyle.bg"
-    class="Button relative transition duration-150 hover:scale-105 hover:shadow-md hover:shadow-gray-400 w-16 h-6 p-1 rounded-[5px] shadow flex-col justify-center items-center gap-2.5 inline-flex"
+    class="Button relative transition duration-150 hover:scale-105 hover:shadow-md hover:shadow-gray-400 w-16 md:w-32 lg:w-64 h-6 md:h-20 l-h-40 p-1 rounded-[5px] shadow flex-col justify-center items-center gap-2.5 inline-flex"
     @click="openLink"
   >
     <img
-      class="Logo w-12 h-4 aspect-auto"
+      class="Logo w-12 md:w-24 lg:w-36 h-4 md:h-8 lg:h-12 aspect-auto"
       src="../../../assets/Brand logos/Logotype-Deezer/Logotype/DIGITAL RGB/SVG/Deezer_Logo_RVB_MonoWhite.svg"
       :alt="alt"
     />

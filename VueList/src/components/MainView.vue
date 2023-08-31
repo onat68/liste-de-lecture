@@ -33,9 +33,9 @@ function onLeave(el) {
 
 <template>
   <div
-    class="font-body Vuetimeline w-iphone8 h-iphone8 rounded-md flex-col justify-end items-center inline-flex border shrink"
+    class="font-body Vuetimeline w-full h-full md:w-3/5 lg:1/2 rounded-md flex-col justify-end items-center inline-flex border shrink"
   >
-    <div class="Screen w-full p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
+    <div class="Screen w-full h-full p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
       <Transition v-if="search.searching == false" @enter="onEnter(this)" @leave="onLeave(this)">
         <TimeLineInnerScreen></TimeLineInnerScreen
       ></Transition>

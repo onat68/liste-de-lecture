@@ -7,7 +7,7 @@ const note = ref(props.note)
 </script>
 
 <template>
-  <p class="text-[10px] leading-snug w-full font-extralight text-ellipsis line-clamp-5">
+  <p class="text-[10px] md:text-base lg:text-xl leading-snug w-full font-extralight text-ellipsis line-clamp-4">
     {{ note }}
   </p>
 </template>
