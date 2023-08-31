@@ -1,5 +1,5 @@
 <script setup>
-import { search } from '../search'
+import { search } from '../../../search';
 </script>
 
 <template>

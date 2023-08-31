@@ -1,11 +1,11 @@
 <script setup>
-import addButton from '../addButton.vue'
+import AddButton from '../uiComponents/buttons/AddButton.vue'
 import streamingSection from './cardSubcomponents/streamingSection.vue'
 import overviewSection from './cardSubcomponents/overviewSection.vue'
 import infosSection from './cardSubcomponents/infosSection.vue'
 
 import { ref } from 'vue'
-
+import { provide } from 'vue'
 import { search } from '../../search'
 import { list } from '../../list'
 
@@ -21,6 +21,8 @@ const img = ref(data.img)
 const type = ref(data.type)
 const cardId = ref(data._id)
 const albumUrl = ref(data.albumUrl)
+
+provide('albumUrl', albumUrl)
 
 function assignTypeStyles(type) {
   let styles = {}
@@ -67,6 +69,6 @@ function addItem() {
       <streamingSection v-if="type == 'Album'" :albumUrl="albumUrl"> </streamingSection>
       <overviewSection v-if="type != 'Album'" :note="note"></overviewSection>
     </section>
-    <addButton v-if="search.searching" @click="addItem"></addButton>
+    <AddButton v-if="search.searching" @click="addItem"></AddButton>
   </div>
 </template>

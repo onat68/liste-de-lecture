@@ -1,5 +1,5 @@
 <script setup>
-import MusicButton from '../../MusicButton.vue'
+import MusicButton from '../../uiComponents/buttons/MusicButton.vue'
 const props = defineProps({ 
     albumUrl: String
  })

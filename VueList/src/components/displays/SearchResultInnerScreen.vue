@@ -19,12 +19,12 @@ function onEnter(el, done) {
   )
 }
 
-import itemCard from './cards/itemCard.vue'
+import itemCard from '../cards/itemCard.vue'
 
 const target = ref('timeline')
 import { ref } from 'vue'
+import { search } from '../../search';
 
-import { search } from '../search.js'
 </script>
 
 <template>

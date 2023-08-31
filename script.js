@@ -15,7 +15,7 @@ const cancelButton = document.querySelector(".cancel-button");
 
 const addInputField = document.getElementById("add-input-field");
 
-const addButton = document.getElementById("add-button");
+const AddButton = document.getElementById("add-button");
 
 cancelButton.onclick = function () {
   srWrapper.classList.toggle("sr-anim-in", false);
@@ -261,7 +261,7 @@ function searchBook() {
     .catch((err) => console.error("error:" + err));
 }
 
-addButton.addEventListener("click", () => {
+AddButton.addEventListener("click", () => {
   searchFilm();
 });
 
@@ -271,7 +271,7 @@ addInputField.addEventListener("keypress", function (event) {
     // Cancel the default action, if needed
     event.preventDefault();
     // Trigger the button element with a click
-    addButton.click();
+    AddButton.click();
   }
 });
 

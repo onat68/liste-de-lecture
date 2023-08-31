@@ -1,8 +1,8 @@
 <script setup>
 import gsap from 'gsap'
-import itemCard from './cards/itemCard.vue';
+import itemCard from '../cards/itemCard.vue';
 import { ref } from 'vue'
-import { list } from '../list'
+import { list } from '../../list' 
 
 list.getData()
 

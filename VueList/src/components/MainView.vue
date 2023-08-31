@@ -1,8 +1,8 @@
 <script setup>
-import TimeLineInnerScreen from './TimeLineInnerScreen.vue'
-import SearchResultInnerScreen from './SearchResultInnerScreen.vue'
-import SearchBar from './SearchBar.vue'
-import { search } from '../search.js'
+import TimeLineInnerScreen from './displays/TimeLineInnerScreen.vue'
+import SearchResultInnerScreen from './displays/SearchResultInnerScreen.vue'
+import SearchBar from './uiComponents/SearchBar.vue'
+import { search } from '../search'
 
 import { gsap } from 'gsap'
 function onEnter(el) {

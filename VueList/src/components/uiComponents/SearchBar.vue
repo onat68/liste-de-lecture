@@ -1,7 +1,7 @@
 <script setup>
-import { search } from '../search'
-import SearchTypeButton from './SearchTypeButton.vue'
-import CancelButton from './CancelButton.vue'
+import { search } from '../../search'
+import SearchTypeButton from './buttons/SearchTypeButton.vue'
+import CancelButton from './buttons/CancelButton.vue'
 import { gsap } from 'gsap'
 
 import { ref } from 'vue'
