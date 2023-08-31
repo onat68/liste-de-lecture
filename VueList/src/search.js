@@ -1,6 +1,13 @@
 import { reactive } from 'vue'
 import { tmdbToken } from './private/encryptBearerTokens.js'
 
+// class ItemObject(  
+//     constructor(data, type) {
+//         this.id = data.id
+//         this.title = data.title
+//     }
+// )
+
 
 export const search = reactive({
     searchResults: [],
@@ -26,7 +33,7 @@ export const search = reactive({
 
         thisAlbum.externalId = album.id
         thisAlbum.title = album.title
-        thisAlbum.url = album.link
+        thisAlbum.albumUrl = album.link
         thisAlbum.img = album.cover
         thisAlbum.authors = album.artist.name
         thisAlbum.type = 'Album'
@@ -69,7 +76,7 @@ export const search = reactive({
         thisMovie.releaseDate = movie.release_date;
         thisMovie.note = movie.overview;
         thisMovie.genre = ''
-        thisMovie.authors = ''  
+        thisMovie.authors = ''
         if (movie.poster_path != null) {
             thisMovie.img = `https://image.tmdb.org/t/p/w92/${movie["poster_path"]}`
         } else { thisMovie.img = 'none' }
@@ -177,3 +184,6 @@ export const search = reactive({
     },
 
 })
+
+
+
