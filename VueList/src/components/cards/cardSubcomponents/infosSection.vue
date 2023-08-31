@@ -30,7 +30,7 @@ const type = ref(props.data.type)
     <div
       class="AuthorInfosWrapper w-full text-xs leading-4 h-min font-medium flex flex-row justify-between gap-2 flex-wrap-reverse gap-y-0"
     >
-      <h4 class="Author h-min w-[18ch] truncate">{{ authors }}</h4>
+      <h4 class="Author h-min w-[15ch] truncate">{{ authors }}</h4>
       <section class="InfosWrapper h-min flex-row gap-0.5 inline-flex self-end">
         <p class="Genre">{{ genre }}</p>
         <p v-if="(type != 'Album' ) && (genre != undefined)" class="dash">/</p>
