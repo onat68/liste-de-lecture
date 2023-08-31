@@ -1,12 +1,14 @@
 import { reactive } from 'vue'
 import { tmdbToken } from './private/encryptBearerTokens.js'
 
-// class ItemObject(  
+// class ItemObject {
 //     constructor(data, type) {
+//         this.data = data
 //         this.id = data.id
 //         this.title = data.title
+//         this.type = type
 //     }
-// )
+// }
 
 
 export const search = reactive({
