@@ -28,7 +28,7 @@ const target = ref('timeline')
 </script>
 <template>
   <div
-    class="Innerscreen w-full relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip"
+    class="Innerscreen w-full relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip "
   >
     <div class="Line w-fit h-full py-2">
       <div class="w-0.5 h-full bg-opgr1"></div>

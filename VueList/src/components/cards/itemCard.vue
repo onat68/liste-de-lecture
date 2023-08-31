@@ -52,7 +52,7 @@ function addItem() {
   <div
     :id="cardId"
     :class="typeStyles.imageHeight"
-    class="CardElement text-offBlckfont-bold w-full bg-white rounded-s5 shadow flex-row justify-center items-start inline-flex"
+    class="CardElement hover:animate-softPulse text-offBlckfont-bold w-full bg-white rounded-s5 shadow flex-row justify-center items-start inline-flex"
   >
     <section class="ImgWrapper w-fit h-fit flex grow-0 shrink-0" v-if="img != 'none' || undefined">
       <img
