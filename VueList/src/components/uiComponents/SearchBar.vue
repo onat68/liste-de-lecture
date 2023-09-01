@@ -40,21 +40,31 @@ function dropdown() {
 }
 function onEnter(el, done) {
   console.log(el)
-  gsap.to(el, {
-    opacity: 1,
-    rotateX: '360deg',
-    onComplete: done
-  })
+  gsap.fromTo(
+    el,
+    {
+      opacity: 0,
+      rotateX: '0deg'
+    },
+    {
+      opacity: 1,
+      rotateX: '360deg',
+      duration: 5,
+      onComplete: done
+    }
+  )
 }
 
 function rollup(arg) {
   currentType.value = arg
-  console.log(typeMenuIsOpen.value)
+  typeMenuIsOpen.value = false
+  console.log(currentType.value)
 }
 </script>
 
 <template>
   <div
+    @type-selected="rollup"
     class="SearchBar font-display h-20 w-full p-2 bg-white rounded-[5px] justify-center items-center gap-2 flex overflow-visible z-40"
   >
     <SearchTypeButton
@@ -66,7 +76,7 @@ function rollup(arg) {
     ></SearchTypeButton>
     <TransitionGroup @enter="onEnter" v-if="typeMenuIsOpen">
       <SearchTypeButton
-        v-for="(type) in types"
+        v-for="type in types"
         :key="type.typeName"
         :type="type.typeName"
         :class="type.typeColor"

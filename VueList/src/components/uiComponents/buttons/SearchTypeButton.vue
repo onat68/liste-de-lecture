@@ -11,7 +11,7 @@ const type = ref(props.type)
 
 <template>
   <button
-    @click="$emit rollup"
+  @click="$emit('typeSelected', type.value)"
     class="searchTypeButton z-50 flex text-xl text-center font-medium leading-tight w-[60px] h-[60px] box-border text-white hover:bg-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-md hover:border-2 rounded-s5 shrink-0 justify-center items-center"
   >
     {{ type }}
