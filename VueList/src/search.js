@@ -71,19 +71,7 @@ export const search = reactive({
     },
 
     movieToObj(movie) {
-        let thisMovie = {}
-
-        thisMovie.externalId = movie.id
-        thisMovie.title = movie.original_title;
-        thisMovie.releaseDate = movie.release_date;
-        thisMovie.note = movie.overview;
-        thisMovie.genre = ''
-        thisMovie.authors = ''
-        if (movie.poster_path != null) {
-            thisMovie.img = `https://image.tmdb.org/t/p/w92/${movie["poster_path"]}`
-        } else { thisMovie.img = 'none' }
-
-        thisMovie.type = 'Movie'
+        
 
         const creditsAndGenreUrl = `tmdb/movie/${movie.id}?append_to_response=credits`;
 
@@ -99,13 +87,7 @@ export const search = reactive({
 
     },
 
-    parseResponseMovies(data) {
-        let movies = data.results
-        movies.forEach((movie) => {
-            this.movieToObj(movie)
 
-        })
-    },
 
     parseResponseAlbums(data) {
         let albums = data.data
@@ -135,19 +117,6 @@ export const search = reactive({
             .catch((err) => console.error("error:" + err))
     },
 
-    searchMovie(query) {
-        const url = `tmdb/search/movie?query=${encodeURI(
-            query
-        )}`;
-
-        fetch(url, this.movieGet)
-            .then((res) => res.json())
-            .then((data) => {
-                this.parseResponseMovies(data)
-            }
-            )
-            .catch((err) => console.error("error:" + err))
-    },
 
     searchAlbum(query) {
         const url = `dzr/search/album?q=${query}`;
