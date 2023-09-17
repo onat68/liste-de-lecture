@@ -20,41 +20,34 @@ export const useCounterStore = defineStore('useSearchResults', {
 
     actions: {
         search(providers, query) {
-            providers.forEach(async provider => {
-                await this.getData(provider, query, 0)
-                if (provider == tmdb) {
-                    this.movies.forEach(movie => { this.getData(tmdb, movie.id, 1) })
-                } else if (provider == dzr) { album => { this.getData(dzr, album.id, 1) } }
-            })
+            this.results = [],
+            providers.forEach(async (provider) => {
+                let data0 = await this.getData(provider, query, 0)
+                this.parseResponse(data0, provider)
 
+                if (provider.steps) {
+                    this.results.forEach(async (movie) => {
+                        let data1 = await this.getData(provider, movie.id, 1)
+                        this.parseResponse(data1, provider)
+                    })
+                }
+            })
+            this.results.concat(this.albums, this.books, this.movies)
         },
 
         async getData(provider, query, step) {
             provider.query = query
             fetch(provider.urls[step], provider.options)
                 .then((res) => res.json())
-                .then((data) => { this.parseResponse(data, provider) }
+                .then((data) => { return data }
                 )
                 .catch((err) => console.error("error:" + err))
         },
 
 
         parseResponse(step, data, provider) {
-            if (provider == tmdb) {
-                let subset = data[tmdb.dataSubset]
-                if (step == 0) {
-                    subset.forEach((movie) => { this.movies.push(tmdb.toObj(movie)) })
-                }
-                else if (step == 1) { this.movies.forEach((movie) => tmdb.creditsGenreToMovie(movie.id)) }
-            } else if (provider == dzr) {
-                let subset = data.data
-                if (step == 0) {
-                    subset.forEach((album) => { this.albums.push(dzr.toObj(album)) })
-                } else if (step == 1) { this.albums.forEach((album) => dzr.genreToAlbum(album.id)) }
-            } else if (provider == gb) {
-                let subset = data.items
-                subset.forEach((book) => { this.books.push(gb.toObj(book)) })
-            }
+            if (step == 0) { data[provider.subset].forEach((item) => { return provider.toObj(item) }) }
+            else if (step == 1) { return provider.toObj1(data.id) }
         }
-    },
+    }
 })

@@ -1,5 +1,5 @@
 <script setup>
-import { search } from '../../search'
+import { useSearchResultStore } from '../../stores/useSearchResultStore'
 import SearchTypeButton from './buttons/SearchTypeButton.vue'
 import CancelButton from './buttons/CancelButton.vue'
 import { typePicker } from '../../typePicker'
@@ -52,7 +52,7 @@ function setType(type) {
         :action="setType"
       ></SearchTypeButton>
     </TransitionGroup>
-    <CancelButton v-if="search.searching"></CancelButton>
+    <CancelButton v-if="useS"></CancelButton>
     <input
       v-model="text"
       type="field"
@@ -65,7 +65,7 @@ function setType(type) {
       v-show="typePicker.opened != true"
       @mouseover="onOver"
       @mouseleave="onLeave"
-      @click="search.search(text, typePicker.currentType.typeName)"
+      @click="useSearchResultStore.search(typePicker.currentType.typeName, query)"
       class="Button w-[60px] h-[60px] hover:bg-white hover:border-brGr hover:border-2 hover:fill-brGr transition-transform duration-300 hover:-translate-y-1 hover:shadow-md fill-white bg-brGr rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
     >
       <svg class="w-5 fill-inherit" viewBox="0 0 24 26" xmlns="http://www.w3.org/2000/svg">

@@ -1,7 +1,7 @@
 export const gb = {
     query: '',
     url: `gb/v1/volumes?q=${encodeURI(this.query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`,
-
+    subset: 'items',
     options: {
         method: "GET",
         headers: {

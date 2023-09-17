@@ -20,11 +20,10 @@ function onEnter(el, done) {
 }
 
 import itemCard from '../cards/itemCard.vue'
+import { useSearchResultStore } from '../../stores/useSearchResultStore'
 
 const target = ref('timeline')
 import { ref } from 'vue'
-import { search } from '../../search';
-
 </script>
 
 <template>
@@ -39,7 +38,7 @@ import { search } from '../../search';
     >
       <TransitionGroup @enter="onEnter"
         ><itemCard
-          v-for="(data, index) in search.searchResults"
+          v-for="(data, index) in useSearchResultStore.getResults()"
           :key="data.externalId"
           :data="data"
           :target="target"
