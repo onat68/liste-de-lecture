@@ -1,8 +1,8 @@
 <script setup>
-import MusicButton from '../../uiComponents/buttons/MusicButton.vue'
-const props = defineProps({ 
-    albumUrl: String
- })
+import MusicButton from './MusicButton.vue'
+const props = defineProps({
+  albumUrl: String
+})
 const albumUrl = props.albumUrl
 // static for now, ref later
 const userDefStreamingService = 'Deezer'

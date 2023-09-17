@@ -1,0 +1,17 @@
+<script setup>
+import { search } from '../../../search';
+</script>
+
+<template>
+  <button
+    class="Button flex grow text-xl text-center font-medium bg-brOrng leading-tight px-2 w-10 h-[60px] box-border fill-white hover:bg-white hover:border-brOrng hover:fill-brOrng transition-transform duration-300 hover:-translate-y-1 hover:shadow-md hover:border-2 rounded-s5 shrink-0 justify-center items-center"
+    @click="search.cancelSearch"
+  >
+    <svg class="w-5 fill-inherit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+      <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+      />
+    </svg>
+  </button>
+</template>
