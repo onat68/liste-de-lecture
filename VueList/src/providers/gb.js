@@ -24,5 +24,9 @@ export const gb = {
 
         return thisBook
     },
-    setUrl(query) { `gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg` }
+    setUrl(query, step) {
+        if (step == 0) {
+            return `gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`
+        }
+    }
 }
