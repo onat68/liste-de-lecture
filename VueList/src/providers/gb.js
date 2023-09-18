@@ -1,12 +1,25 @@
 export const gb = {
-    steps: false,
-    subset: 'items',
+
     options: {
         method: "GET",
         headers: {
             accept: "application/json",
         },
     },
+    search(query) {
+        let arr = []
+
+        fetch(`gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`, this.options)
+            .then((res) => res.json())
+            .then((data) => {
+                arr = data.items.map(element => {
+                   this.toObj(element)
+                });
+                return arr
+            })
+            .catch((err) => console.error("error:" + err))
+    },
+
     toObj(book) {
         let thisBook = {}
         thisBook.externalId = book.id
@@ -24,9 +37,4 @@ export const gb = {
 
         return thisBook
     },
-    setUrl(query, step) {
-        if (step == 0) {
-            return `gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`
-        }
-    }
 }

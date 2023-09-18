@@ -54,7 +54,7 @@ function setType(type) {
         :action="setType"
       ></SearchTypeButton>
     </TransitionGroup>
-    <CancelButton v-if="useS"></CancelButton>
+    <CancelButton v-if="search.getSearching"></CancelButton>
     <input
       v-model="text"
       type="field"

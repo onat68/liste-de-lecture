@@ -1,12 +1,32 @@
 export const dzr = {
-    steps: true,
-    subset: 'data',
     options: {
         method: "GET",
         headers: {
             accept: "application/json",
         },
     },
+
+    search(query) {
+        let arr = []
+
+        fetch(`dzr/search/album?q=${query}`, this.options)
+            .then((res) => res.json())
+            .then((data) => {
+                arr = data.data.map(element => {
+                    this.toObj(element)
+
+                    fetch(`dzr/genre/${element.id}`, this.options)
+                        .then((res) => res.json())
+                        .then((data) => {
+                            element.genre = data.name
+                        })
+                        .catch((err) => console.error("error:" + err))
+                });
+                return arr
+            })
+            .catch((err) => console.error("error:" + err))
+    },
+
     toObj(album) {
         let thisAlbum = {}
 
@@ -20,12 +40,4 @@ export const dzr = {
 
         return thisAlbum
     },
-    toObj1(album, data) {
-        album.genre = data.name
-    },
-    setUrl(query, step) {
-        if (step == 0) {
-            return (`dzr/search/album?q=${query}`)
-        } else if (step == 1) { return `dzr/genre/${query}` }
-    }
 }

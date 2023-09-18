@@ -1,17 +1,34 @@
 import { tmdbToken } from '../private/encryptBearerTokens.js'
 
 export const tmdb = {
-    query: '',
-
-    steps: true,
-    subset: 'results',
-
     options: {
         method: "GET",
         headers: {
             accept: "application/json",
             Authorization: `Bearer ${tmdbToken}`
         },
+    },
+
+    search(query) {
+        let arr = []
+
+        fetch(`tmdb/search/movie?query=${encodeURI(query)}`, this.options)
+            .then((res) => res.json())
+            .then((data) => {
+                arr = data.results.map(element => {
+                    this.toObj(element)
+
+                    fetch(`tmdb/movie/${element.id}?append_to_response=credits`, this.options)
+                        .then((res) => res.json())
+                        .then((data) => {
+                            element.authors = data.credits.crew[0].original_name
+                            element.genre = data.genres[0].name
+                        })
+                        .catch((err) => console.error("error:" + err))
+                });
+                return arr
+            })
+            .catch((err) => console.error("error:" + err))
     },
 
     toObj(movie) {
@@ -31,14 +48,4 @@ export const tmdb = {
 
         return (thisMovie)
     },
-
-    toObj1(movie, data) {
-        movie.authors = data.credits.crew[0].original_name
-        movie.genre = data.genres[0].name
-    },
-    setUrl(query, step) {
-        if (step == 0) {
-            return (`tmdb/search/movie?query=${encodeURI(query)}`)
-        } else if (step == 1) { return `tmdb/movie/${query}?append_to_response=credits` }
-    }
 }
