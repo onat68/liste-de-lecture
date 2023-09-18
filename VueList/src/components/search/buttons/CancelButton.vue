@@ -1,11 +1,11 @@
 <script setup>
-import { search } from '../../../search';
+import { useSearchResultStore } from '../../../stores/useSearchResultStore';
 </script>
 
 <template>
   <button
     class="Button flex grow text-xl text-center font-medium bg-brOrng leading-tight px-2 w-10 h-[60px] box-border fill-white hover:bg-white hover:border-brOrng hover:fill-brOrng transition-transform duration-300 hover:-translate-y-1 hover:shadow-md hover:border-2 rounded-s5 shrink-0 justify-center items-center"
-    @click="search.cancelSearch"
+    @click="useSearchResultStore.stopSearching()"
   >
     <svg class="w-5 fill-inherit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
       <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->

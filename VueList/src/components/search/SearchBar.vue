@@ -58,7 +58,7 @@ function setType(type) {
       type="field"
       id="search-field"
       :class="typePicker.currentType.focusColor"
-      @keypress.enter="search.search(text, typePicker.currentType.typeName)"
+      @keypress.enter="useSearchResultStore.search(text, typePicker.currentType.typeName)"
       class="SearchField flex grow focus-visible:outline-none focus-visible:border-2 px-2 py-1 text-xl font-medium w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
     />
     <button

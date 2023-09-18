@@ -44,7 +44,7 @@ const typeStyles = assignTypeStyles(type.value)
 function addItem() {
   list.sendData(data)
 
-  setTimeout((search.searching = false), 800)
+  setTimeout((useSearchResultStore.getSearching() = false), 800)
 }
 </script>
 
@@ -70,6 +70,6 @@ function addItem() {
       <streamingSection v-if="type == 'Album'" :albumUrl="albumUrl"> </streamingSection>
       <overviewSection v-if="type != 'Album'" :note="note"></overviewSection>
     </section>
-    <AddButton v-if="search.searching" @click="addItem"></AddButton>
+    <AddButton v-if="useSearchResultStore.getSearching()" @click="addItem"></AddButton>
   </div>
 </template>
