@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import dzr from '../providers/dzr'
-import gb from '../providers/gb'
-import tmdb from '../providers/tmdb'
+import { dzr } from '../providers/dzr'
+import { gb } from '../providers/gb'
+import { tmdb } from '../providers/tmdb'
 
-export const useCounterStore = defineStore('useSearchResults', {
+export const useSearchResults = defineStore('useSearchResults', {
     state: () => ({
         results: [],
         books: [],
@@ -21,26 +21,36 @@ export const useCounterStore = defineStore('useSearchResults', {
     },
 
     actions: {
-        search(providers, query) {
-            this.searching = true;
-            this.results = [],
-                providers.forEach(async (provider) => {
-                    let data0 = await this.getData(provider, query, 0)
-                    this.parseResponse(data0, provider)
+        defineProviders(type) {
+            if (type == 'movie') {
+                return tmdb
+            } else if (type == 'album') { return dzr } else if (type == 'book') {
+                return gb
+            } else { return [dzr, gb, tmdb] }
+        },
 
-                    if (provider.steps) {
-                        this.results.forEach(async (movie) => {
-                            let data1 = await this.getData(provider, movie.id, 1)
-                            this.parseResponse(data1, provider)
-                        })
-                    }
-                })
+        search(type, query) {
+            this.searching = true;
+            this.results = [];
+            let providers = this.defineProviders(type)
+
+            providers.forEach(async (provider) => {
+                let data0 = await this.getData(provider, query, 0)
+                this.parseResponse(data0, provider)
+
+                if (provider.steps) {
+                    this.results.forEach(async (item) => {
+                        let data1 = await this.getData(provider, item.id, 1)
+                        this.parseResponse(data1, provider)
+                    })
+                }
+            })
             this.results.concat(this.albums, this.books, this.movies)
         },
 
         async getData(provider, query, step) {
-            provider.query = query
-            fetch(provider.urls[step], provider.options)
+            let url = provider.setUrl(query, step)
+            fetch(url, provider.options)
                 .then((res) => res.json())
                 .then((data) => { return data }
                 )

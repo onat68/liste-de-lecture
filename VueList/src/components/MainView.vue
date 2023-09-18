@@ -3,7 +3,8 @@ import TimeLineInnerScreen from './timeline/TimeLineInnerScreen.vue'
 import SearchResultInnerScreen from './search/SearchResultInnerScreen.vue'
 import SearchBar from './search/SearchBar.vue'
 
-import { search } from '../search'
+import { useSearchResults } from '../stores/useSearchResultStore'
+const search = useSearchResults()
 
 import { gsap } from 'gsap'
 function onEnter(el) {
@@ -37,10 +38,10 @@ function onLeave(el) {
     class="font-body Vuetimeline w-full h-full md:w-2/5 lg:1/2 rounded-md flex-col justify-end items-center inline-flex border shrink"
   >
     <div class="Screen w-full h-full p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
-      <Transition v-if="useSearchResultStore.getSearching() == false" @enter="onEnter(this)" @leave="onLeave(this)">
+      <Transition v-if="search.getSearching == false" @enter="onEnter(this)" @leave="onLeave(this)">
         <TimeLineInnerScreen></TimeLineInnerScreen
       ></Transition>
-      <Transition v-if="useSearchResultStore.getSearching()" @enter="onEnter(this)" @leave="onLeave(this)">
+      <Transition v-if="search.getSearching" @enter="onEnter(this)" @leave="onLeave(this)">
         <SearchResultInnerScreen> </SearchResultInnerScreen>
       </Transition>
     </div>

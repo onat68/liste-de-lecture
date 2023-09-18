@@ -1,15 +1,10 @@
-import { tmdbToken } from './private/encryptBearerTokens.js'
+import { tmdbToken } from '../private/encryptBearerTokens.js'
 
 export const tmdb = {
     query: '',
 
-
+    steps: true,
     subset: 'results',
-
-    urls: [
-        { url: `tmdb/search/movie?query=${encodeURI(this.query)}` },
-        { creditsGenreUrl: `tmdb/movie/${this.query}?append_to_response=credits` }
-    ],
 
     options: {
         method: "GET",
@@ -40,5 +35,10 @@ export const tmdb = {
     toObj1(movie, data) {
         movie.authors = data.credits.crew[0].original_name
         movie.genre = data.genres[0].name
+    },
+    setUrl(query, step) {
+        if (step == 0) {
+            return (`tmdb/search/movie?query=${encodeURI(query)}`)
+        } else if (step == 1) { return `tmdb/movie/${query}?append_to_response=credits` }
     }
 }

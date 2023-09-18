@@ -6,7 +6,7 @@ import infosSection from './cardSubcomponents/infosSection.vue'
 
 import { ref } from 'vue'
 import { provide } from 'vue'
-import { search } from '../../search'
+import { useSearchResults } from '../../stores/useSearchResultStore'
 import { list } from '../../list'
 
 const props = defineProps({
@@ -14,6 +14,7 @@ const props = defineProps({
   target: String
 })
 
+const search = useSearchResults()
 const data = props.data
 
 const note = ref(data.note)
@@ -44,7 +45,7 @@ const typeStyles = assignTypeStyles(type.value)
 function addItem() {
   list.sendData(data)
 
-  setTimeout((useSearchResultStore.getSearching() = false), 800)
+  setTimeout(search.stopSearching(), 800)
 }
 </script>
 
@@ -64,12 +65,12 @@ function addItem() {
     </section>
 
     <section
-      class="cardBody font-display h-full grow shrink self-stretch pl-1 pr-2  lg:pl-2 lg:pr-4 pt-1 pb-2 rounded-s5 flex-col justify-between items-start inline-flex gap-0.5"
+      class="cardBody font-display h-full grow shrink self-stretch pl-1 pr-2 lg:pl-2 lg:pr-4 pt-1 pb-2 rounded-s5 flex-col justify-between items-start inline-flex gap-0.5"
     >
       <infosSection :data="props.data" :typeStyles="typeStyles"></infosSection>
       <streamingSection v-if="type == 'Album'" :albumUrl="albumUrl"> </streamingSection>
       <overviewSection v-if="type != 'Album'" :note="note"></overviewSection>
     </section>
-    <AddButton v-if="useSearchResultStore.getSearching()" @click="addItem"></AddButton>
+    <AddButton v-if="search.getSearching" @click="addItem"></AddButton>
   </div>
 </template>

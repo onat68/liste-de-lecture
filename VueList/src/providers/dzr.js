@@ -1,9 +1,6 @@
 export const dzr = {
-    query: '',
-    searchUrl: `dzr/search/album?q=${this.query}`,
-
+    steps: true,
     subset: 'data',
-    genreUrl: `dzr/genre/${this.query.genre_id}`,
     options: {
         method: "GET",
         headers: {
@@ -25,5 +22,10 @@ export const dzr = {
     },
     toObj1(album, data) {
         album.genre = data.name
+    },
+    setUrl(query, step) {
+        if (step == 0) {
+            return (`dzr/search/album?q=${query}`)
+        } else if (step == 1) { return `dzr/genre/${query}` }
     }
 }

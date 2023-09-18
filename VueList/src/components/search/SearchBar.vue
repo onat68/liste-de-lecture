@@ -1,9 +1,11 @@
 <script setup>
-import { useSearchResultStore } from '../../stores/useSearchResultStore'
+import { useSearchResults } from '../../stores/useSearchResultStore'
 import SearchTypeButton from './buttons/SearchTypeButton.vue'
 import CancelButton from './buttons/CancelButton.vue'
 import { typePicker } from '../../typePicker'
 import gsap from 'gsap'
+
+const search = useSearchResults()
 
 import { ref } from 'vue'
 const text = ref('')
@@ -58,14 +60,14 @@ function setType(type) {
       type="field"
       id="search-field"
       :class="typePicker.currentType.focusColor"
-      @keypress.enter="useSearchResultStore.search(text, typePicker.currentType.typeName)"
+      @keypress.enter="search.search( typePicker.currentType.typeName, text)"
       class="SearchField flex grow focus-visible:outline-none focus-visible:border-2 px-2 py-1 text-xl font-medium w-full h-full bg-neutral-200 rounded-s5 shadow-inner"
     />
     <button
       v-show="typePicker.opened != true"
       @mouseover="onOver"
       @mouseleave="onLeave"
-      @click="useSearchResultStore.search(typePicker.currentType.typeName, query)"
+      @click="search.search(typePicker.currentType.typeName, query)"
       class="Button w-[60px] h-[60px] hover:bg-white hover:border-brGr hover:border-2 hover:fill-brGr transition-transform duration-300 hover:-translate-y-1 hover:shadow-md fill-white bg-brGr rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
     >
       <svg class="w-5 fill-inherit" viewBox="0 0 24 26" xmlns="http://www.w3.org/2000/svg">

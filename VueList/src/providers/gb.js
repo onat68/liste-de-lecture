@@ -1,6 +1,5 @@
 export const gb = {
-    query: '',
-    url: `gb/v1/volumes?q=${encodeURI(this.query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`,
+    steps: false,
     subset: 'items',
     options: {
         method: "GET",
@@ -24,5 +23,6 @@ export const gb = {
             : (thisBook.img = "none");
 
         return thisBook
-    }
+    },
+    setUrl(query) { `gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg` }
 }
