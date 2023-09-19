@@ -34,7 +34,7 @@ const type = ref(props.data.type)
       <section class="InfosWrapper h-min flex-row gap-0.5 inline-flex self-end">
         <p class="Genre">{{ genre }}</p>
         <p v-if="(type != 'Album' ) && (genre != undefined)" class="dash">/</p>
-        <p v-if="props.data.releaseDate != undefined" class="ReleaseYear">
+        <p v-if="releaseDate != undefined" class="ReleaseYear">
           {{ releaseDate.slice(0, 4) }}
         </p>
       </section>

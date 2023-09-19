@@ -15,7 +15,7 @@ export const dzr = {
                 data.data.forEach(element => {
                     let item = this.toObj(element)
 
-                    fetch(`dzr/genre/${item.externalId}`, this.options)
+                    fetch(`dzr/genre/${element.genre_id}`, this.options)
                         .then((res) => res.json())
                         .then((data) => {
                             item.genre = data.name
