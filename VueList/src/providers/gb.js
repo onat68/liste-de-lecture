@@ -6,18 +6,18 @@ export const gb = {
             accept: "application/json",
         },
     },
-    search(query) {
+    async search(query) {
         let arr = []
 
-        fetch(`gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`, this.options)
+        await fetch(`gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`, this.options)
             .then((res) => res.json())
             .then((data) => {
-                arr = data.items.map(element => {
-                   this.toObj(element)
+                data.items.map(element => {
+                    arr.push(this.toObj(element))
                 });
-                return arr
             })
             .catch((err) => console.error("error:" + err))
+        return arr
     },
 
     toObj(book) {

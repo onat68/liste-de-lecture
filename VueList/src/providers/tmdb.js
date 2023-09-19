@@ -9,26 +9,27 @@ export const tmdb = {
         },
     },
 
-    search(query) {
+    async search(query) {
         let arr = []
 
-        fetch(`tmdb/search/movie?query=${encodeURI(query)}`, this.options)
+        await fetch(`tmdb/search/movie?query=${encodeURI(query)}`, this.options)
             .then((res) => res.json())
             .then((data) => {
-                arr = data.results.map(element => {
-                    this.toObj(element)
-
+                data.results.forEach(element => {
+                    let item = this.toObj(element)
                     fetch(`tmdb/movie/${element.id}?append_to_response=credits`, this.options)
                         .then((res) => res.json())
-                        .then((data) => {
-                            element.authors = data.credits.crew[0].original_name
-                            element.genre = data.genres[0].name
+                        .then((data1) => {
+                            item.authors = data1?.credits?.crew[0]?.original_name
+                            item.genre = data1?.genres[0]?.name
+                            arr.push(item)
                         })
                         .catch((err) => console.error("error:" + err))
                 });
-                return arr
+
             })
             .catch((err) => console.error("error:" + err))
+        return arr
     },
 
     toObj(movie) {

@@ -19,11 +19,11 @@ function onEnter(el, done) {
   )
 }
 
+
 import itemCard from '../cards/itemCard.vue'
 import { useSearchResults } from '../../stores/useSearchResultStore'
 
 const search = useSearchResults()
-
 const target = ref('timeline')
 import { ref } from 'vue'
 </script>

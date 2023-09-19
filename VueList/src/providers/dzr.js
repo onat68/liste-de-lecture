@@ -6,25 +6,25 @@ export const dzr = {
         },
     },
 
-    search(query) {
+    async search(query) {
         let arr = []
-
-        fetch(`dzr/search/album?q=${query}`, this.options)
+        await fetch(`dzr/search/album?q=${query}`, this.options)
             .then((res) => res.json())
             .then((data) => {
-                arr = data.data.map(element => {
-                    this.toObj(element)
+                data.data.forEach(element => {
+                    let item = this.toObj(element)
 
-                    fetch(`dzr/genre/${element.id}`, this.options)
+                    fetch(`dzr/genre/${item.externalId}`, this.options)
                         .then((res) => res.json())
                         .then((data) => {
-                            element.genre = data.name
+                            item.genre = data.name
+                            arr.push(item)
                         })
                         .catch((err) => console.error("error:" + err))
                 });
-                return arr
             })
             .catch((err) => console.error("error:" + err))
+            return arr
     },
 
     toObj(album) {
