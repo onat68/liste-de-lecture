@@ -5,6 +5,7 @@ export const dzr = {
             accept: "application/json",
         },
     },
+    type: 'Album',
 
     async search(query) {
         let arr = []

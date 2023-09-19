@@ -7,14 +7,14 @@ export const useSearchResults = defineStore('useSearchResults', {
     state: () => ({
         results: [],
         searching: false,
-        providers: [dzr, gb, tmdb]
+        providers: [dzr, gb, tmdb],
     }),
 
     getters: {
-        getResults: state => { return state.results },
-        getAlbums: state => { return state.albums },
-        getBooks: state => { return state.books },
-        getMovies: state => { return state.movies },
+        getResults: state => { return state.results.flat() },
+        getAlbums: state => { return state.results.flat().filter(item => item.type == 'Album').items },
+        getBooks: state => { return state.results.flat().filter(item => item.type == 'Book').items },
+        getMovies: state => { return state.results.flat().filter(item => item.type == 'Movie').items },
         getSearching: state => { return state.searching }
     },
 
@@ -22,19 +22,18 @@ export const useSearchResults = defineStore('useSearchResults', {
         async search(type, query) {
             this.results = []
             this.searching = true
-            if (type == 'movie') {
-                this.results = await tmdb.search(query)
-            } else if (type == 'album') { this.results = await dzr.search(query) } else if (type == 'book') { this.results = await gb.search(query) } else {
-                this.providers.forEach(async provider => {
-                    let response = await provider.search(query)
-                    this.results.push(response)
-                    this.results = this.results.flat(1)
-                })
-            }
-            
+            this.providers.forEach(async provider => {
+
+                if (provider.type == type || type == 'All') {
+
+                    this.results.push(
+                        await provider.search(query)
+                    )
+                }
+            })
         },
         stopSearching() {
-            setTimeout(this.searching = false, 500)
+            setTimeout(this.searching = false)
         }
     }
 })

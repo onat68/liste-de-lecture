@@ -6,6 +6,8 @@ export const gb = {
             accept: "application/json",
         },
     },
+    type: 'Book',
+
     async search(query) {
         let arr = []
 

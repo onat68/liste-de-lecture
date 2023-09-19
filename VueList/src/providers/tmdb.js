@@ -8,6 +8,7 @@ export const tmdb = {
             Authorization: `Bearer ${tmdbToken}`
         },
     },
+    type: 'Movie',
 
     async search(query) {
         let arr = []
