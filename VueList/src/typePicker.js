@@ -5,18 +5,14 @@ export const typePicker = reactive({
     types: types,
     opened: false,
     currentType: types[0],
-    otherTypes: [],
-
+    otherTypes: types,
     open() {
-        this.otherTypes = types.filter((type) => {
-            type != this.currentType
-        })
         this.opened = true
     },
 
     setType(type) {
-        this.currentType = type
         this.opened = false
+        this.currentType = type
     },
 
 

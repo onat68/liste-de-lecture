@@ -8,6 +8,7 @@ export const useSearchResults = defineStore('useSearchResults', {
         results: [],
         searching: false,
         providers: [dzr, gb, tmdb],
+        pickedType: '',
     }),
 
     getters: {
@@ -22,10 +23,11 @@ export const useSearchResults = defineStore('useSearchResults', {
         async search(type, query) {
             this.results = []
             this.searching = true
+            this.pickedType = type
             this.providers.forEach(async provider => {
 
                 if (provider.type == type || type == 'All') {
-
+                    console.log(type)
                     this.results.push(
                         await provider.search(query)
                     )

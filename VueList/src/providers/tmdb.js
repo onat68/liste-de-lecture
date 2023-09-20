@@ -23,9 +23,9 @@ export const tmdb = {
                         .then((data1) => {
                             item.authors = data1?.credits?.crew[0]?.original_name
                             item.genre = data1?.genres[0]?.name
-                            arr.push(item)
                         })
                         .catch((err) => console.error("error:" + err))
+                    arr.push(item)
                 });
 
             })

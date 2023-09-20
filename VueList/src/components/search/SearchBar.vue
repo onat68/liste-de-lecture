@@ -53,7 +53,7 @@ function setType(type) {
         v-for="(type, index) in typePicker.otherTypes"
         :key="index"
         :type="type"
-        :action="setType"
+        @click="setType(type)"
       ></SearchTypeButton>
     </TransitionGroup>
     <CancelButton v-if="search.getSearching"></CancelButton>

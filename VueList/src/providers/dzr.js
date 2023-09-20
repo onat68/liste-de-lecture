@@ -19,13 +19,13 @@ export const dzr = {
                         .then((res) => res.json())
                         .then((data) => {
                             item.genre = data.name
-                            arr.push(item)
                         })
                         .catch((err) => console.error("error:" + err))
+                    arr.push(item)
                 });
             })
             .catch((err) => console.error("error:" + err))
-            return arr
+        return arr
     },
 
     toObj(album) {
