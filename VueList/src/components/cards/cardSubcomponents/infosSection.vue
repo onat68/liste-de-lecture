@@ -18,7 +18,7 @@ const type = ref(props.data.type)
     class="MainInfoWrapper h-min flex-col self-stretch justify-between items-baseline inline-flex"
   >
     <div
-      class="TitleTypeWrapper text-base sm:text-md md:text-lg lg:text-xl self-stretch h-min gap-1 flex-row justify-between items-start flex"
+      class="TitleTypeWrapper text-base sm:text-base md:text-lg lg:text-xl self-stretch h-min gap-1 flex-row justify-between items-start flex"
     >
       <h3 class="Title self-stretch font-display font-bold leading-tight line-clamp-1">
         {{ title }}
@@ -28,9 +28,9 @@ const type = ref(props.data.type)
       </p>
     </div>
     <div
-      class="AuthorInfosWrapper w-full text-xs sm:text-xs md:text-base lg:text-md leading-4 h-min font-medium flex flex-row justify-between gap-2 flex-wrap-reverse gap-y-0"
+      class="AuthorInfosWrapper w-full text-xs sm:text-xs md:text-base lg:text-md leading-4 h-min font-medium flex flex-row justify-between gap-2 gap-y-0"
     >
-      <h4 class="Author h-min w-[15ch] truncate">{{ authors }}</h4>
+      <h4 class="Author h-min line-clamp-1">{{ authors }}</h4>
       <section class="InfosWrapper h-min flex-row gap-0.5 inline-flex self-end">
         <p class="Genre">{{ genre }}</p>
         <p v-if="(type != 'Album' ) && (genre != undefined)" class="dash">/</p>

@@ -32,7 +32,7 @@ function assignTypeStyles(type) {
     styles.imageH = 'h-[120px] md:h-[180px] '
   } else if (type == 'Book') {
     styles.color = 'text-drkRd'
-    styles.imageH = 'h-fit h-36'
+    styles.imageH = 'h-fit'
   } else if (type == 'Album') {
     styles.imageH = 'h-20 md:h-[120px]'
     styles.color = 'text-mdBl'
