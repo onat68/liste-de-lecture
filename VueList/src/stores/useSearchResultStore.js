@@ -13,9 +13,6 @@ export const useSearchResults = defineStore('useSearchResults', {
 
     getters: {
         getResults: state => { return state.results },
-        getAlbums: state => { return state.results.flat().filter(item => item.type == 'Album').items },
-        getBooks: state => { return state.results.flat().filter(item => item.type == 'Book').items },
-        getMovies: state => { return state.results.flat().filter(item => item.type == 'Movie').items },
         getSearching: state => { return state.searching }
     },
 
@@ -24,12 +21,9 @@ export const useSearchResults = defineStore('useSearchResults', {
             this.results = []
             this.searching = true
             this.pickedType = type
-            this.providers.forEach(async provider => {
-
+            this.providers.forEach(provider => {
                 if (provider.type == type || type == 'All') {
-                    this.results.concat(
-                        provider.search(query)
-                    )
+                    provider.search(query)
                 }
             })
         },
