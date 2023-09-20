@@ -1,3 +1,5 @@
+import { useSearchResults } from "../stores/useSearchResultStore";
+
 export const dzr = {
     options: {
         method: "GET",
@@ -7,38 +9,36 @@ export const dzr = {
     },
     type: 'Album',
 
-     search(query) {
-        let arr = []
-         fetch(`dzr/search/album?q=${query}`, this.options)
+    search(query) {
+        const search = useSearchResults()
+        fetch(`dzr/search/album?q=${query}`, this.options)
             .then((res) => res.json())
             .then((data) => {
-                data.data.forEach( element => {
-                    let item = this.toObj(element)
-
-                     fetch(`dzr/genre/${element.genre_id}`, this.options)
+                data.data.forEach(element => {
+                    fetch(`dzr/genre/${element.genre_id}`, this.options)
                         .then((res) => res.json())
-                        .then((data) => {
-                            item.genre = data.name
-                            arr.push(item)
+                        .then((data1) => {
+                            let item = this.toObj(element, data1)
+                            search.addResult(item)
                         })
                         .catch((err) => console.error("error:" + err))
                 });
             })
             .catch((err) => console.error("error:" + err))
-        return arr
     },
 
-    toObj(album) {
-        let thisAlbum = {}
+    toObj(element, data1) {
+        let item = {}
 
-        thisAlbum.externalId = album.id
-        thisAlbum.title = album.title
-        thisAlbum.albumUrl = album.link
-        thisAlbum.img = album.cover
-        thisAlbum.authors = album.artist.name
-        thisAlbum.type = 'Album'
-        thisAlbum.genre = ''
+        item.externalId = element.id
+        item.title = element.title
+        item.albumUrl = element.link
+        item.img = element.cover
+        item.authors = element.artist.name
+        item.type = 'Album'
+        item.genre = ''
+        item.genre = data1.name
 
-        return thisAlbum
+        return item
     },
 }

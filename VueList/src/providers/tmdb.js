@@ -1,4 +1,5 @@
 import { tmdbToken } from '../private/encryptBearerTokens.js'
+import { useSearchResults } from '../stores/useSearchResultStore.js'
 
 export const tmdb = {
     options: {
@@ -10,44 +11,41 @@ export const tmdb = {
     },
     type: 'Movie',
 
-     search(query) {
-        let arr = []
-
-         fetch(`tmdb/search/movie?query=${encodeURI(query)}`, this.options)
+    search(query) {
+        const search = useSearchResults()
+        fetch(`tmdb/search/movie?query=${encodeURI(query)}`, this.options)
             .then((res) => res.json())
             .then((data) => {
                 data.results.forEach(element => {
-                    let item = this.toObj(element)
                     fetch(`tmdb/movie/${element.id}?append_to_response=credits`, this.options)
                         .then((res) => res.json())
                         .then((data1) => {
-                            item.authors = data1?.credits?.crew[0]?.original_name
-                            item.genre = data1?.genres[0]?.name
-                            arr.push(item)
+                            let item = this.toObj(element, data1)
+                            search.addResult(item)
                         })
                         .catch((err) => console.error("error:" + err))
                 });
-
             })
             .catch((err) => console.error("error:" + err))
-        return arr
     },
 
-    toObj(movie) {
-        let thisMovie = {}
+    toObj(element, data1) {
+        let item = {}
 
-        thisMovie.externalId = movie.id
-        thisMovie.title = movie.original_title;
-        thisMovie.releaseDate = movie.release_date;
-        thisMovie.note = movie.overview;
-        thisMovie.genre = ''
-        thisMovie.authors = ''
-        thisMovie.type = 'Movie'
+        item.externalId = element.id
+        item.title = element.original_title;
+        item.releaseDate = element.release_date;
+        item.note = element.overview;
+        item.genre = ''
+        item.authors = ''
+        item.type = 'Movie'
+        item.authors = data1?.credits?.crew[0]?.original_name
+        item.genre = data1?.genres[0]?.name
 
-        if (movie.poster_path != null) {
-            thisMovie.img = `https://image.tmdb.org/t/p/w92/${movie["poster_path"]}`
-        } else { thisMovie.img = 'none' }
+        if (element.poster_path != null) {
+            item.img = `https://image.tmdb.org/t/p/w92/${data1["poster_path"]}`
+        } else { item.img = 'none' }
 
-        return (thisMovie)
+        return (item)
     },
 }

@@ -1,3 +1,5 @@
+import { useSearchResults } from "../stores/useSearchResultStore";
+
 export const gb = {
 
     options: {
@@ -8,35 +10,35 @@ export const gb = {
     },
     type: 'Book',
 
-    async search(query) {
-        let arr = []
-
-        await fetch(`gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`, this.options)
+    search(query) {
+        const search = useSearchResults()
+        fetch(`gb/v1/volumes?q=${encodeURI(query)}&key=AIzaSyATExARtYho9ib0B_uCuN_vmS7jbA7CoBg`, this.options)
             .then((res) => res.json())
             .then((data) => {
-                data.items.map(element => {
-                    arr.push(this.toObj(element))
+                data.items.forEach(element => {
+                    let item = this.toObj(element)
+                    console.log(element)
+                    search.addResult(item)
                 });
             })
             .catch((err) => console.error("error:" + err))
-        return arr
     },
 
-    toObj(book) {
-        let thisBook = {}
-        thisBook.externalId = book.id
-        thisBook.title = book.volumeInfo.title;
-        thisBook.releaseDate = book.volumeInfo.publishedDate;
-        thisBook.note = book.volumeInfo.description;
+    toObj(element) {
+        let item = {}
+        item.externalId = element.id
+        item.title = element.volumeInfo.title;
+        item.releaseDate = element.volumeInfo.publishedDate;
+        item.note = element.volumeInfo.description;
 
-        if (book.volumeInfo.authors != undefined) {
-            thisBook.authors = book.volumeInfo.authors.join(', ')
-        } else { thisBook.authors = book.volumeInfo.publisher }
-        thisBook.type = 'Book'
-        book.volumeInfo.imageLinks != undefined
-            ? (thisBook.img = book.volumeInfo.imageLinks.thumbnail)
-            : (thisBook.img = "none");
+        if (element.volumeInfo.authors != undefined) {
+            item.authors = element.volumeInfo.authors.join(', ')
+        } else { item.authors = element.volumeInfo.publisher }
+        item.type = 'Book'
+        element.volumeInfo.imageLinks != undefined
+            ? (item.img = element.volumeInfo.imageLinks.thumbnail)
+            : (item.img = "none");
 
-        return thisBook
+        return item
     },
 }

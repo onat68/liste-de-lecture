@@ -12,7 +12,7 @@ export const useSearchResults = defineStore('useSearchResults', {
     }),
 
     getters: {
-        getResults: state => { return state.results.flat() },
+        getResults: state => { return state.results },
         getAlbums: state => { return state.results.flat().filter(item => item.type == 'Album').items },
         getBooks: state => { return state.results.flat().filter(item => item.type == 'Book').items },
         getMovies: state => { return state.results.flat().filter(item => item.type == 'Movie').items },
@@ -27,12 +27,14 @@ export const useSearchResults = defineStore('useSearchResults', {
             this.providers.forEach(async provider => {
 
                 if (provider.type == type || type == 'All') {
-                    console.log(type)
-                    this.results.push(
-                        await provider.search(query)
+                    this.results.concat(
+                        provider.search(query)
                     )
                 }
             })
+        },
+        addResult(item) {
+            this.results.push(item)
         },
         stopSearching() {
             setTimeout(this.searching = false)
