@@ -22,6 +22,7 @@ const img = ref(data.img)
 const type = ref(data.type)
 const cardId = ref(data._id)
 const albumUrl = ref(data.albumUrl)
+const externalId = ref(data.externalId)
 
 provide('albumUrl', albumUrl)
 
@@ -53,7 +54,7 @@ function addItem() {
   <div
     :id="cardId"
     :class="typeStyles.imageH"
-    class="CardElement  text-offBlck w-full bg-white rounded-s5 shadow flex-row justify-center items-start inline-flex"
+    class="CardElement text-offBlck w-full bg-white rounded-s5 shadow flex-row justify-center items-start inline-flex"
   >
     <section class="ImgWrapper w-fit h-fit flex grow-0 shrink-0" v-if="img != 'none' || undefined">
       <img
@@ -68,7 +69,8 @@ function addItem() {
       class="cardBody font-display h-full grow shrink self-stretch pl-1 pr-2 lg:pl-2 lg:pr-4 pt-1 pb-2 rounded-s5 flex-col justify-between items-start inline-flex gap-0.5"
     >
       <infosSection :data="props.data" :typeStyles="typeStyles"></infosSection>
-      <streamingSection v-if="type == 'Album'" :albumUrl="albumUrl"> </streamingSection>
+      <streamingSection v-if="type == 'Album'" :albumUrl="albumUrl" :externalId="externalId">
+      </streamingSection>
       <overviewSection v-if="type != 'Album'" :note="note"></overviewSection>
     </section>
     <AddButton v-if="search.getSearching" @click="addItem"></AddButton>
