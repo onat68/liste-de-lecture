@@ -11,11 +11,13 @@ function onEnter(el, done) {
     el,
     {
       opacity: 0,
-      translateY: -window.innerHeight
+      translateY: -window.innerHeight,
+      tranlateZ: '20px'
     },
     {
       opacity: 1,
       translateY: 0,
+      translateZ:0,
       ease: 'elastic.out(0.1, 0.5)',
       duration: 2,
       delay: el.dataset.index * 0.25,

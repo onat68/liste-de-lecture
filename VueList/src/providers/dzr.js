@@ -7,21 +7,21 @@ export const dzr = {
     },
     type: 'Album',
 
-    async search(query) {
+     search(query) {
         let arr = []
-        await fetch(`dzr/search/album?q=${query}`, this.options)
+         fetch(`dzr/search/album?q=${query}`, this.options)
             .then((res) => res.json())
             .then((data) => {
-                data.data.forEach(element => {
+                data.data.forEach( element => {
                     let item = this.toObj(element)
 
-                    fetch(`dzr/genre/${element.genre_id}`, this.options)
+                     fetch(`dzr/genre/${element.genre_id}`, this.options)
                         .then((res) => res.json())
                         .then((data) => {
                             item.genre = data.name
+                            arr.push(item)
                         })
                         .catch((err) => console.error("error:" + err))
-                    arr.push(item)
                 });
             })
             .catch((err) => console.error("error:" + err))

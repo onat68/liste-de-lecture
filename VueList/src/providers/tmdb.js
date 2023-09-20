@@ -10,10 +10,10 @@ export const tmdb = {
     },
     type: 'Movie',
 
-    async search(query) {
+     search(query) {
         let arr = []
 
-        await fetch(`tmdb/search/movie?query=${encodeURI(query)}`, this.options)
+         fetch(`tmdb/search/movie?query=${encodeURI(query)}`, this.options)
             .then((res) => res.json())
             .then((data) => {
                 data.results.forEach(element => {
@@ -23,9 +23,9 @@ export const tmdb = {
                         .then((data1) => {
                             item.authors = data1?.credits?.crew[0]?.original_name
                             item.genre = data1?.genres[0]?.name
+                            arr.push(item)
                         })
                         .catch((err) => console.error("error:" + err))
-                    arr.push(item)
                 });
 
             })
