@@ -11,8 +11,9 @@ export const typePicker = reactive({
     },
 
     setType(type) {
-        this.opened = false
         this.currentType = type
+        this.opened = false
+
     },
 
 

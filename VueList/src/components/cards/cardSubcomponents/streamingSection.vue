@@ -16,7 +16,7 @@ const player = ref(false)
 </script>
 <template>
   <section
-    class="streamingServicesWrapper h-full flex items-end content-end gap-1 self-stretch wrap"
+    class="streamingServicesWrapper h-full flex items-end justify-end gap-1 self-stretch wrap"
   >
     <MusicButton :brand="userDefStreamingService" :albumUrl="albumUrl"></MusicButton>
     <iframe

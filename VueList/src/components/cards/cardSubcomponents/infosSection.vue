@@ -15,25 +15,29 @@ const type = ref(props.data.type)
 
 <template>
   <section
-    class="MainInfoWrapper h-min flex-col self-stretch justify-between items-baseline inline-flex"
+    class="MainInfoWrapper h-min flex-col self-stretch justify-between items-baseline flex"
   >
     <div
-      class="TitleTypeWrapper text-base sm:text-base md:text-lg lg:text-xl self-stretch h-min gap-1 flex-row justify-between items-start flex"
+      class="TitleTypeWrapper text-base leading-tight sm:text-base md:text-md lg:text-lg self-stretch h-min gap-1 flex-row justify-between items-start flex"
     >
-      <h3 class="Title self-stretch font-display font-bold leading-tight line-clamp-1">
+      <h3 class="Title self-stretch font-display font-bold line-clamp-1">
         {{ title }}
       </h3>
-      <p :class="typeStyles.color" class="Type font-medium leading-tight">
+      <p :class="typeStyles.color" class="Type font-body font-light">
         {{ type }}
       </p>
     </div>
     <div
-      class="AuthorInfosWrapper w-full text-xs sm:text-xs md:text-base lg:text-md leading-4 h-min font-medium flex flex-row justify-between gap-2 gap-y-0"
+      class="AuthorInfosWrapper w-full text-sm sm:text-base md:text-md lg:text-md leading-tight  h-min flex flex-row justify-between gap-2 gap-y-0"
     >
-      <h4 class="Author h-min line-clamp-1">{{ authors }}</h4>
-      <section class="InfosWrapper h-min flex-row gap-0.5 inline-flex self-end">
+      <h4 class="Author h-min line-clamp-1 font-medium ">
+        {{ authors }}
+      </h4>
+      <section
+        class="InfosWrapper h-min flex-row gap-0.5font-normal inline-flex self-end text-xs sm:text-sm md:text-base lg:text-md"
+      >
         <p class="Genre">{{ genre }}</p>
-        <p v-if="(type != 'Album' ) && (genre != undefined)" class="dash">/</p>
+        <p v-if="type != 'Album' && genre != undefined" class="dash">/</p>
         <p v-if="releaseDate != undefined" class="ReleaseYear">
           {{ releaseDate.slice(0, 4) }}
         </p>

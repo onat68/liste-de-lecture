@@ -2,8 +2,8 @@ export const types = [
 
     {
         typeName: 'All',
-        typeColor: 'bg-rainbow hover:text-rainbow hover:border-none',
-        focusColor: 'focus-visible:border-grey-500'
+        typeColor: 'bg-lghtGry hover:text-lghtGry hover:border-lghtGry',
+        focusColor: 'focus-visible:border-transparent'
     },
     {
         typeName: 'Album',

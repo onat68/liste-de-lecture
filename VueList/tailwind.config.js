@@ -1,4 +1,9 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
+
+
+
 // eslint-disable-next-line no-undef
 module.exports = {
   content: [
@@ -20,13 +25,21 @@ module.exports = {
       height: {
         iphone8: '665px'
       },
+      fontSize: {
+        xs: '0.6rem',
+        sm: '0.75rem',
+        base: '0.875rem',
+        md: '1.25rem',
+        lg: '1.55rem',
+        xl: '3rem',
+      },
       backgroundImage: {
         custom1: 'linear-gradient(179.18deg, #1B0B27 0.7 %, #007EA7 47.43 %, #1B0B27 99.3 %)',
-        mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 0) 100%)',
-        mask2: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 75%,  rgba(0, 0, 0, 1) 100%)',
+        mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0) 98%,  rgba(0, 0, 0, 0.2) 100%)',
+        mask2: 'linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%,rgba(0, 0, 0, 0) 2%, rgba(0, 0, 0, 0) 66%,rgba(0, 0, 0, 0.2) 75%,  rgba(0, 0, 0, 0.6) 100%)',
         opgr1: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%)',
         srRes: 'linear-gradient(134deg, #001E6C 0%, #FFF 100%);',
-        rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
+        lghtGry: '#98817B',
       },
       borderRadius: {
         s5: '5px'
@@ -38,7 +51,7 @@ module.exports = {
         drkRd: '#9D0026',
         mdBl: '#007399',
         brOrng: '#ff8811',
-        rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
+        lghtGry: '#98817B',
       },
       borderColor: {
         brGr: '#C2E000',
@@ -47,7 +60,7 @@ module.exports = {
         drkRd: '#9D0026',
         mdBl: '#007399',
         brOrng: '#ff8811',
-        rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
+        lghtGry: '#98817B',
 
       },
       outlineColor: {
@@ -65,7 +78,7 @@ module.exports = {
         drkRd: '#9D0026',
         mdBl: '#007399',
         brOrng: '#ff8811',
-        rainbow: 'linear-gradient(135deg, rgba(255,113,0,1) 0%, rgba(255,194,0,1) 20%, rgba(194,224,0,1) 40%, rgba(0,115,153,1) 60%, rgba(151,71,255,1) 80%, rgba(157,0,38,1) 100%)',
+        lghtGry: '#98817B',
       },
       textColor: {
         brGr: '#C2E000',
@@ -74,6 +87,7 @@ module.exports = {
         drkRd: '#9D0026',
         mdBl: '#007399',
         brOrng: '#ff8811',
+        lghtGry: '#98817B',
       },
       animation: {
         'softPulse': 'pulse3D 2s 1s 1 normal forwards',
@@ -102,6 +116,7 @@ module.exports = {
   },
   plugins: [
     require('tailwind-scrollbar'),
+
   ]
 }
 
