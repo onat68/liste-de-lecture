@@ -7,8 +7,9 @@ import infosSection from './cardSubcomponents/infosSection.vue'
 import { ref } from 'vue'
 import { provide } from 'vue'
 import { useSearchResults } from '../../stores/useSearchResultStore'
-import { list } from '../../list'
+import { useDB } from '../../stores/useDBStore'
 
+const db = useDB()
 const props = defineProps({
   data: Object,
   target: String
@@ -44,7 +45,7 @@ function assignTypeStyles(type) {
 const typeStyles = assignTypeStyles(type.value)
 
 function addItem() {
-  list.sendData(data)
+  db.sendData(data)
 
   setTimeout(search.stopSearching(), 800)
 }
@@ -58,7 +59,7 @@ function addItem() {
   >
     <section class="ImgWrapper w-fit h-fit flex grow-0 shrink-0" v-if="img != 'none' || undefined">
       <img
-        class="Image aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin w-16  md:w-24"
+        class="Image aspect-auto rounded-tl-s5 rounded-bl-s5 text-xs text-gray-400 font-thin w-16 md:w-24"
         :class="typeStyles.imageH"
         :src="img"
         alt="A poster, book or album cover or similar image related to the element displayed in the card"

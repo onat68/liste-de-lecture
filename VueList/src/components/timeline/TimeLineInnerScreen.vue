@@ -1,10 +1,9 @@
 <script setup>
 import gsap from 'gsap'
-import itemCard from '../cards/itemCard.vue';
+import itemCard from '../cards/itemCard.vue'
 import { ref } from 'vue'
-import { list } from '../../list' 
-
-list.getData()
+import { useDB } from '../../stores/useDBStore'
+const db = useDB()
 
 function onEnter(el, done) {
   gsap.fromTo(
@@ -17,7 +16,7 @@ function onEnter(el, done) {
     {
       opacity: 1,
       translateY: 0,
-      translateZ:0,
+      translateZ: 0,
       ease: 'elastic.out(0.1, 0.5)',
       duration: 2,
       delay: el.dataset.index * 0.25,
@@ -27,10 +26,11 @@ function onEnter(el, done) {
 }
 
 const target = ref('timeline')
+db.fetchData()
 </script>
 <template>
   <div
-    class="Innerscreen w-full relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip "
+    class="Innerscreen w-full relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip"
   >
     <div class="Line w-fit h-full py-1">
       <div class="w-0.5 h-full bg-opgr1"></div>
@@ -41,9 +41,9 @@ const target = ref('timeline')
     <div
       class="CardWrapper flex-col-reverse justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scrollbar-none"
     >
-      <TransitionGroup @enter="onEnter" v-if="list.responseData != undefined"
+      <TransitionGroup @enter="onEnter"
         ><itemCard
-          v-for="(data, index) in list.responseData"
+          v-for="(data, index) in db.getData"
           :key="data._id"
           :data="data"
           :target="target"

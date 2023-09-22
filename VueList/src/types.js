@@ -3,7 +3,7 @@ export const types = [
     {
         typeName: 'All',
         typeColor: 'bg-lghtGry hover:text-lghtGry hover:border-lghtGry',
-        focusColor: 'focus-visible:border-transparent'
+        focusColor: 'focus-visible:border-transparent',
     },
     {
         typeName: 'Album',
