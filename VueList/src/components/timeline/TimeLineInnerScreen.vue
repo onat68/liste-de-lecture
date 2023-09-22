@@ -30,7 +30,7 @@ db.fetchData()
 </script>
 <template>
   <div
-    class="Innerscreen w-full relative rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-2 flex overflow-clip"
+    class="Innerscreen w-full relative rounded-s5 self-stretch grow shrink basis-0 px-2 bg-gradient-to-b from-gray-900 via-sky-700 to-gray-900 shadow-inner justify-center items-center gap-1.5 flex overflow-clip"
   >
     <div class="Line w-fit h-full py-1">
       <div class="w-0.5 h-full bg-opgr1"></div>
@@ -39,7 +39,7 @@ db.fetchData()
       class="absolute bg-mask1 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"
     ></div>
     <div
-      class="CardWrapper flex-col-reverse justify-start items-center gap-2 h-full inline-flex overflow-y-scroll scrollbar-none"
+      class="CardWrapper flex-col-reverse justify-start items-center gap-2 h-full py-2 inline-flex overflow-y-scroll scrollbar-none"
     >
       <TransitionGroup @enter="onEnter"
         ><itemCard

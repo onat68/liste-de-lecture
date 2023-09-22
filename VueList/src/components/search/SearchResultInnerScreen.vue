@@ -30,13 +30,13 @@ import { ref } from 'vue'
 
 <template>
   <div
-    class="Innerscreen relative w-full rounded-s5 self-stretch grow shrink basis-0 p-2 bg-srRes shadow-inner justify-center items-center gap-2 flex overflow-clip"
+    class="Innerscreen relative w-full rounded-s5 self-stretch grow shrink basis-0 px-2 bg-srRes shadow-inner justify-center items-center gap-2 flex overflow-clip"
   >
     <div
       class="absolute bg-mask2 pointer-events-none bottom-0 left-0 right-0 top-0 h-full w-full z-40 rounded-s5 bg-clip-content"
     ></div>
     <div
-      class="CardWrapper flex-col justify-start items-center gap-2 h-full w-full pb-20 inline-flex overflow-y-scroll scrollbar-none"
+      class="CardWrapper flex-col justify-start items-center gap-2 h-full w-full pb-40 pt-2 inline-flex overflow-y-scroll scrollbar-none"
     >
       <TransitionGroup @enter="onEnter"
         ><itemCard
