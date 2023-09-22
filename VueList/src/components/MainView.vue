@@ -24,7 +24,7 @@ watch(search.searching, toggleLoader())
     class="font-body Vuetimeline w-full h-full rounded-md flex-col justify-end items-center inline-flex border shrink"
   >
     <div
-      class="Screen w-full h-full p-1.5 md:p-2 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden"
+      class="Screen w-full h-full p-1.5 md:p-2 pb-0 md:pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden"
     >
       <Transition name="screen">
         <TimeLineInnerScreen v-if="!search.getSearching && !loading"></TimeLineInnerScreen>
