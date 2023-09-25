@@ -12,7 +12,9 @@ export const useSearchResults = defineStore('useSearchResults', {
     }),
 
     getters: {
-        getResults: state => { return state.results },
+        getResults: state => {
+            return state.results
+        },
         getSearching: state => { return state.searching }
     },
 

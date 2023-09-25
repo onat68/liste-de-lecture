@@ -62,7 +62,7 @@ function setType(type) {
 <style>
 .div-enter-active,
 .div-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 }
 .div-enter-from,
 .div-leave-to {
@@ -71,7 +71,7 @@ function setType(type) {
 }
 .divrev-enter-active,
 .divrev-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 }
 .divrev-enter-from,
 .divrev-leave-to {

@@ -33,7 +33,7 @@ if (brand == 'YouTube') {
   >
     <img
       class="Logo aspect-auto"
-      src="../../../assets/Brand logos/Logotype-Deezer/Logotype/DIGITAL RGB/SVG/Deezer_Logo_RVB_MonoWhite.svg"
+      src="../../../assets/brandLogos/Logotype-Deezer/Logotype/DIGITAL RGB/SVG/Deezer_Logo_RVB_MonoWhite.svg"
       :alt="alt"
     />
   </button>

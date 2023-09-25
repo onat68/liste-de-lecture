@@ -7,7 +7,6 @@ import { useSearchResults } from '../stores/useSearchResultStore'
 import { ref, watch } from 'vue'
 const search = useSearchResults()
 const loading = ref()
-toggleLoader()
 
 function toggleLoader() {
   loading.value = true
@@ -15,8 +14,7 @@ function toggleLoader() {
     loading.value = false
   }, 1000)
 }
-
-watch(search.searching, toggleLoader())
+toggleLoader()
 </script>
 
 <template>
@@ -26,14 +24,13 @@ watch(search.searching, toggleLoader())
     <div
       class="Screen w-full h-full p-1.5 md:p-2 pb-0 md:pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden"
     >
-      <Transition name="screen">
+      <Transition mode="out-in">
         <TimeLineInnerScreen v-if="!search.getSearching && !loading"></TimeLineInnerScreen>
         <SearchResultInnerScreen v-else-if="search.getSearching && !loading">
         </SearchResultInnerScreen
-        ><loadingScreen v-else-if="loading"></loadingScreen
       ></Transition>
+      <loadingScreen v-if="loading"></loadingScreen>
     </div>
     <SearchBar></SearchBar>
   </div>
 </template>
-<style></style>

@@ -1,5 +1,11 @@
 <script setup>
 import gsap from 'gsap'
+import { useSearchResults } from '../../stores/useSearchResultStore'
+import { ref } from 'vue'
+
+import itemCard from '../cards/itemCard.vue'
+const search = useSearchResults()
+const target = ref('timeline')
 
 function onEnter(el, done) {
   gsap.fromTo(
@@ -20,12 +26,7 @@ function onEnter(el, done) {
 }
 
 
-import itemCard from '../cards/itemCard.vue'
-import { useSearchResults } from '../../stores/useSearchResultStore'
 
-const search = useSearchResults()
-const target = ref('timeline')
-import { ref } from 'vue'
 </script>
 
 <template>

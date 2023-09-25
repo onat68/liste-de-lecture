@@ -2,7 +2,7 @@
 <template>
   <div
     id="loading-screen"
-    class="Innerscreen w-full relative shadow-inner rounded-s5 self-stretch grow shrink basis-0 p-2 bg-gray-50 justify-center items-center gap-1.5 flex overflow-clip"
+    class="Innerscreen w-full h-full  shadow-inner rounded-s5 self-stretch bg-gray-50 justify-center items-center flex"
   >
     <span class="loader"></span>
   </div>
