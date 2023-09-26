@@ -52,7 +52,7 @@ function setType(type) {
     ></transition>
     <label for="searchField"></label
     ><searchField
-      id="searchField"
+      :id="'searchField'"
       v-model="query"
       :class="typePicker.currentType.focusColor"
     ></searchField>
