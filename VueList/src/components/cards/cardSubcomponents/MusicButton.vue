@@ -1,9 +1,8 @@
 <script setup>
+import { inject } from 'vue'
 const props = defineProps({
   brand: String
 })
-
-import { inject } from 'vue'
 
 const brand = props.brand
 const albumUrl = inject('albumUrl').value
@@ -31,10 +30,6 @@ if (brand == 'YouTube') {
     class="Button relative transition duration-150 hover:scale-103 hover:shadow-md hover:shadow-gray-400 w-12 md:w-16 h-5 md:h-8 p-1 rounded-[5px] shadow flex-col justify-center items-center gap-2.5 inline-flex"
     @click="openLink"
   >
-    <img
-      class="Logo aspect-auto"
-      src="../../../assets/brandLogos/Logotype-Deezer/Logotype/DIGITAL RGB/SVG/Deezer_Logo_RVB_MonoWhite.svg"
-      :alt="alt"
-    />
+    <img class="Logo aspect-auto" src="../../../assets/brandLogos/deezerLogo.svg" :alt="alt" />
   </button>
 </template>

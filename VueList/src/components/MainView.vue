@@ -4,7 +4,8 @@ import SearchResultInnerScreen from './search/SearchResultInnerScreen.vue'
 import SearchBar from './search/SearchBar.vue'
 import loadingScreen from './loadingScreen.vue'
 import { useSearchResults } from '../stores/useSearchResultStore'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
+
 const search = useSearchResults()
 const loading = ref()
 
