@@ -5,7 +5,7 @@ import overviewSection from './cardSubcomponents/overviewSection.vue'
 import infosSection from './cardSubcomponents/infosSection.vue'
 
 import { ref } from 'vue'
-import { provide } from 'vue'
+// import { provide } from 'vue'
 import { useSearchResults } from '../../stores/useSearchResultStore'
 import { useDB } from '../../stores/useDBStore'
 

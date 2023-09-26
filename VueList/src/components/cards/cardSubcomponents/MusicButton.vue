@@ -11,7 +11,7 @@ function openLink() {
   console.log(albumUrl)
   window.open(albumUrl, '_blank')
 }
-const alt = `Brand logo for ${brand} indicating a button linking to their music streaming service`
+const alt = `Logo of ${brand}`
 
 const brandStyle = {}
 
@@ -30,6 +30,6 @@ if (brand == 'YouTube') {
     class="Button relative transition duration-150 hover:scale-103 hover:shadow-md hover:shadow-gray-400 w-12 md:w-16 h-5 md:h-8 p-1 rounded-[5px] shadow flex-col justify-center items-center gap-2.5 inline-flex"
     @click="openLink"
   >
-    <img class="Logo aspect-auto" src="../../../assets/brandLogos/deezerLogo.svg" :alt="alt" />
+    <img class="Logo aspect-auto" src="../../../assets/brandLogos/deezerLogo.svg" :alt="alt"/>
   </button>
 </template>
