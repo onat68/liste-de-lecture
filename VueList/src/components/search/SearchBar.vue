@@ -50,7 +50,7 @@ function setType(type) {
     <transition name="div">
       <CancelButton :class="'relative'" v-if="search.getSearching"></CancelButton
     ></transition>
-    <label for="searchField"></label
+    <label for="searchField" class="absolute invisible pointer-events-none">Search field</label
     ><searchField
       :id="'searchField'"
       v-model="query"

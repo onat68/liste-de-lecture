@@ -1,5 +1,5 @@
-import { tmdbToken } from '../private/encryptBearerTokens.js'
 import { useSearchResults } from '../stores/useSearchResultStore.js'
+const tmdbToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5M2ViMWFhM2EzNDZkNTg5MWFkZDFjMWQ4MzM2ZGQ2NyIsInN1YiI6IjY0YzkwNDhiODlmNzQ5MDBhZTBiZmI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WY3acLejoDB0otuZHhtAFelDy8ONHz9zJs_3pr1DHSk" 
 
 export const tmdb = {
     options: {
