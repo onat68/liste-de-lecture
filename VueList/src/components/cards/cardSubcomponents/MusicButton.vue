@@ -25,7 +25,7 @@ if (brand == 'YouTube') {
 </script>
 
 <template>
-  <button
+  <button aria-label="LinkToMusicServiceButton"
     :class="brandStyle.bg"
     class="Button relative transition duration-150 hover:scale-103 hover:shadow-md hover:shadow-gray-400 w-12 md:w-16 h-5 md:h-8 p-1 rounded-[5px] shadow flex-col justify-center items-center gap-2.5 inline-flex"
     @click="openLink"

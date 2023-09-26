@@ -47,8 +47,15 @@ function setType(type) {
         ></SearchTypeButton>
       </div>
     </transition>
-    <transition name="div"> <CancelButton :class="'relative'" v-if="search.getSearching"></CancelButton></transition>
-    <searchField v-model="query" :class="typePicker.currentType.focusColor"></searchField>
+    <transition name="div">
+      <CancelButton :class="'relative'" v-if="search.getSearching"></CancelButton
+    ></transition>
+    <label for="searchField"></label
+    ><searchField
+      id="searchField"
+      v-model="query"
+      :class="typePicker.currentType.focusColor"
+    ></searchField>
     <transition name="divrev">
       <SearchButton
         v-if="!typePicker.opened"

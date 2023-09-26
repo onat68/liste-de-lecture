@@ -40,11 +40,10 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true
+        enabled: false
       },
-
       manifest: {
-        includeAssets: ["assets/*", "deezerLogo.svg", "logo192.png","logo512.png"],
+        includeAssets: ["assets/*", "deezerLogo.svg"],
         name: 'RList',
         short_name: 'RList',
         start_url: '/',
@@ -52,12 +51,12 @@ export default defineConfig({
         theme_color: '#000000',
         icons: [
           {
-            src: './src/assets/Logo/logo192.png',
+            src: './assets/Logo/logo192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: './src/assets/Logo/logo512.png',
+            src: './assets/Logo/logo512.png',
             sizes: '512x512',
             type: 'image/png'
           }]

@@ -4,7 +4,7 @@ const search = useSearchResults()
 </script>
 
 <template>
-  <button
+  <button name="CancelButton"
     class="Button flex grow text-md text-center font-medium bg-brOrng leading-tight px-2 w-8 h-12 md:w-10 md:h-16 box-border fill-white hover:bg-white hover:border-brOrng hover:fill-brOrng hover:-translate-y-1  hover:shadow-md hover:border-2 rounded-s5 shrink-0 justify-center items-center"
     @click="search.stopSearching()"
   >
