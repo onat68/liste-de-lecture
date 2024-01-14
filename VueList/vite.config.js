@@ -43,7 +43,7 @@ export default defineConfig({
         enabled: false
       },
       manifest: {
-        includeAssets: ["assets/*", "deezerLogo.svg"],
+        includeAssets: ["assets/*", "deezerLogo.svg", "deezerLogoBlack.svg"],
         name: 'RList',
         short_name: 'RList',
         start_url: '/',

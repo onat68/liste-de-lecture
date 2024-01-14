@@ -18,7 +18,7 @@ export const dzr = {
                     fetch(`dzr/genre/${element.genre_id}`, this.options)
                         .then((res) => res.json())
                         .then((data1) => {
-                            let item = this.toObj(element, data1)
+                            const item = this.toObj(element, data1)
                             search.addResult(item)
                         })
                         .catch((err) => console.error("error:" + err))
@@ -30,7 +30,7 @@ export const dzr = {
     toObj(element, data1) {
         let item = {}
 
-        item.externalId = element.id
+        item.externalId = element.id.toString()
         item.title = element.title
         item.albumUrl = element.link
         item.img = element.cover_medium

@@ -35,8 +35,8 @@ module.exports = {
       },
       backgroundImage: {
         custom1: 'linear-gradient(179.18deg, #1B0B27 0.7 %, #007EA7 47.43 %, #1B0B27 99.3 %)',
-        mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0) 98%,  rgba(0, 0, 0, 0.2) 100%)',
-        mask2: 'linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%,rgba(0, 0, 0, 0) 2%, rgba(0, 0, 0, 0) 66%,rgba(0, 0, 0, 0.2) 75%,  rgba(0, 0, 0, 0.6) 100%)',
+        mask1: 'linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 15%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 98%,  rgba(0, 0, 0, 0.2) 100%)',
+        mask2: 'linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%,rgba(0, 0, 0, 0) 2%, rgba(0, 0, 0, 0) 75%,rgba(0, 0, 0, 0.1) 85%,  rgba(0, 0, 0, 0.2) 100%)',
         opgr1: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%)',
         srRes: 'linear-gradient(134deg, #001E6C 0%, #FFF 100%);',
         lghtGry: '#98817B',
@@ -52,6 +52,7 @@ module.exports = {
         mdBl: '#007399',
         brOrng: '#ff8811',
         lghtGry: '#98817B',
+        dzrPnk: '#9333E8'
       },
       borderColor: {
         brGr: '#C2E000',
@@ -61,7 +62,7 @@ module.exports = {
         mdBl: '#007399',
         brOrng: '#ff8811',
         lghtGry: '#98817B',
-
+        dzrPnk: '#9333E8'
       },
       outlineColor: {
         brGr: '#C2E000',
@@ -79,6 +80,7 @@ module.exports = {
         mdBl: '#007399',
         brOrng: '#ff8811',
         lghtGry: '#98817B',
+        dzrPnk: '#9333E8'
       },
       textColor: {
         brGr: '#C2E000',
@@ -88,6 +90,7 @@ module.exports = {
         mdBl: '#007399',
         brOrng: '#ff8811',
         lghtGry: '#98817B',
+        dzrPnk: '#9333E8'
       },
       animation: {
         'softPulse': 'pulse3D 2s 1s 1 normal forwards',

@@ -8,6 +8,7 @@ export const useSearchResults = defineStore('useSearchResults', {
         results: [],
         searching: false,
         providers: [dzr, gb, tmdb],
+        query: '',
         pickedType: '',
     }),
 
@@ -19,21 +20,25 @@ export const useSearchResults = defineStore('useSearchResults', {
     },
 
     actions: {
-        async search(type, query) {
+        async search(type) {
             this.results = []
-            this.searching = true
             this.pickedType = type
-            this.providers.forEach(provider => {
+            this.providers.forEach(async provider => {
                 if (provider.type == type || type == 'All') {
-                    provider.search(query)
+                    const res = await fetch(`api/${type}/${this.query}`)
+                    if(res.ok()) {
+                        const data = res.json()
+                        this.results.push(data)
+                    }
                 }
             })
+            this.router.replace({ name: 'search' })
         },
         addResult(item) {
             this.results.push(item)
         },
         stopSearching() {
-            setTimeout(this.searching = false)
+            setTimeout(() => this.router.replace('/timeline'))
         }
     }
 })

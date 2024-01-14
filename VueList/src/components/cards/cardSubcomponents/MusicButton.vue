@@ -1,5 +1,7 @@
 <script setup>
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
+import dzrWhite from '../../../assets/brandLogos/deezerLogo.svg'
+import dzrPink from '../../../assets/brandLogos/deezerLogoPink.svg'
 const props = defineProps({
   brand: String
 })
@@ -11,25 +13,35 @@ function openLink() {
   console.log(albumUrl)
   window.open(albumUrl, '_blank')
 }
+
 const alt = `Logo of ${brand}`
 
 const brandStyle = {}
-
 if (brand == 'YouTube') {
+  brandStyle.logo = ref('')
   brandStyle.bg = '#F00'
 } else if (brand == 'Deezer') {
-  brandStyle.bg = 'bg-gradient-to-r from-yellow-400 via-fuchsia-800 to-blue-800'
+  brandStyle.logo = ref(dzrWhite)
+  brandStyle.bg = 'bg-dzrPnk'
 } else if (brand == 'Spotify') {
+  brandStyle.logo = ref('')
   brandStyle.bg = '#1DB954'
 }
+
+function changeLogo(event) {
+  if (event.type == 'mouseenter') {
+    brandStyle.logo.value = dzrPink
+  } else if(event.type == 'mouseleave') {  
+    brandStyle.logo.value = dzrWhite
+  }
+}
+
 </script>
 
 <template>
-  <button aria-label="LinkToMusicServiceButton"
-    :class="brandStyle.bg"
-    class="Button relative transition duration-150 hover:scale-103 hover:shadow-md hover:shadow-gray-400 w-12 md:w-16 h-5 md:h-8 p-1 rounded-[5px] shadow flex-col justify-center items-center gap-2.5 inline-flex"
-    @click="openLink"
-  >
-    <img class="Logo aspect-auto" src="../../../assets/brandLogos/deezerLogo.svg" :alt="alt"/>
+  <button aria-label="LinkToMusicServiceButton" :class="brandStyle.bg"
+    class="Button relative transition duration-150 hover:bg-white hover:border-dzrPnk hover:border-[1px]  w-12 md:w-14 h-5 md:h-6 p-1 rounded-[5px] flex-col justify-center items-center gap-2.5 inline-flex"
+    @click="openLink" @mouseenter="changeLogo" @mouseleave="changeLogo">
+    <img class="Logo aspect-auto" :src=brandStyle.logo.value :alt="alt" />
   </button>
 </template>

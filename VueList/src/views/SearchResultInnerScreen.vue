@@ -1,9 +1,9 @@
 <script setup>
 import gsap from 'gsap'
-import { useSearchResults } from '../../stores/useSearchResultStore'
+import { useSearchResults } from '../stores/useSearchResultStore'
 import { ref } from 'vue'
 
-import itemCard from '../cards/itemCard.vue'
+import itemCard from '../components/cards/itemCard.vue'
 const search = useSearchResults()
 const target = ref('timeline')
 

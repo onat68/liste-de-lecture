@@ -5,7 +5,7 @@ import overviewSection from './cardSubcomponents/overviewSection.vue'
 import infosSection from './cardSubcomponents/infosSection.vue'
 
 import { ref } from 'vue'
-// import { provide } from 'vue'
+import { provide } from 'vue'
 import { useSearchResults } from '../../stores/useSearchResultStore'
 import { useDB } from '../../stores/useDBStore'
 
@@ -63,6 +63,7 @@ function addItem() {
         :class="typeStyles.imageH"
         :src="img"
         alt="A poster, book or album cover or similar image related to the element displayed in the card"
+        loading="lazy"
       />
     </section>
 

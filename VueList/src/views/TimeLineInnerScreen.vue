@@ -1,8 +1,8 @@
 <script setup>
 import gsap from 'gsap'
-import itemCard from '../cards/itemCard.vue'
+import itemCard from '../components/cards/itemCard.vue'
 import { ref } from 'vue'
-import { useDB } from '../../stores/useDBStore'
+import { useDB } from '../stores/useDBStore'
 const db = useDB()
 
 function onEnter(el, done) {
