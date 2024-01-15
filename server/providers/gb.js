@@ -8,11 +8,23 @@ const gb = {
     type: 'Book',
     key: process.env.GB_API_KEY,
 
-    bookUrl (query) {
-        return `https://www.googleapis.com/books/v1/volumes?q=${encodeURI(query)}&key=${this.key}`
+    bookUrl(query) {
+        console.log(this.key)
+        return `https://www.googleapis.com/books/v1/volumes?q=${encodeURI(query)}&maxResults=10&key=${this.key}`
     },
 
-    toObj (book) {
+    async find(query) {
+        const res1 = await fetch(this.bookUrl(query), this.options)
+        const books = await res1.json()
+        const items = []
+        for (const book of books?.items) {
+            const item = await this.toObj(book)
+            items.push(item)
+        }
+        return await items
+    },
+
+    toObj(book) {
         return {
             externalId: book.id,
             title: book.volumeInfo.title,
@@ -24,14 +36,9 @@ const gb = {
                 } else { return book.volumeInfo.publisher }
             },
             type: 'Book',
-            img: () => {
-                if (book.volumeInfo.imageLinks !== undefined) {
-                    return book.volumeInfo.imageLinks.thumbnail
-                } else {
-                    return 'none'
-                }
-            }
+            img: book?.volumeInfo?.imageLinks?.thumbnail
         }
     }
 }
+
 module.exports = gb
