@@ -41,7 +41,7 @@ function changeLogo (event) {
 
 <template>
   <button aria-label="LinkToMusicServiceButton" :class="brandStyle.bg"
-    class="Button relative transition duration-150 hover:bg-white hover:border-dzrPnk hover:border-[1px]  w-12 md:w-14 h-5 md:h-6 p-1 rounded-[5px] flex-col justify-center items-center gap-2.5 inline-flex"
+    class="Button relative transition duration-150 hover:bg-white hover:border-dzrPnk hover:border-[1px]  w-12 h-5 p-1 rounded-[5px] flex-col justify-center items-center gap-2.5 inline-flex"
     @click="openLink" @mouseenter="changeLogo" @mouseleave="changeLogo">
     <img class="Logo aspect-auto" :src=brandStyle.logo.value :alt="alt" />
   </button>

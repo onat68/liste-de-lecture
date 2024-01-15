@@ -14,12 +14,12 @@ function setType (type) {
 
 <template>
   <div
-    class="SearchBar font-display h-fit w-full p-1.5 md:p-2 bg-white rounded-[5px] justify-center items-center gap-1.5 md:gap-2 flex overflow-visible z-40">
+    class="SearchBar font-display h-fit w-full p-1.5 bg-white rounded-[5px] justify-center items-center gap-1.5 flex overflow-visible z-40">
     <transition name="div" mode="out-in">
       <div v-if="!search.pickerOpened" class="box-border w-fit relative">
         <SearchTypeButton :type="search.pickedType" :action="search.openPicker" :class="'relative'" />
       </div>
-      <div v-else-if="search.pickerOpened" class="box-border flex w-fit relative gap-1.5 md:gap-2">
+      <div v-else-if="search.pickerOpened" class="box-border flex w-fit relative gap-1.5">
         <SearchTypeButton v-for="(type, index) in search.unpickedTypes" :class="'relative'" :key="index" :type="type"
           @click="setType(type)" />
       </div>
