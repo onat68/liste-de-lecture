@@ -1,9 +1,10 @@
+/* eslint-disable eqeqeq */
 import { defineStore } from 'pinia'
 
 export const useDB = defineStore('useDB', {
 
     state: () => ({
-        responseData: {},
+        responseData: {}
     }),
 
     getters: {
@@ -11,11 +12,11 @@ export const useDB = defineStore('useDB', {
     },
 
     actions: {
-        fetchData() {
+        fetchData () {
             this.responseData = {}
             const xhr = new XMLHttpRequest()
 
-            xhr.open('GET', `db/all`)
+            xhr.open('GET', 'db/all')
             xhr.send()
             xhr.responseType = 'json'
             xhr.onload = () => {
@@ -28,7 +29,7 @@ export const useDB = defineStore('useDB', {
             }
         },
 
-        sendData(data) {
+        sendData (data) {
             const xhr = new XMLHttpRequest()
 
             let target
@@ -37,17 +38,17 @@ export const useDB = defineStore('useDB', {
             } else if (data.type == 'Movie') {
                 target = 'movies'
             } else if (data.type == 'Album') { target = 'albums' }
-            xhr.open("POST", `db/${target}`);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            const body = JSON.stringify(data);
+            xhr.open('POST', `db/${target}`)
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            const body = JSON.stringify(data)
             xhr.onload = () => {
                 if (xhr.readyState == 4 && xhr.status == 201) {
-                    console.log(JSON.parse(xhr.responseText));
+                    console.log(JSON.parse(xhr.responseText))
                 } else {
-                    console.log(`Error: ${xhr.status}`);
+                    console.log(`Error: ${xhr.status}`)
                 }
-            };
-            xhr.send(body);
+            }
+            xhr.send(body)
         }
     }
 })

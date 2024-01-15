@@ -1,44 +1,57 @@
+/* eslint-disable eqeqeq */
 import { defineStore } from 'pinia'
-import { dzr } from '../providers/dzr'
-import { gb } from '../providers/gb'
-import { tmdb } from '../providers/tmdb'
+import { types } from '../types'
 
 export const useSearchResults = defineStore('useSearchResults', {
     state: () => ({
+        albums: [],
+        books: [],
+        movies: [],
         results: [],
-        searching: false,
-        providers: [dzr, gb, tmdb],
         query: '',
-        pickedType: '',
+        pickedType: types[0],
+        pickerOpened: false
     }),
 
     getters: {
-        getResults: state => {
-            return state.results
-        },
-        getSearching: state => { return state.searching }
+        unpickedTypes: state => {
+            return types.filter(obj =>
+                obj != state.pickedType
+            )
+        }
     },
 
     actions: {
-        async search(type) {
-            this.results = []
-            this.pickedType = type
-            this.providers.forEach(async provider => {
-                if (provider.type == type || type == 'All') {
-                    const res = await fetch(`api/${type}/${this.query}`)
-                    if(res.ok()) {
-                        const data = res.json()
-                        this.results.push(data)
-                    }
-                }
-            })
+        async find () {
+            this.router.replace({ name: 'load' })
+            this.endSearch()
+            const res = await fetch(`ext/find/${this.pickedType.name}/${this.query}`)
             this.router.replace({ name: 'search' })
+            const data = await res.json()
+            console.log(await data)
+            this.albums = await data.albums
+            this.movies = await data.movies
+            this.books = await data.books
         },
-        addResult(item) {
-            this.results.push(item)
+        endSearch () {
+            this.albums = []
+            this.movies = []
+            this.books = []
         },
-        stopSearching() {
-            setTimeout(() => this.router.replace('/timeline'))
+
+        setQuery (val) {
+            this.query = val
+        },
+        openPicker () {
+            this.pickerOpened = true
+        },
+        closePicker () {
+            this.pickerOpened = false
+        },
+
+        setType (type) {
+            this.pickedType = type
+            this.pickerOpened = false
         }
     }
 })

@@ -1,39 +1,40 @@
+<!-- eslint-disable eqeqeq -->
 <script setup>
 import { inject, ref } from 'vue'
 import dzrWhite from '../../../assets/brandLogos/deezerLogo.svg'
 import dzrPink from '../../../assets/brandLogos/deezerLogoPink.svg'
 const props = defineProps({
-  brand: String
+    brand: String
 })
 
 const brand = props.brand
 const albumUrl = inject('albumUrl').value
 
-function openLink() {
-  console.log(albumUrl)
-  window.open(albumUrl, '_blank')
+function openLink () {
+    console.log(albumUrl)
+    window.open(albumUrl, '_blank')
 }
 
 const alt = `Logo of ${brand}`
 
 const brandStyle = {}
 if (brand == 'YouTube') {
-  brandStyle.logo = ref('')
-  brandStyle.bg = '#F00'
+    brandStyle.logo = ref('')
+    brandStyle.bg = '#F00'
 } else if (brand == 'Deezer') {
-  brandStyle.logo = ref(dzrWhite)
-  brandStyle.bg = 'bg-dzrPnk'
+    brandStyle.logo = ref(dzrWhite)
+    brandStyle.bg = 'bg-dzrPnk'
 } else if (brand == 'Spotify') {
-  brandStyle.logo = ref('')
-  brandStyle.bg = '#1DB954'
+    brandStyle.logo = ref('')
+    brandStyle.bg = '#1DB954'
 }
 
-function changeLogo(event) {
-  if (event.type == 'mouseenter') {
-    brandStyle.logo.value = dzrPink
-  } else if(event.type == 'mouseleave') {  
-    brandStyle.logo.value = dzrWhite
-  }
+function changeLogo (event) {
+    if (event.type == 'mouseenter') {
+        brandStyle.logo.value = dzrPink
+    } else if (event.type == 'mouseleave') {
+        brandStyle.logo.value = dzrWhite
+    }
 }
 
 </script>

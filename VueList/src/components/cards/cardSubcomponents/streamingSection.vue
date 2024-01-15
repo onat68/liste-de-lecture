@@ -1,9 +1,10 @@
 <script setup>
 import MusicButton from './MusicButton.vue'
+import { ref } from 'vue'
 
 const props = defineProps({
-  albumUrl: String,
-  externalId: String
+    albumUrl: String,
+    externalId: String
 })
 const albumUrl = props.albumUrl
 const externalId = props.externalId
@@ -11,7 +12,6 @@ const externalId = props.externalId
 const embedUrl = `https://widget.deezer.com/widget/auto/album/${externalId}`
 // static for now, ref later
 const userDefStreamingService = 'Deezer'
-import { ref } from 'vue'
 const player = ref(false)
 </script>
 <template>
