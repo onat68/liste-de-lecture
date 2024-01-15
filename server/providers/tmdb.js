@@ -10,15 +10,28 @@ const tmdb = {
     },
     type: 'Movie',
 
-    movieUrl (query) {
+    movieUrl(query) {
         return `https://api.themoviedb.org/3/search/movie?query=${encodeURI(query)}`
     },
 
-    detailsUrl (movieId) {
+    detailsUrl(movieId) {
         return `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=credits`
     },
 
-    toObj (movie, details) {
+    async find(query) {
+        const res1 = await fetch(this.movieUrl(query), this.options)
+        const movies = await res1.json()
+        const items = []
+        for (const movie of movies?.results) {
+            const res2 = await fetch(this.detailsUrl(movie.id), this.options)
+            const details = await res2.json()
+            const item = await this.toObj(movie, await details)
+            items.push(item)
+        }
+        return await items
+    },
+
+    toObj(movie, details) {
         return {
             externalId: movie.id,
             title: movie.original_title,
