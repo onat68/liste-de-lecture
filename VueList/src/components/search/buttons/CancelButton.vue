@@ -1,12 +1,17 @@
 <script setup>
+import router from '../../../router'
 import { useSearchResults } from '../../../stores/useSearchResultStore'
 const search = useSearchResults()
+function endSearch () {
+    router.replace({ name: 'timeline' })
+    search.endSearch()
+}
 </script>
 
 <template>
   <button name="CancelButton"
     class="Button flex grow text-md text-center font-medium bg-brOrng leading-tight px-2 w-8 h-12 md:w-10 md:h-16 box-border fill-white hover:bg-white hover:border-brOrng hover:fill-brOrng hover:-translate-y-1  hover:shadow-md hover:border-2 rounded-s5 shrink-0 justify-center items-center"
-    @click="search.stopSearching()"
+    @click="endSearch"
   >
     <svg class="w-5 fill-inherit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
       <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
