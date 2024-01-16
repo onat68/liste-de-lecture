@@ -28,20 +28,3 @@ exports.find = async (req, res, next) => {
         new JsonStreamStringify({ albums, books, movies }).pipe(res)
     }
 }
-
-exports.findBook = async (req, res, next) => {
-    if (req.params.type == 'Book') {
-        res.status(200).send(JSON.stringify(items))
-    } else {
-        console.log(items)
-        new JsonStreamStringify(items).pipe(res)
-        next()
-    }
-
-}
-
-exports.findMovie = async (req, res, next) => {
-
-    res.locals.movies = { movies: items }
-    new JsonStreamStringify(items).pipe(res)
-}
