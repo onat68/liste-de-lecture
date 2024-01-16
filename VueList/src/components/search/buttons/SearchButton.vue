@@ -1,6 +1,6 @@
 <template>
   <button aria-label="LaunchSearchButton"
-    class="Button w-12 md:w-16 h-12 md:h-16 hover:bg-white hover:border-brGr hover:border-2 hover:fill-brGr transition-transform duration-300 hover:-translate-y-1 hover:shadow-md fill-white bg-brGr rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
+    class="Button w-12 h-12 hover:bg-white hover:border-brGr hover:border-2 hover:fill-brGr transition-transform duration-300 hover:-translate-y-1 hover:shadow-md fill-white bg-brGr rounded-s5 box-border shrink-0 justify-center items-center inline-flex"
   >
     <svg class="w-5 fill-inherit" viewBox="0 0 24 26" xmlns="http://www.w3.org/2000/svg">
       <path

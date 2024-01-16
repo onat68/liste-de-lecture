@@ -25,8 +25,8 @@ function onLeave (el, done) {
 </script>
 
 <template>
-  <div class="font-body Vuetimeline w-full h-full rounded-md flex-col justify-end items-center inline-flex border shrink">
-    <div class="Screen w-full h-full p-1.5 md:p-2 pb-0 md:pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
+  <div class="font-body Vuetimeline w-full max-w-[390px] h-full max-h-[844px] rounded-md flex-col justify-end items-center inline-flex border shrink">
+    <div class="Screen w-full h-full p-1.5 pb-0 rounded-s5 bg-white flex shrink grow overflow-hidden">
       <router-view v-slot="{ Component }">
         <transition @enter="onEnter" @before-leave="onLeave">
           <component :is="Component"></component>

@@ -12,7 +12,7 @@ function setQuery (ev) {
     type="field"
     @input="setQuery"
     @keypress.enter="search.find()"
-    class="SearchField scale-in-hor-center flex grow focus-visible:outline-none border-transparent border-2 px-2 py-1 text-base md:text-md font-normal w-full h-12 md:h-16 bg-neutral-200 rounded-s5 shadow-inner"
+    class="SearchField scale-in-hor-center flex grow focus-visible:outline-none border-transparent border-2 px-2 py-1 text-base font-normal w-full h-12 bg-neutral-200 rounded-s5 shadow-inner"
   />
 </template>
 <style>

@@ -7,7 +7,6 @@ export const useSearchResults = defineStore('useSearchResults', {
         albums: [],
         books: [],
         movies: [],
-        results: [],
         query: '',
         pickedType: types[0],
         pickerOpened: false
