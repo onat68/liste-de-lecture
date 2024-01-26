@@ -1,24 +1,26 @@
 const dzr = {
     options: {
-        method: 'GET',
+        method: "GET",
         headers: {
-            accept: 'application/json'
-        }
+            accept: "application/json",
+        },
     },
-    type: 'Album',
+    type: "Album",
     searchResults: [],
 
     async find(query) {
         const res1 = await fetch(this.albumUrl(query), this.options)
         const albums = await res1.json()
         const items = []
+
         for (const album of albums?.data) {
             const res2 = await fetch(this.genreUrl(album.id), this.options)
             const genre = await res2.json()
-
             const item = await this.toObj(album, await genre)
+
             items.push(item)
         }
+
         return await items
     },
 
@@ -37,10 +39,10 @@ const dzr = {
             albumUrl: album.link,
             img: album.cover_medium,
             authors: album.artist.name,
-            type: 'Album',
-            genre: genre.name
+            type: "Album",
+            genre: genre.name,
         }
-    }
+    },
 }
 
 module.exports = dzr
