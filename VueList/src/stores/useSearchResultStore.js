@@ -16,6 +16,18 @@ export const useSearchResults = defineStore("useSearchResults", {
         unpickedTypes: (state) => {
             return types.filter((obj) => obj != state.pickedType)
         },
+
+        all: (state) => {
+            return state.albums.concat(state.books, state.movies)
+        },
+
+        filtered(state) {
+            if (state.pickedType.name == "All") {
+                return this.all
+            } else {
+                return state[state.pickedType.name.toLowerCase() + "s"]
+            }
+        },
     },
 
     actions: {
