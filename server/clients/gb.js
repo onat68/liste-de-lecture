@@ -1,15 +1,14 @@
 const gb = {
     options: {
-        method: 'GET',
+        method: "GET",
         headers: {
-            accept: 'application/json'
-        }
+            accept: "application/json",
+        },
     },
-    type: 'Book',
+    type: "Book",
     key: process.env.GB_API_KEY,
 
     bookUrl(query) {
-        console.log(this.key)
         return `https://www.googleapis.com/books/v1/volumes?q=${encodeURI(query)}&maxResults=10&key=${this.key}`
     },
 
@@ -17,10 +16,13 @@ const gb = {
         const res1 = await fetch(this.bookUrl(query), this.options)
         const books = await res1.json()
         const items = []
+
         for (const book of books?.items) {
             const item = await this.toObj(book)
+
             items.push(item)
         }
+
         return await items
     },
 
@@ -32,13 +34,15 @@ const gb = {
             note: book.volumeInfo.description,
             authors: () => {
                 if (book.volumeInfo.authors !== undefined) {
-                    return book.volumeInfo.authors.join(', ')
-                } else { return book.volumeInfo.publisher }
+                    return book.volumeInfo.authors.join(", ")
+                } else {
+                    return book.volumeInfo.publisher
+                }
             },
-            type: 'Book',
-            img: book?.volumeInfo?.imageLinks?.thumbnail
+            type: "Book",
+            img: book?.volumeInfo?.imageLinks?.thumbnail,
         }
-    }
+    },
 }
 
 module.exports = gb
