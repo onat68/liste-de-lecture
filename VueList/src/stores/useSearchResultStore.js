@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 import { defineStore } from "pinia"
-import { types } from "../types"
+import { types } from "../itemTypes"
 
 export const useSearchResults = defineStore("useSearchResults", {
     state: () => ({
