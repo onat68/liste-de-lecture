@@ -1,11 +1,12 @@
 {
   "name": "server",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "lint": "eslint . --ext .js,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "devDependencies": {
     "@types/jest": "^29.5.3",
