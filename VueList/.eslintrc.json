@@ -1,11 +1,13 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     "extends": [
-        "standard",
+        "eslint:recommended",
         "plugin:vue/vue3-essential",
+        "plugin:import/recommended",
         "prettier"
     ],
     "parserOptions": {
@@ -14,6 +16,5 @@
     },
     "plugins": [
         "vue"
-    ],
-    "rules": {}
+    ]
 }
