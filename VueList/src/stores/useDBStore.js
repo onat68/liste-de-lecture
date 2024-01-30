@@ -18,7 +18,7 @@ export const useDB = defineStore("useDB", {
 
             const xhr = new XMLHttpRequest()
 
-            xhr.open("GET", "db/all")
+            xhr.open("GET", "api/all")
             xhr.send()
             xhr.responseType = "json"
 
@@ -45,7 +45,7 @@ export const useDB = defineStore("useDB", {
                 target = "albums"
             }
 
-            xhr.open("POST", `db/${target}`)
+            xhr.open("POST", `api/${target}`)
             xhr.setRequestHeader("Content-Type", "application/json")
 
             const body = JSON.stringify(data)
