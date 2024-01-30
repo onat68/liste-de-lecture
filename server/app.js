@@ -1,14 +1,18 @@
 require("dotenv").config()
 const express = require("express")
+const morgan = require("morgan")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const app = express()
+const path = require("path")
 
-const stuffRoutes = require("./routes/stuff")
-const userRoutes = require("./routes/user")
-const externalRoutes = require("./routes/external")
-const vueRoutes = require("./routes/vueApp")
-const publicPath = __dirname + "/static/dist"
+const stuffRouter = require("./routes/stuff")
+const userRouter = require("./routes/user")
+const externalRouter = require("./routes/external")
+const dirPath = path.join(__dirname + "/../VueList/dist")
+const history = require("connect-history-api-fallback")
+
+app.use(morgan("dev"))
 
 mongoose
     .connect("mongodb+srv://onatrigault:lestat@clusterlater.ekjrhqs.mongodb.net/?retryWrites=true&w=majority", {
@@ -27,13 +31,17 @@ app.use((req, res, next) => {
         "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
     )
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS")
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate", "Content-Type")
     next()
 })
 
+app.use("/api", stuffRouter)
+app.use("/api/auth", userRouter)
+app.use("/ext", externalRouter)
+
 app.use(bodyParser.json())
-app.use("/", express.static(publicPath))
-app.use("/home", vueRoutes)
-app.use("/api", stuffRoutes)
-app.use("/api/auth", userRoutes)
-app.use("/ext", externalRoutes)
+app.use(express.static(dirPath))
+app.use("/", history({ disableDotRule: true, verbose: true }))
+app.use(express.static(dirPath))
+
 module.exports = app
