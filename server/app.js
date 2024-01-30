@@ -3,9 +3,12 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const app = express()
+
 const stuffRoutes = require("./routes/stuff")
 const userRoutes = require("./routes/user")
 const externalRoutes = require("./routes/external")
+const vueRoutes = require("./routes/vueApp")
+const publicPath = __dirname + "/static/dist"
 
 mongoose
     .connect("mongodb+srv://onatrigault:lestat@clusterlater.ekjrhqs.mongodb.net/?retryWrites=true&w=majority", {
@@ -28,8 +31,9 @@ app.use((req, res, next) => {
 })
 
 app.use(bodyParser.json())
+app.use("/", express.static(publicPath))
+app.use("/home", vueRoutes)
 app.use("/api", stuffRoutes)
 app.use("/api/auth", userRoutes)
 app.use("/ext", externalRoutes)
-
 module.exports = app
