@@ -7,24 +7,31 @@ This application is designed to address these challenges and provide a straight-
 ## Project Overview
 ### Key Features
 #### Comprehensive Search
-    Description: Users can search for any type of cultural item and are provided with extensive and relevant search results.
-    User Stories: As a user, I want to quickly find information about any item being recommended to me, even when provided with vague information such as a partial title or an author's name.
-    Acceptance Criterias:
+##### Description:
+Users can search for any type of cultural item and are provided with extensive and relevant search results.
+##### User Stories:
+As a user, I want to quickly find information about any item being recommended to me, even when provided with vague information such as a partial title or an author's name.
+##### Acceptance Criterias:
     - Search engine is insensitive to typos and provides relevant search results when provided with keywords.
     - Search results are ordered from most to less likely, accounting for disambiguation.
     - Time to search completion never exceeds five (5) seconds when searching for all types of items and three (3) seconds when narrowed down to a specific type (book, movie...).
     
 #### Detailed Bookmarking
-        Description: Users are provided with detailed information about each item, including title, description, genre, release date and more.
-        User Stories: As a user, I want to be able to quickly find the specific recommended item in the list of search results thanks to ample details, and I want my bookmarks to be equally detailed for easy reference.
-        Acceptance Criterias:
+##### Description:
+Users are provided with detailed information about each item, including title, description, genre, release date and more.
+##### User Stories:
+As a user, I want to be able to quickly find the specific recommended item in the list of search results thanks to ample details, and I want my bookmarks to be equally detailed for easy reference.
+##### Acceptance Criterias:
         - Search results provide a title, author or director name, release date, description or summary, genre and a cover or poster image when available.
         - The information is clearly presented and digestible, with at least three lines of description/summary, color coded item type, and large bold titles. The presentation is consistent accross item types while also accounting for their specificity (square cover image for albums, 2:3 aspect ratio for movie posters.
         - Search results and bookmarded items are similar in every way except search results being presented with an "add to favorites" button.
         
 #### Platform-Agnostic Bookmarking
-        Description: Data is aggregated from multiple relevant streaming platforms and cultural database without requiring identification. 
-        User Stories: As a user, I want to be able to manage my recommandations in a single app without having to log in to any other service, but I also want to be directed to the platform where the content is currently available when I want to.
-        Acceptance Criterias: The application is self-sufficient and doesn't rely on third party services, but references those services so that the user can access the content when needed.
+##### Description:
+Data is aggregated from multiple relevant streaming platforms and cultural database without requiring identification. 
+##### User Stories:
+As a user, I want to be able to manage my recommandations in a single app without having to log in to any other service, but I also want to be directed to the platform where the content is currently available when I want to.
+##### Acceptance Criterias:
+The application is self-sufficient and doesn't rely on third party services, but references those services so that the user can access the content when needed.
 
 ... Work In Progress ...
