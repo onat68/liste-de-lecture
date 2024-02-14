@@ -1,13 +1,17 @@
 # Bookmarking App
 ## About
 - We're being recommended cultural items on a daily basis, however, it is rarely practical to take notes and when it is, they end up being hard to decypher.
-- We often find ourselves stumped when having to pick a movie or TV show to watch, despite the staggering amount of content available these days. - This massive amount of content is often scattered across many competing services, with specific recommendation and bookmarking systems.
+
+- We often find ourselves stumped when having to pick a movie or TV show to watch, despite the staggering amount of content available these days.
+
+- This massive amount of content is often scattered across many competing services, with specific recommendation and bookmarking systems.
 
 This application is designed to address these challenges and provide a straight-forward and intuitive way of managing recommandations.
 
 ## Access the app
 A preview of the app will soon be accessible @ http://app.bookmarkit.one
 User accounts are not enabled at the moment and will be coming soon.
+
 ## Project Overview
 ### Key Features
 #### Comprehensive Search
