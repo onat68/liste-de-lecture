@@ -24,7 +24,6 @@ export const useDB = defineStore("useDB", {
 
             xhr.onload = () => {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    // console.log(movies)
                     this.responseData = xhr.response.results
                 } else {
                     console.log(`Error: ${xhr.status}`)
@@ -35,15 +34,7 @@ export const useDB = defineStore("useDB", {
         sendData(data) {
             const xhr = new XMLHttpRequest()
 
-            let target
-
-            if (data.type == "Book") {
-                target = "books"
-            } else if (data.type == "Movie") {
-                target = "movies"
-            } else if (data.type == "Album") {
-                target = "albums"
-            }
+            const target = data.type.toLowerCase() + "s"
 
             xhr.open("POST", `api/${target}`)
             xhr.setRequestHeader("Content-Type", "application/json")
