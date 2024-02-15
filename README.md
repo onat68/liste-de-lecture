@@ -68,15 +68,15 @@ const albumSchema = new mongoose.Schema({
 The app was built with **Vue.js** using **Pinia** for state management and styled with **TailwindCSS**
 It's offers two main views:
 - The Timeline view, which displays bookmarked items
-![Timeline view screen-shot](https://ibb.co/K0STBhV)
+![Timeline view screen-shot](/assets/TimelineView.png)
 - The Search view, that allows the user to query third-party APIs through the server and displays search results
-![Search view screen-shot](https://ibb.co/px6gJGf)
+![Search view screen-shot](/assets/SearchView.png)
 
 ## What's next ?
 We're currently prioritizing these features:
 - Secure self-hosting with a domain name (incoming!)
 - User accounts and authentification
 - Recommandation system
-- More third-party services integration (YouTube Red, Spotify, Netflix...à
+- More third-party services integration (YouTube Red, Spotify, Netflix...)
 
 In the future we'd like to add filters, user preferences and more types of cultural items such as podcasts, tv shows and even video games. We're very intent on porting the app to mobile, possibly as a Progressive Web App.

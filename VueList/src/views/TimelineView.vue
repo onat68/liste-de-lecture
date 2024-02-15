@@ -1,7 +1,6 @@
 <script setup>
 import gsap from 'gsap'
 import itemCard from '../components/cards/itemCard.vue'
-import { ref } from 'vue'
 import { useDB } from '../stores/useDBStore'
 const db = useDB()
 
@@ -22,9 +21,6 @@ function onEnter(el, done) {
     }
   )
 }
-
-const target = ref('timeline')
-
 db.fetchData()
 </script>
 
@@ -38,7 +34,8 @@ db.fetchData()
     <div
       class="CardWrapper flex-col-reverse justify-start items-center gap-2 h-full py-2 inline-flex overflow-y-scroll scrollbar-none">
       <TransitionGroup @enter="onEnter">
-        <itemCard v-for="(data, index) in db.getData" :key="data._id" :data="data" :target="target" :data-index="index" />
+        <itemCard v-for="(data, index) in db.getData" :key="data._id" :data="data" :data-index="index"
+          :searchResult="false" />
       </TransitionGroup>
     </div>
   </div>

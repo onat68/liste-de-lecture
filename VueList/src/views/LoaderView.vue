@@ -1,8 +1,5 @@
 <template>
-  <div id="loading-screen"
-    class="Innerscreen w-full h-full  shadow-inner rounded-s5 self-stretch bg-gray-50 justify-center items-center flex">
-    <span class="loader"></span>
-  </div>
+  <span class="loader absolute top-2/4 left-2/4 pointer-events-none"></span>
 </template>
 
 <style>

@@ -4,7 +4,6 @@ import SearchView from "../views/SearchView.vue"
 import TimelineView from "../views/TimelineView.vue"
 import CancelButton from "../components/search/buttons/CancelButton.vue"
 import LoaderView from "../views/LoaderView.vue"
-import AddButton from "../components/cards/cardSubcomponents/AddButton.vue"
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,7 +27,7 @@ const router = createRouter({
                 {
                     path: "/search",
                     name: "search",
-                    components: { default: SearchView, cancelbutton: CancelButton, addbutton: AddButton },
+                    components: { default: SearchView, cancelbutton: CancelButton },
                 },
             ],
         },

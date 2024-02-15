@@ -2,15 +2,14 @@
 import { ref } from 'vue'
 const props = defineProps({
   data: Object,
-  typeStyles: Object
+  type: Object
 })
 
 const authors = ref(props.data.authors)
 const title = ref(props.data.title)
 const releaseDate = ref(props.data.releaseDate)
 const genre = ref(props.data.genre)
-const typeStyles = ref(props.typeStyles)
-const type = ref(props.data.type)
+const type = ref(props.type)
 </script>
 
 <template>
@@ -20,8 +19,8 @@ const type = ref(props.data.type)
       <h3 class="Title self-stretch font-display font-bold line-clamp-1">
         {{ title }}
       </h3>
-      <p :class="typeStyles.color" class="Type font-body font-light">
-        {{ type }}
+      <p :class="type.color" class="Type font-body font-light">
+        {{ type.name }}
       </p>
     </div>
 
@@ -34,7 +33,7 @@ const type = ref(props.data.type)
       <section class="InfosWrapper h-min flex-row gap-0.5font-normal inline-flex self-end text-xs sm:text-sm">
         <p class="Genre">{{ genre }}</p>
 
-        <p v-if="type != 'Album' && genre != undefined" class="dash">/</p>
+        <p v-if="type.name != 'Album' && genre != undefined" class="dash">/</p>
 
         <p v-if="releaseDate != undefined" class="ReleaseYear">
           {{ releaseDate.slice(0, 4) }}

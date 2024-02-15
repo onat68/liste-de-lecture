@@ -32,18 +32,17 @@ export const useSearchResults = defineStore("useSearchResults", {
 
     actions: {
         async find() {
-            this.router.replace({ name: "load" })
             this.endSearch()
+            this.router.replace({ name: "search" })
 
             const res = await fetch(`ext/find/${this.pickedType.name}/${this.query}`)
-
-            this.router.replace({ name: "search" })
 
             const data = await res.json()
 
             this.albums = await data.albums
             this.movies = await data.movies
             this.books = await data.books
+            this.searching = false
         },
 
         endSearch() {
