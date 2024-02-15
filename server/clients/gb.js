@@ -23,8 +23,8 @@ const gb = {
 
                 items.push(item)
             }
-            return await items
         }
+        return await items
     },
 
     toObj(book) {
