@@ -72,9 +72,9 @@ export const useItemsStore = defineStore("items", {
             if ((await res.status) === 200) {
                 try {
                     const data = await res.json()
-                    this.bmAlbums = await data.albums
-                    this.bmBooks = await data.books
-                    this.bmMovies = await data.movies
+                    this.bmAlbums = await data.results.filter(async (item) => (await item.type) === "albums")
+                    this.bmBooks = await data.results.filter(async (item) => (await item.type) === "books")
+                    this.bmMovies = await data.results.filter(async (item) => (await item.type) === "movies")
                 } catch (e) {
                     console.info("Data is cached")
                 }
