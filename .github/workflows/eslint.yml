@@ -6,8 +6,6 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
-  schedule:
-    - cron: '38 17 * * 4'
 
 jobs:
   eslint:
@@ -24,8 +22,13 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install dependencies
         run: |
+          cd ./VueList
           npm i
           npm install @microsoft/eslint-formatter-sarif@2.1.7
+          cd ../server
+          npm i
+          npm install @microsoft/eslint-formatter-sarif@2.1.7
+          cd ..
 
       - name: Run ESLint
         run: npx eslint .
@@ -40,3 +43,4 @@ jobs:
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
+          
