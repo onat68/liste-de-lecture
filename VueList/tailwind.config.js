@@ -31,7 +31,8 @@ module.exports = {
                 mask1: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 15%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 98%,  rgba(0, 0, 0, 0.2) 100%)",
                 mask2: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%,rgba(0, 0, 0, 0) 2%, rgba(0, 0, 0, 0) 75%,rgba(0, 0, 0, 0.1) 85%,  rgba(0, 0, 0, 0.2) 100%)",
                 opgr1: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%)",
-                srRes: "linear-gradient(134deg, #001E6C 0%, #FFF 100%);",
+                search: "linear-gradient(134deg, #001E6C 0%, #FFF 100%);",
+                timeline: "linear-gradient(134deg, #0f172a 0%, #0369a1 50%, #0f172a 100%);",
                 lghtGry: "#98817B",
             },
             borderRadius: {

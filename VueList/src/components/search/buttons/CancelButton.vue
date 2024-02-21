@@ -1,18 +1,14 @@
 <script setup>
 import router from '../../../router'
-import { useSearchResults } from '../../../stores/useSearchResultStore'
-
-const search = useSearchResults()
 
 function endSearch() {
-  router.replace({ name: 'timeline' })
-  search.endSearch()
+  router.replace({ name: 'home' })
 }
 </script>
 
 <template>
   <button name="CancelButton"
-    class="Button flex grow transition-all duration-300 text-md text-center font-medium bg-brOrng leading-tight px-2 w-8 h-12 fill-white hover:bg-white hover:border-brOrng border-brOrng hover:fill-brOrng hover:-translate-y-1  hover:shadow-md border-2 rounded-s5 shrink-0 justify-center items-center"
+    class="flex grow transition-all duration-300 text-md text-center font-medium bg-brOrng leading-tight px-2 w-8 h-12 fill-white hover:bg-white hover:border-brOrng border-brOrng hover:fill-brOrng hover:-translate-y-1  hover:shadow-md border-2 rounded-s5 shrink-0 justify-center items-center"
     @click="endSearch">
     <svg class="w-5 fill-inherit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
       <path

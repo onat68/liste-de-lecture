@@ -1,37 +1,52 @@
 import { createRouter, createWebHistory } from "vue-router"
-import HomeView from "../views/HomeView.vue"
-import SearchView from "../views/SearchView.vue"
-import TimelineView from "../views/TimelineView.vue"
-import CancelButton from "../components/search/buttons/CancelButton.vue"
-import LoaderView from "../views/LoaderView.vue"
+import BaseLayout from "../views/BaseLayout.vue"
+import CardsView from "../views/CardsView.vue"
+import SearchBar from "../components/search/SearchBar.vue"
+
+import { useItemsStore } from "../stores/ItemsStore"
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: "/",
-            name: "home",
-            redirect: "/timeline",
-            component: HomeView,
+            name: "layout",
+            redirect: "/home",
+            component: BaseLayout,
             children: [
                 {
-                    path: "/timeline",
-                    name: "timeline",
-                    component: TimelineView,
+                    path: "/home",
+                    name: "home",
+                    components: {
+                        cardsview: CardsView,
+                        searchbar: SearchBar,
+                    },
+                    beforeEnter: async () => {
+                        const itemsStore = useItemsStore()
+                        await itemsStore.endSearch()
+                        await itemsStore.fetchBookmarks()
+                    },
                 },
                 {
-                    path: "/load",
-                    name: "load",
-                    component: LoaderView,
-                },
-                {
-                    path: "/search",
+                    path: "/search/:query",
                     name: "search",
-                    components: { default: SearchView, cancelbutton: CancelButton },
+                    components: {
+                        cardsview: CardsView,
+                        searchbar: SearchBar,
+                    },
+                    beforeEnter: [
+                        async () => {
+                            const itemsStore = useItemsStore()
+                            await itemsStore.endSearch()
+                            await itemsStore.find()
+                        },
+                    ],
                 },
             ],
         },
     ],
 })
+
+router.beforeEach
 
 export default router

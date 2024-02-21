@@ -5,11 +5,7 @@ import { createApp } from "vue"
 import router from "./router/index.js"
 import App from "./App.vue"
 
-function vueRouter() {
-    return { router }
-}
-
-const pinia = createPinia().use(vueRouter)
+const pinia = createPinia()
 
 const app = createApp(App).use(router).use(pinia)
 

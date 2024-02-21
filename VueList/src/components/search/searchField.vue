@@ -1,15 +1,21 @@
 <script setup>
-import { useSearchResults } from '../../stores/useSearchResultStore'
+import { useItemsStore } from '../../stores/ItemsStore';
+import { useRouter } from 'vue-router';
 
-const search = useSearchResults()
+const router = useRouter()
 
+function navigateToSearch() {
+  router.replace({ name: "search", params: { query: itemsStore.query } })
+}
+
+const itemsStore = useItemsStore()
 function setQuery(ev) {
-  search.setQuery(ev.target.value)
+  itemsStore.setQuery(ev.target.value)
 }
 </script>
 
 <template>
-  <input type="field" @input="setQuery" @keypress.enter="search.find()"
+  <input type="field" @input="setQuery" @keypress.enter="navigateToSearch"
     class="SearchField scale-in-hor-center flex grow focus-visible:outline-none border-transparent border-2 px-2 py-1 text-base font-normal w-full h-12 bg-neutral-200 rounded-s5 shadow-inner" />
 </template>
 
