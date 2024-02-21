@@ -18,6 +18,6 @@
         "vue"
     ],
     "ignorePatterns": [
-        "dist/"
+        "VueList/dist","node_modules/",".git/",".**/"
     ]
 }
