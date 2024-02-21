@@ -24,7 +24,6 @@ jobs:
         run: |
           npm i eslint
           npm i @microsoft/eslint-formatter-sarif@2.1.7
-          cd ../server
 
       - name: Run ESLint
         run: npx eslint .
