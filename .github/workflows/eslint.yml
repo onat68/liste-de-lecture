@@ -22,14 +22,9 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install dependencies
         run: |
-          cd ./VueList
-          npm i -f esbuild
           npm i eslint
           npm i @microsoft/eslint-formatter-sarif@2.1.7
           cd ../server
-          npm i eslint
-          npm i @microsoft/eslint-formatter-sarif@2.1.7
-          cd ..
 
       - name: Run ESLint
         run: npx eslint .
