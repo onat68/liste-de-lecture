@@ -68,8 +68,11 @@ const albumSchema = new mongoose.Schema({
 The app was built with **Vue.js** using **Pinia** for state management and styled with **TailwindCSS**
 It's offers two main views:
 - The Timeline view, which displays bookmarked items
+
 ![Timeline view screen-shot](/assets/TimelineView.png)
+
 - The Search view, that allows the user to query third-party APIs through the server and displays search results
+
 ![Search view screen-shot](/assets/SearchView.png)
 
 ## What's next ?
