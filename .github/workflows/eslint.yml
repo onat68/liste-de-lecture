@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd ./VueList
-          npm i esbuild
+          npm i -f esbuild
           npm i eslint
           npm i @microsoft/eslint-formatter-sarif@2.1.7
           cd ../server
