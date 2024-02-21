@@ -1,61 +1,61 @@
 <script setup>
-import { useSearchResults } from '../../stores/useSearchResultStore'
-import SearchTypeButton from './buttons/SearchTypeButton.vue'
+import { useItemsStore } from '../../stores/ItemsStore'
+import { useRoute, useRouter } from 'vue-router';
+import CancelButton from './buttons/CancelButton.vue';
 import SearchButton from './buttons/SearchButton.vue'
 import searchField from './searchField.vue'
+import TypePicker from './TypePicker.vue'
 
-const search = useSearchResults()
+const itemsStore = useItemsStore()
+const route = useRoute()
+const router = useRouter()
 
-function setType(type) {
-  search.pickedType = type
-  search.closePicker()
+function navigateToSearch() {
+  router.replace({ name: "search", params: { query: itemsStore.query } })
 }
+
 </script>
 
 <template>
   <div
     class="SearchBar font-display h-fit w-full p-1.5 bg-white rounded-[5px] justify-center items-center gap-1.5 flex overflow-visible z-40">
-    <transition name="div" mode="out-in">
-      <div v-if="!search.pickerOpened" class="box-border w-fit relative">
-        <SearchTypeButton :type="search.pickedType" :action="search.openPicker" :class="'relative'" />
-      </div>
-      <div v-else-if="search.pickerOpened" class="box-border flex w-fit relative gap-1.5">
-        <SearchTypeButton v-for="(type, index) in search.unpickedTypes" :class="'relative'" :key="index" :type="type"
-          @click="setType(type)" />
-      </div>
+    <transition name="picker" mode="out-in">
+      <TypePicker />
     </transition>
 
-    <router-view name="cancelbutton" v-slot="{ Component }">
-      <transition name="div">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <transition appear name="cancel">
+      <CancelButton v-show="(route.name === 'search')" />
+    </transition>
 
     <label for="searchField" class="absolute invisible pointer-events-none">Search field</label>
 
-    <searchField :id="'searchField'" v-model="search.query" :class="search.pickedType.focusColor" />
+    <searchField :id="'searchField'" v-model="itemsStore.query" :class="itemsStore.pickedType.focusColor" />
 
     <transition name="divrev">
-      <SearchButton v-if="!search.pickerOpened" :class='"relative"' @click="search.find" />
+      <SearchButton v-show="!itemsStore.pickerOpened" :class='"relative"' @click="navigateToSearch" />
     </transition>
   </div>
 </template>
 
 <style>
-.div-enter-active,
-.div-leave-active {
-  transition: all 0.2s ease;
+.picker-enter-active,
+.picker-leave-active,
+.cancel-enter-active,
+.cancel-leave-active {
+  transition: all 0.3s ease;
 }
 
-.div-enter-from,
-.div-leave-to {
+.picker-enter-from,
+.picker-leave-to,
+.cancel-enter-from,
+.cancel-leave-to {
   opacity: 0;
   transform: translateX(-100%);
 }
 
 .divrev-enter-active,
 .divrev-leave-active {
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .divrev-enter-from,

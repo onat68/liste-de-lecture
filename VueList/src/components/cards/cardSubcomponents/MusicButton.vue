@@ -21,18 +21,18 @@ const brandStyle = {}
 if (brand == 'YouTube') {
     brandStyle.logo = ref('')
     brandStyle.bg = '#F00'
-} else if (brand == 'Deezer') {
+} else if (brand === 'Deezer') {
     brandStyle.logo = ref(dzrWhite)
     brandStyle.bg = 'bg-dzrPnk'
-} else if (brand == 'Spotify') {
+} else if (brand === 'Spotify') {
     brandStyle.logo = ref('')
     brandStyle.bg = '#1DB954'
 }
 
 function changeLogo(event) {
-    if (event.type == 'mouseenter') {
+    if (event.type === 'mouseenter') {
         brandStyle.logo.value = dzrPink
-    } else if (event.type == 'mouseleave') {
+    } else if (event.type === 'mouseleave') {
         brandStyle.logo.value = dzrWhite
     }
 }

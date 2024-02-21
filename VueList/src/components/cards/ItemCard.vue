@@ -4,11 +4,12 @@ import streamingSection from "./cardSubcomponents/streamingSection.vue"
 import overviewSection from "./cardSubcomponents/overviewSection.vue"
 import infosSection from "./cardSubcomponents/infosSection.vue"
 import AddButton from "./cardSubcomponents/AddButton.vue"
+import { useItemsStore } from "../../stores/ItemsStore"
 import { types } from "../../itemTypes"
 import { ref, provide } from "vue"
-import { useDB } from "../../stores/useDBStore"
 
-const db = useDB()
+const itemsStore = useItemsStore()
+
 const props = defineProps({
   data: Object,
   searchResult: Boolean,
@@ -21,7 +22,7 @@ const data = props.data
 
 const note = ref(data.note)
 const img = ref(data.img)
-const type = ref(types.find(type => type.name == data.type))
+const type = ref(types.find(type => type.name === data.type))
 const cardId = ref(data._id)
 const albumUrl = ref(data.albumUrl)
 const externalId = ref(data.externalId)
@@ -30,7 +31,7 @@ provide("albumUrl", albumUrl)
 
 
 function addItem() {
-  db.sendData(data)
+  itemsStore.saveItem(data)
 }
 </script>
 
@@ -47,7 +48,7 @@ function addItem() {
       class="cardBody font-display h-full grow shrink self-stretch p-1 rounded-s5 flex-col justify-between items-start inline-flex gap-0.5">
       <infosSection :data="props.data" :type="type" />
 
-      <streamingSection v-if="type.name == 'Album'" :albumUrl="albumUrl" :externalId="externalId" />
+      <streamingSection v-if="type.name === 'Album'" :albumUrl="albumUrl" :externalId="externalId" />
 
       <overviewSection v-if="type.name != 'Album'" :note="note" />
     </section>
