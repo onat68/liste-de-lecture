@@ -1,7 +1,6 @@
 const Film = require("../models/film.js")
 const Book = require("../models/book.js")
 const Album = require("../models/album.js")
-// const generateTimeline = require("../generateTimeline")
 
 exports.createFilm = (req, res) => {
     delete req.body._id
@@ -82,10 +81,11 @@ exports.getAllThings = (req, res) => {
 
     Promise.all(promises)
         .then((all) => {
-            const results = all[0].concat(all[1]).concat(all[2])
-            console.log(results)
-            // generateTimeline(results);
-            res.status(200).json({ results })
+            res.status(200).json({
+                movies: all[0],
+                books: all[1],
+                albums: all[2],
+            })
         })
         .catch((error) => res.status(400).json({ error }))
 }
