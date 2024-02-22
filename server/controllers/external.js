@@ -14,19 +14,18 @@ function matchProvider(type) {
 }
 
 exports.find = async (req, res) => {
+    const obj = { albums: [], books: [], movies: [] }
     if (req.params.type !== "All") {
         const provider = matchProvider(req.params.type)
-        const items = await provider?.find(req.params.query)
-        const obj = {}
-
-        obj[req.params.type.toLowerCase() + "s"] = await items
-
-        res.status(200).send(JSON.stringify(await obj))
+        obj[req.params.type.toLowerCase() + "s"] = await await provider?.find(req.params.query)
     } else {
-        const albums = await dzr.find(req.params.query)
-        const books = await gb.find(req.params.query)
-        const movies = await tmdb.find(req.params.query)
-
-        new JsonStreamStringify({ albums, books, movies }).pipe(res)
+        obj.albums = await dzr.find(req.params.query)
+        obj.books = await gb.find(req.params.query)
+        obj.movies = await tmdb.find(req.params.query)
     }
+    console.log(await obj)
+    const readable = new JsonStreamStringify(await obj).pipe(res)
+    readable.on("end", () => {
+        res.end()
+    })
 }

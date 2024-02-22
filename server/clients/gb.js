@@ -16,13 +16,14 @@ const gb = {
         const res1 = await fetch(this.bookUrl(query), this.options)
         const books = await res1.json()
         const items = []
-
-        if (books.items.length > 0) {
-            for (const book of books.items) {
+        try {
+            for await (const book of books.items) {
                 const item = await this.toObj(book)
 
-                items.push(item)
+                items.push(await item)
             }
+        } catch (e) {
+            console.error(e)
         }
         return await items
     },

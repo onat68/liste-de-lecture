@@ -1,7 +1,5 @@
 const express = require("express")
-// const { model } = require ('mongoose')
 const stuffRouter = express.Router()
-console.log(stuffRouter)
 const stuffCtrl = require("../controllers/stuff")
 
 stuffRouter.post("/films", stuffCtrl.createFilm)
