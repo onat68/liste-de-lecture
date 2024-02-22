@@ -6,18 +6,18 @@ import vue from "@vitejs/plugin-vue"
 export default defineConfig({
     server: {
         proxy: {
-            "/api": {
-                target: "http://90.3.112.97:3000/api",
-                changeOrigin: true,
-                secure: false,
-                rewrite: (path) => path.replace(/^\/api/, ""),
-            },
-            "/ext": {
-                target: "http://90.3.112.97:3000/ext",
-                changeOrigin: true,
-                secure: false,
-                rewrite: (path) => path.replace(/^\/ext/, ""),
-            },
+            // "/api": {
+            //     target: "http://90.3.112.97:3000/api",
+            //     changeOrigin: true,
+            //     secure: false,
+            //     rewrite: (path) => path.replace(/^\/api/, ""),
+            // },
+            // "/ext": {
+            //     target: "http://90.3.112.97:3000/ext",
+            //     changeOrigin: true,
+            //     secure: false,
+            //     rewrite: (path) => path.replace(/^\/ext/, ""),
+            // },
         },
     },
     plugins: [vue()],

@@ -11,7 +11,7 @@ const route = useRoute()
 const router = useRouter()
 
 function navigateToSearch() {
-  router.replace({ name: "search", params: { query: itemsStore.query } })
+  router.replace({ name: "search", params: { query: encodeURI(itemsStore.query) } })
 }
 
 </script>
