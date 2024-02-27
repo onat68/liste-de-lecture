@@ -51,7 +51,7 @@ function onEnter(el, done) {
 
 <template>
     <div :class="flexDir" class="flex justify-start items-center gap-2
-        h-full py-2 overflow-y-scroll scrollbar-none">
+        h-full w-full py-2 overflow-y-scroll scrollbar-none">
         <TransitionGroup appear @enter="onEnter">
             <ItemCard :class="'relative'" v-for="(data, index) in cards" :key="index" :data="data" :data-index="index"
                 :searchResult="isSR" />

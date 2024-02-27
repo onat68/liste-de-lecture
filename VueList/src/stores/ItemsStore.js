@@ -30,7 +30,7 @@ export const useItemsStore = defineStore("items", {
             if (state.pickedType.name === "All") {
                 return this.srAll
             } else {
-                return state[state.pickedType.name.toLowerCase() + "s"]
+                return state["sr" + state.pickedType.name + "s"]
             }
         },
 
@@ -42,7 +42,7 @@ export const useItemsStore = defineStore("items", {
             if (state.pickedType.name === "All") {
                 return this.bmAll
             } else {
-                return state[state.pickedType.name.toLowerCase() + "s"]
+                return state["bm" + state.pickedType.name + "s"]
             }
         },
     },
