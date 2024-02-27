@@ -4,8 +4,10 @@
 <template>
   <div
     class="font-body w-full max-w-[390px] h-full max-h-[844px] rounded-md flex-col justify-end items-center inline-flex border shrink">
+    <router-view name="menubar" />
     <router-view name="cardsview" :key="$route.path" />
     <router-view name="searchbar" :key="$route.path" />
+    <router-view name="signup" />
   </div>
 </template>
 
