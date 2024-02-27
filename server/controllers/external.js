@@ -17,13 +17,12 @@ exports.find = async (req, res) => {
     const obj = { albums: [], books: [], movies: [] }
     if (req.params.type !== "All") {
         const provider = matchProvider(req.params.type)
-        obj[req.params.type.toLowerCase() + "s"] = await await provider?.find(req.params.query)
+        obj[req.params.type.toLowerCase() + "s"] = await provider.find(req.params.query)
     } else {
         obj.albums = await dzr.find(req.params.query)
         obj.books = await gb.find(req.params.query)
         obj.movies = await tmdb.find(req.params.query)
     }
-    console.log(await obj)
     const readable = new JsonStreamStringify(await obj).pipe(res)
     readable.on("end", () => {
         res.end()
