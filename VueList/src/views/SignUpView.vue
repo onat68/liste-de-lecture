@@ -15,7 +15,7 @@ async function sendForm() {
             {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
-                body: JSON.stringify({ email: email, password: password })
+                body: JSON.stringify({ email: email.value, password: password.value })
             }
         )
         if (res.status === 201) {
@@ -30,8 +30,7 @@ async function sendForm() {
 </script>
 
 <template>
-    <form action="http://90.3.112.97:3000/auth/signup/" enctype="application/x-www-form-urlencoded" method="post"
-        class="flex flex-col gap-2 h-full w-full p-4 justify-center items-center box-border">
+    <form class="flex flex-col gap-2 h-full w-full p-4 justify-center items-center box-border">
         <InputField v-model="email" :type="'text'" :label="'Email:'" :name="'email'" :required="true" />
         <InputField v-model="password" :type="'password'" :label="'Password:'" :name="'password'" :required="true" />
         <FormSubmit @click="sendForm"
