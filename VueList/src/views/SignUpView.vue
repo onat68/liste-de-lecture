@@ -1,30 +1,24 @@
 <script setup>
 import InputField from '../components/InputField.vue';
 import FormSubmit from '../components/shared/FormSubmit.vue';
-
+import { useAuthStore } from '../stores/authStore';
+import { useRouter } from 'vue-router'
 import { ref } from 'vue';
 
-const email = ref("test")
+const router = useRouter()
+const auth = useAuthStore()
+
+const email = ref("")
 const password = ref("")
 
 async function sendForm() {
-    console.log(email)
-    try {
-        const res = await fetch(
-            `http://90.3.112.97:3000/auth/signup/`,
-            {
-                method: "POST",
-                headers: { "Accept": "application/json", "Content-Type": "application/json" },
-                body: JSON.stringify({ email: email.value, password: password.value })
-            }
-        )
-        if (res.status === 201) {
-            const data = await res.json()
-            console.info(await data)
-        } else throw new Error(`Error: ${await res.json()}`)
-    } catch (e) { console.error(e) }
+    await auth.signup(email.value, password.value)
 
+    if (auth.token) {
+        router.replace({ name: "home" })
+    }
 }
+
 
 
 </script>
