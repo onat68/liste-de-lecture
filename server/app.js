@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 })
 
 app.use("/api", stuffRouter)
-app.use("/api/auth", userRouter)
+app.use("/auth", userRouter)
 app.use("/ext", externalRouter)
 
 app.use(bodyParser.json())
