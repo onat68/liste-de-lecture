@@ -10,7 +10,6 @@ exports.createFilm = (req, res) => {
 
     console.info(`Movie: ${film}`)
 
-
     film.save()
         .then(() => {
             res.status(201).json({ film })
