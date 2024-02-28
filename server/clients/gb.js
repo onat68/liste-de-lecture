@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const gb = {
     options: {
         method: "GET",
@@ -16,32 +18,29 @@ const gb = {
         const res1 = await fetch(this.bookUrl(query), this.options)
         const books = await res1.json()
         const items = []
-
-        if (books.items.length > 0) {
+        try {
             for (const book of books.items) {
                 const item = await this.toObj(book)
 
-                items.push(item)
+                items.push(await item)
             }
+        } catch (e) {
+            console.error(e)
         }
         return await items
     },
 
     toObj(book) {
+        console.info(book.authors)
+
         return {
             externalId: book.id,
             title: book.volumeInfo.title,
             releaseDate: book.volumeInfo.publishedDate,
             note: book.volumeInfo.description,
-            authors: () => {
-                if (book.volumeInfo.authors !== undefined) {
-                    return book.volumeInfo.authors.join(", ")
-                } else {
-                    return book.volumeInfo.publisher
-                }
-            },
+            authors: book.volumeInfo.authors?.join(", ") ?? book.volumeInfo.publisher,
             type: "Book",
-            img: book?.volumeInfo?.imageLinks?.thumbnail,
+            img: book.volumeInfo.imageLinks?.thumbnail,
         }
     },
 }

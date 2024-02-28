@@ -4,10 +4,12 @@ const Album = require("../models/album.js")
 
 exports.createFilm = (req, res) => {
     delete req.body._id
-
     const film = new Film({
         ...req.body,
     })
+
+    console.info(`Movie: ${film}`)
+
 
     film.save()
         .then(() => {
@@ -18,10 +20,11 @@ exports.createFilm = (req, res) => {
 
 exports.createBook = (req, res) => {
     delete req.body._id
-
     const book = new Book({
         ...req.body,
     })
+
+    console.info(`Book: ${book}`)
 
     book.save()
         .then(() => {
@@ -36,6 +39,8 @@ exports.createAlbum = (req, res) => {
     const album = new Album({
         ...req.body,
     })
+
+    console.info(`Album: ${album}`)
 
     album
         .save()

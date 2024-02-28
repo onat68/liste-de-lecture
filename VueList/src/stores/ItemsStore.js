@@ -30,7 +30,7 @@ export const useItemsStore = defineStore("items", {
             if (state.pickedType.name === "All") {
                 return this.srAll
             } else {
-                return state[state.pickedType.name.toLowerCase() + "s"]
+                return state["sr" + state.pickedType.name + "s"]
             }
         },
 
@@ -42,33 +42,39 @@ export const useItemsStore = defineStore("items", {
             if (state.pickedType.name === "All") {
                 return this.bmAll
             } else {
-                return state[state.pickedType.name.toLowerCase() + "s"]
+                return state["bm" + state.pickedType.name + "s"]
             }
         },
     },
 
     actions: {
         async find() {
-            const res = await fetch(`ext/find/${this.pickedType.name}/${this.query}`, {
-                method: "get",
-                headers: { Accept: "application/json", "Content-Type": "application/json" },
-            })
+            const res = await fetch(
+                `http://90.3.112.97:3000/ext/find/${encodeURI(this.pickedType.name)}/${encodeURI(this.query)}`,
+                {
+                    method: "GET",
+                    headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                }
+            )
+            try {
+                const data = await res.json()
 
-            const data = await res.json()
-
-            this.srAlbums = await data.albums
-            this.srMovies = await data.movies
-            this.srBooks = await data.books
+                this.srAlbums = await data.albums
+                this.srMovies = await data.movies
+                this.srBooks = await data.books
+            } catch (e) {
+                console.info("Data is cached")
+            }
         },
 
         async fetchBookmarks() {
-            const res = await fetch("api/all")
+            const res = await fetch("http://90.3.112.97:3000/api/all")
             if ((await res.status) === 200) {
                 try {
                     const data = await res.json()
-                    this.bmAlbums = await data.albums
-                    this.bmBooks = await data.books
-                    this.bmMovies = await data.movies
+                    this.bmAlbums = await data.results.filter(async (item) => (await item.type) === "albums")
+                    this.bmBooks = await data.results.filter(async (item) => (await item.type) === "books")
+                    this.bmMovies = await data.results.filter(async (item) => (await item.type) === "movies")
                 } catch (e) {
                     console.info("Data is cached")
                 }
@@ -78,17 +84,21 @@ export const useItemsStore = defineStore("items", {
         },
 
         async saveItem(data) {
-            const target = data.type.toLowerCase() + "s"
+            const target = encodeURI(data.type.toLowerCase() + "s")
+            const url = encodeURI(`http://90.3.112.97:3000/api/${target}`)
+            console.log(url)
 
             try {
-                const res = await fetch(`api/${target}`, {
-                    method: "post",
+                const res = await fetch(url, {
+                    method: "POST",
                     headers: { Accept: "application/json", "Content-Type": "application/json" },
                     body: JSON.stringify(data),
+                    referrerPolicy: "no-referrer",
                 })
 
-                if ((await res.status) === 200) {
-                    console.info(JSON.parse(await res.responseText))
+                if ((await res.status) === 201) {
+                    const parsed = await res.json()
+                    console.info(await parsed)
                 } else {
                     throw new Error(`Request Error: ${await res.status}`)
                 }
