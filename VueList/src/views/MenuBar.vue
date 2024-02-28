@@ -7,6 +7,7 @@ import NavItem from '../components/nav/NavItem.vue';
 <template>
     <nav class="flex w-full h-fit pt-2">
         <ul class="flex w-full h-fit p-1 justify-end items-center">
+            <NavItem href="login" nav-type="route" name="Log-in" />
             <NavItem href="signup" nav-type="route" name="Sign-up" />
         </ul>
     </nav>

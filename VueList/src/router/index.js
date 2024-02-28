@@ -4,6 +4,7 @@ import CardsView from "../views/CardsView.vue"
 import SearchBar from "../components/search/SearchBar.vue"
 import MenuBar from "../views/MenuBar.vue"
 import SignUpView from "../views/SignUpView.vue"
+import LogIn from "../views/LogIn.vue"
 
 import { useItemsStore } from "../stores/ItemsStore"
 
@@ -35,6 +36,19 @@ const router = createRouter({
                     name: "signup",
                     components: {
                         signup: SignUpView,
+                        menubar: MenuBar,
+                    },
+                    beforeEnter: async () => {
+                        const itemsStore = useItemsStore()
+                        await itemsStore.endSearch()
+                        await itemsStore.fetchBookmarks()
+                    },
+                },
+                {
+                    path: "/login",
+                    name: "login",
+                    components: {
+                        signup: LogIn,
                         menubar: MenuBar,
                     },
                     beforeEnter: async () => {
